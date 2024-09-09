@@ -1,0 +1,91 @@
+﻿@using TmdbApi.Lib.Models;
+
+@model ResultReturn;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    if (Model.FilmResults.results.Count() != 0)
+    {
+        <h4>Film:</h4>
+
+        <p></p>
+
+        @foreach (var obj in Model.FilmResults.results)
+        {
+            <div class="inner_block">
+                <table>
+                    <tr>
+                        <td>
+                            @{
+                                if (!string.IsNullOrEmpty(obj.release_date))
+                                {
+                                    DateTime releaseDate = Convert.ToDateTime(obj.release_date);
+
+                                    <span>@obj.original_title (@releaseDate.Year)</span>
+                                }
+                                else
+                                {
+                                    <span>@obj.original_title</span>
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @{
+                                string url = "https://image.tmdb.org/t/p/original/" + obj.poster_path;
+                            }
+
+                            <img src="@url" width="100%" height="100%" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        }
+    }
+}
+
+@{
+    if (Model.TVResults.results.Count() != 0)
+    {
+        <h4>TV:</h4>
+
+        <p></p>
+
+        @foreach (var obj in Model.TVResults.results)
+        {
+            <div class="inner_block">
+                <table>
+                    <tr>
+                        <td>
+                            @{
+                                if (!string.IsNullOrEmpty(obj.first_air_date))
+                                {
+                                    DateTime firstAirDate = Convert.ToDateTime(obj.first_air_date);
+
+                                    <span>@obj.original_title (@firstAirDate.Year)</span>
+                                }
+                                else
+                                {
+                                    <span>@obj.original_title</span>
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @{
+                                string url = "https://image.tmdb.org/t/p/original/" + obj.poster_path;
+                            }
+
+                            <img src="@url" width="100%" height="100%" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        }
+    }
+}
