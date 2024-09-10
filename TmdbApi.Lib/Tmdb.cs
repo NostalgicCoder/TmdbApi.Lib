@@ -36,6 +36,10 @@ namespace TmdbApi.Lib
             return null;
         }
 
+        /// <summary>
+        /// Aquire information from the configuration endpoint
+        /// - Data on image URL filepaths, sizing etc
+        /// </summary>
         public void GetConfigurationData()
         {
             string query = Endpoint.Configuration;
@@ -50,6 +54,11 @@ namespace TmdbApi.Lib
             }
         }
 
+        /// <summary>
+        /// Search the Movie/TV endpoint for results that match the keyword
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
         public ResultReturn SearchForFilmTV(string keyword)
         {
             ResultReturn resultReturn = new ResultReturn();
@@ -60,6 +69,11 @@ namespace TmdbApi.Lib
             return resultReturn;
         }
 
+        /// <summary>
+        /// Search the Movie endpoint for results that match the keyword
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
         public Rootobject SearchForFilm(string keyword)
         {
             string query = Endpoint.SearchMovie + keyword + "&include_adult=false&language=en-US&page=1";
@@ -69,6 +83,27 @@ namespace TmdbApi.Lib
             return result;
         }
 
+        /// <summary>
+        /// Search the Movie endpoint for a specific result that matches the id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResultReturn SearchForFilmById(int id)
+        {
+            ResultReturn resultReturn = new ResultReturn();
+
+            string query = Endpoint.SearchMovieId + id;
+
+            resultReturn.FilmIdResult = CallTmdbApi(query);
+
+            return resultReturn;
+        }
+
+        /// <summary>
+        /// Search the TV endpoint for results that match the keyword
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
         public Rootobject SearchForTv(string keyword)
         {
             string query = Endpoint.SearchTV + keyword + "&include_adult=false&language=en-US&page=1";

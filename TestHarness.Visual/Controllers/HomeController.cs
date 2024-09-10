@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TestHarness.Visual.Models;
-using TmdbApi.Lib;
-using TmdbApi.Lib.Models;
 
 namespace TestHarness.Visual.Controllers
 {
@@ -15,15 +13,9 @@ namespace TestHarness.Visual.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(string keyword)
+        public IActionResult Index()
         {
-            Tmdb tmdb = new Tmdb();
-
-            tmdb.GetConfigurationData();
-
-            ResultReturn result = tmdb.SearchForFilmTV(keyword);
-
-            return View(result);
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -14,6 +14,8 @@ namespace TestHarness.Console
 
             tmdb.GetMovieImages(5548);
 
+            tmdb.SearchForFilmById(5548);
+
             System.Console.ReadLine();
         }
     }
