@@ -25,7 +25,7 @@ Resources / Credits:
 
 Images:
 
-Visual examples of some of the returned data from the rest based IGDB Api.
+Visual examples of some of the returned data from the rest based TMDB Api.
 
 ![Alt text](Images/TmdbApi-1.jpg)
 ![Alt text](Images/TmdbApi-2.jpg)
