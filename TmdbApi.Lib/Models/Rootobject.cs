@@ -39,5 +39,6 @@ namespace TmdbApi.Lib.Models
         public bool video { get; set; }
         public float vote_average { get; set; }
         public int vote_count { get; set; }
+        public Dates dates { get; set; }
     }
 }

@@ -1,0 +1,66 @@
+﻿@using TmdbApi.Lib.Models;
+
+@model ResultReturn;
+
+@{
+    ViewData["Title"] = "MoviesNowPlaying";
+}
+
+<h4>Movies Now Playing:</h4>
+
+<p></p>
+
+@{
+    if (Model.MoviesNowPlaying.results.Count() != 0)
+    {
+
+        @foreach (var obj in Model.MoviesNowPlaying.results)
+        {
+            if(obj.original_language == "en")
+            {
+                <div class="inner_block">
+                    <table>
+                        <tr>
+                            <td>
+                                @{
+                                    if (!string.IsNullOrEmpty(obj.release_date))
+                                    {
+                                        DateTime releaseDate = Convert.ToDateTime(obj.release_date);
+
+                                        <span>@obj.original_title (@releaseDate.Year)</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@obj.original_title</span>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @{
+                                    string url = string.Empty;
+
+                                    url = "https://image.tmdb.org/t/p/original/" + obj.poster_path;
+
+                                    <a href="@Url.Action("GetUserSelection", "Movie", new { id = obj.id })">
+
+                                        @if (string.IsNullOrEmpty(obj.poster_path))
+                                        {
+                                            <img id="Cinema.jpg" class="imgCentre" src="~/Images/Cinema.jpg" width="198px" height="298px" />
+                                        }
+                                        else
+                                        {
+                                            <img src="@url" width="198px" height="298px" />
+                                        }
+
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            }
+        }
+    }
+}

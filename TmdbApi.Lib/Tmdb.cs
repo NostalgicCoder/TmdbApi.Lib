@@ -114,6 +114,7 @@ namespace TmdbApi.Lib
         }
 
         /// <summary>
+        /// Gets URL paths and logo and poster sizing information for films
         /// - https://developer.themoviedb.org/docs/image-basics
         /// - https://www.themoviedb.org/talk/5f3ef4eec175b200365ee352
         /// </summary>
@@ -126,6 +127,21 @@ namespace TmdbApi.Lib
 
             string logo = _imgPath + _logoSizes.Last<string>() + result.logos.FirstOrDefault().file_path;
             string url = _imgPath + _posterSizes.Last<string>() + result.posters.FirstOrDefault().file_path;
+        }
+
+        /// <summary>
+        /// Returns a list of films currently showing in cinemas in the UK
+        /// </summary>
+        /// <returns></returns>
+        public ResultReturn MoviesNowPlaying()
+        {
+            ResultReturn resultReturn = new ResultReturn();
+
+            string query = Endpoint.MoviesNowPlaying;
+
+            resultReturn.MoviesNowPlaying = CallTmdbApi(query);
+
+            return resultReturn;
         }
     }
 }

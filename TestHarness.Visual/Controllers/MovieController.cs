@@ -21,5 +21,12 @@ namespace TestHarness.Visual.Controllers
 
             return View(result);
         }
+
+        public IActionResult MoviesNowPlaying()
+        {
+            ResultReturn result = _tmdb.MoviesNowPlaying();
+
+            return View(result);
+        }
     }
 }
