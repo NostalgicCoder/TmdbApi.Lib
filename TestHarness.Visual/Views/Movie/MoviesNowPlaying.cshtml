@@ -41,9 +41,9 @@
                                 @{
                                     string url = string.Empty;
 
-                                    url = "https://image.tmdb.org/t/p/original/" + obj.poster_path;
+                                    url = "https://image.tmdb.org/t/p/original" + obj.poster_path;
 
-                                    <a href="@Url.Action("GetUserSelection", "Movie", new { id = obj.id })">
+                                    <a href="@Url.Action("GetUserFilmSelectionById", "Movie", new { id = obj.id })">
 
                                         @if (string.IsNullOrEmpty(obj.poster_path))
                                         {

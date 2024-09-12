@@ -30,7 +30,14 @@ namespace TmdbApi.Lib
             {
                 string rawResponse = response.Content;
 
-                return JsonConvert.DeserializeObject<Rootobject>(rawResponse);
+                try
+                {
+                    return JsonConvert.DeserializeObject<Rootobject>(rawResponse);
+                }
+                catch(Exception ex) 
+                {
+                    return null;
+                }
             }
 
             return null;
@@ -95,6 +102,22 @@ namespace TmdbApi.Lib
             string query = Endpoint.SearchMovieId + id;
 
             resultReturn.FilmIdResult = CallTmdbApi(query);
+
+            return resultReturn;
+        }
+
+        /// <summary>
+        /// Search the TV endpoint for a specific result that matches the id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResultReturn SearchForTVById(int id)
+        {
+            ResultReturn resultReturn = new ResultReturn();
+
+            string query = Endpoint.SearchTVId + id;
+
+            resultReturn.TVIdResult = CallTmdbApi(query);
 
             return resultReturn;
         }

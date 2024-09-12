@@ -38,9 +38,9 @@
                             @{
                                 string url = string.Empty;
 
-                                url = "https://image.tmdb.org/t/p/original/" + obj.poster_path;
-                                
-                                <a href="@Url.Action("GetUserSelection", "Movie", new { id = obj.id })">
+                                url = "https://image.tmdb.org/t/p/original" + obj.poster_path;
+
+                                <a href="@Url.Action("GetUserFilmSelectionById", "Movie", new { id = obj.id })">
 
                                 @if(string.IsNullOrEmpty(obj.poster_path))
                                 {
@@ -96,16 +96,20 @@
                             @{
                                 string url = string.Empty;
 
-                                url = "https://image.tmdb.org/t/p/original/" + obj.poster_path;
-                                
-                                @if(string.IsNullOrEmpty(obj.poster_path))
-                                {
-                                    <img id="Cinema.jpg" class="imgCentre" src="~/Images/Cinema.jpg" width="198px" height="298px" />
-                                }
-                                else
-                                {
-                                    <img src="@url" width="198px" height="298px" />
-                                }
+                                url = "https://image.tmdb.org/t/p/original" + obj.poster_path;
+
+                                <a href="@Url.Action("GetUserTVSelectionById", "Movie", new { id = obj.id })">
+
+                                    @if (string.IsNullOrEmpty(obj.poster_path))
+                                    {
+                                        <img id="Cinema.jpg" class="imgCentre" src="~/Images/Cinema.jpg" width="198px" height="298px" />
+                                    }
+                                    else
+                                    {
+                                        <img src="@url" width="198px" height="298px" />
+                                    }
+
+                                </a>
                             }
                         </td>
                     </tr>

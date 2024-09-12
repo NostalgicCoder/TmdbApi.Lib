@@ -1,0 +1,51 @@
+﻿@using TmdbApi.Lib.Models;
+
+@model ResultReturn;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    string url = "https://image.tmdb.org/t/p/original" + Model.TVIdResult.poster_path;
+
+    @if (string.IsNullOrEmpty(Model.TVIdResult.poster_path))
+    {
+        <img id="Cinema.jpg" class="imgCentre" src="~/Images/Cinema.jpg" width="20%" height="20%" />
+    }
+    else
+    {
+        <img src="@url" width="20%" height="20%" />
+    }
+}
+
+<p></p>
+
+<h3>@Model.TVIdResult.name</h3>
+
+<p></p>
+
+@{
+    if (!string.IsNullOrEmpty(Model.TVIdResult.first_air_date))
+    {
+        <li>First Air Date: @Convert.ToDateTime(Model.TVIdResult.first_air_date).Year.ToString()</li>
+    }
+}
+
+<li>Vote Average: @Math.Round(Model.TVIdResult.vote_average, 1)</li>
+<li>Genres: @String.Join(", ", Model.TVIdResult.genres.Select(x => x.name).ToArray())</li>
+
+@{
+    if(!string.IsNullOrEmpty(Model.TVIdResult.tagline))
+    {
+        <li>Tagline: @Model.TVIdResult.tagline</li>
+    }
+}
+
+<p></p>
+
+<h4>Overview:</h4>
+
+<p></p>
+
+@Model.TVIdResult.overview
