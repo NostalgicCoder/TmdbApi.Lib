@@ -28,3 +28,19 @@ body {
     /*padding-bottom: 10px;*/
     /*border: 1px solid black;*/
 }
+
+.filmTvPosterImgSize {
+    /*Poster sizing issues are caused if this is set to a % value*/
+    width: 198px;
+    height: 298px;
+}
+
+.filmTvDetailPosterImgSize {
+    width: 20%;
+    height: 20%;
+}
+
+.castImgSize {
+    width: 40%;
+    height: 40%;
+}

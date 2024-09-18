@@ -1,4 +1,6 @@
-﻿namespace TmdbApi.Lib.Models
+﻿using static TmdbApi.Lib.Tmdb;
+
+namespace TmdbApi.Lib.Models
 {
     public class Rootobject
     {
@@ -53,5 +55,7 @@
         public string original_name { get; set; }
         public Season[] seasons { get; set; }
         public string type { get; set; }
+        public Cast[] cast { get; set; }
+        public Crew[] crew { get; set; }
     }
 }

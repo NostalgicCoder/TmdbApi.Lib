@@ -12,9 +12,9 @@ namespace TestHarness.Console
 
             tmdb.SearchForFilmTV("Robocop");
 
-            tmdb.GetMovieImages(5548);
+            tmdb.SearchForFilmAndCreditsById(5548);
 
-            tmdb.SearchForFilmById(5548);
+            tmdb.GetMovieImages(5548);
 
             tmdb.MoviesNowPlaying();
 

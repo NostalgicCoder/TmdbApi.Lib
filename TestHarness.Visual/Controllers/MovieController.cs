@@ -19,16 +19,16 @@ namespace TestHarness.Visual.Controllers
 
         public IActionResult GetUserFilmSelectionById(int id)
         {
-            ResultReturn result = _tmdb.SearchForFilmById(id);
+            ResultReturn result = _tmdb.SearchForFilmAndCreditsById(id);
 
-            if (result.FilmIdResult != null)
+            if (result.FilmIdResult != null && result.CreditsByFilmId != null)
             {
                 return View(result);
             }
             else
             {
                 _errorViewModel = new ErrorViewModel();
-                _errorViewModel.Error = "FilmIdResult has been returned NULL.";
+                _errorViewModel.Error = "FilmIdResult or CreditsByFilmId has been returned NULL.";
 
                 return View("Error", _errorViewModel);
             }

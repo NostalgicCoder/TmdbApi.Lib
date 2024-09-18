@@ -34,7 +34,7 @@ namespace TmdbApi.Lib
                 {
                     return JsonConvert.DeserializeObject<Rootobject>(rawResponse);
                 }
-                catch(Exception ex) 
+                catch (Exception ex)
                 {
                     return null;
                 }
@@ -85,25 +85,58 @@ namespace TmdbApi.Lib
         {
             string query = Endpoint.SearchMovie + keyword + "&include_adult=false&language=en-US&page=1";
 
-            Rootobject result = CallTmdbApi(query);
-
-            return result;
+            return CallTmdbApi(query);
         }
 
         /// <summary>
-        /// Search the Movie endpoint for a specific result that matches the id
+        /// Search the TV endpoint for results that match the keyword
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
+        public Rootobject SearchForTv(string keyword)
+        {
+            string query = Endpoint.SearchTV + keyword + "&include_adult=false&language=en-US&page=1";
+
+            return CallTmdbApi(query);
+        }
+
+        /// <summary>
+        /// Search the movie and credits endpoints for data that matches the specified movieId
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ResultReturn SearchForFilmById(int id)
+        public ResultReturn SearchForFilmAndCreditsById(int id)
         {
             ResultReturn resultReturn = new ResultReturn();
 
-            string query = Endpoint.SearchMovieId + id;
-
-            resultReturn.FilmIdResult = CallTmdbApi(query);
+            resultReturn.FilmIdResult = SearchForFilmById(id);
+            resultReturn.CreditsByFilmId = SearchForCreditsByFilmId(id);
 
             return resultReturn;
+        }
+
+        /// <summary>
+        /// Search for film information by movieId
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Rootobject SearchForFilmById(int id)
+        {
+            string query = Endpoint.SearchMovieId + id;
+
+            return CallTmdbApi(query);
+        }
+
+        /// <summary>
+        /// Search for cast and crew information by movieId
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Rootobject SearchForCreditsByFilmId(int id)
+        {
+            string query = Endpoint.SearchMovieId + id + Endpoint.Credits;
+
+            return CallTmdbApi(query);
         }
 
         /// <summary>
@@ -123,28 +156,14 @@ namespace TmdbApi.Lib
         }
 
         /// <summary>
-        /// Search the TV endpoint for results that match the keyword
-        /// </summary>
-        /// <param name="keyword"></param>
-        /// <returns></returns>
-        public Rootobject SearchForTv(string keyword)
-        {
-            string query = Endpoint.SearchTV + keyword + "&include_adult=false&language=en-US&page=1";
-
-            Rootobject result = CallTmdbApi(query);
-
-            return result;
-        }
-
-        /// <summary>
         /// Gets URL paths and logo and poster sizing information for films
         /// - https://developer.themoviedb.org/docs/image-basics
         /// - https://www.themoviedb.org/talk/5f3ef4eec175b200365ee352
         /// </summary>
         /// <param name="movieId"></param>
-        public void GetMovieImages(int movieId)
+        public void GetMovieImages(int id)
         {
-            string query = "/movie/" + movieId + "/images";
+            string query = Endpoint.SearchMovieId + id + Endpoint.MovieImages;
 
             Rootobject result = CallTmdbApi(query);
 

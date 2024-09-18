@@ -7,5 +7,6 @@
         public Rootobject FilmIdResult { get; set; }
         public Rootobject TVIdResult { get; set; }
         public Rootobject MoviesNowPlaying { get; set; }
+        public Rootobject CreditsByFilmId { get; set; }
     }
 }

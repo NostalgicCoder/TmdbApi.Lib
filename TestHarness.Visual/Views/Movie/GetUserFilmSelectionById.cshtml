@@ -11,11 +11,11 @@
 
     @if (string.IsNullOrEmpty(Model.FilmIdResult.poster_path))
     {
-        <img id="Cinema.jpg" class="imgCentre" src="~/Images/Cinema.jpg" width="20%" height="20%" />
+        <img id="Cinema.jpg" class="filmTvDetailPosterImgSize" src="~/Images/Cinema.jpg" />
     }
     else
     {
-        <img src="@url" width="20%" height="20%" />
+        <img src="@url" class="filmTvDetailPosterImgSize" />
     }
 }
 
@@ -50,3 +50,54 @@
 <p></p>
 
 @Model.FilmIdResult.overview
+
+<p></p>
+
+<h4>Main Cast:</h4>
+
+@{
+    List<Cast> castColl;
+
+    if (Model.CreditsByFilmId.cast.Count() > 15)
+    {
+        castColl = Model.CreditsByFilmId.cast.OrderBy(item => item.order).Take(15).ToList();
+    }
+    else
+    {
+        castColl = Model.CreditsByFilmId.cast.OrderBy(item => item.order).ToList();
+    }
+
+    foreach (Cast cast in castColl)
+    {
+        <div class="inner_block">
+            <table>
+                <tr>
+                    <td>
+                        @cast.name
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            string castUrl = "https://image.tmdb.org/t/p/original" + cast.profile_path;
+
+                            @if (string.IsNullOrEmpty(cast.profile_path))
+                            {
+                                <img id="Cinema.jpg" class="castImgSize" src="~/Images/Cinema.jpg" />
+                            }
+                            else
+                            {
+                                <img src="@castUrl" class="castImgSize" />
+                            }
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @cast.character
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+}

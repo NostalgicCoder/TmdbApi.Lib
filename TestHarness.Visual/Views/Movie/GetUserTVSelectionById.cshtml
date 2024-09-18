@@ -11,11 +11,11 @@
 
     @if (string.IsNullOrEmpty(Model.TVIdResult.poster_path))
     {
-        <img id="Cinema.jpg" class="imgCentre" src="~/Images/Cinema.jpg" width="20%" height="20%" />
+        <img id="Cinema.jpg" class="filmTvDetailPosterImgSize" src="~/Images/Cinema.jpg" />
     }
     else
     {
-        <img src="@url" width="20%" height="20%" />
+        <img src="@url" class="filmTvDetailPosterImgSize" />
     }
 }
 
