@@ -1,16 +1,14 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
 using TmdbApi.Lib.Class;
+using TmdbApi.Lib.Interfaces;
 using TmdbApi.Lib.Models;
 
 namespace TmdbApi.Lib
 {
-    // https://developer.themoviedb.org/reference/intro/getting-started
-
-    public class Tmdb
+    public class Tmdb : ITmdb
     {
         private RestClient _client = new RestClient("https://api.themoviedb.org/3");
-
         private List<string> _logoSizes;
         private List<string> _posterSizes;
 

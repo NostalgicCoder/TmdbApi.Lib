@@ -4,15 +4,19 @@ TMDB (The Movie Database) Rest API
 
 First created on: 09/09/2024
 
-My nephew had introduced me to the TMDB API on one of his projects so i thought this would be a good API to use to further increase my experience with working with REST based API’s.  My plan is just to experiment with the capabilities of the API with the possibility of creating a movie tracking application around it later.
+I am a avid film fan in my personal life so when i discovered the TMDB API (The Movie Database - www.themoviedb.org) from my nephew that had used it on one of his personal projects i was keen to give it a try.  I have begun creating a C# wrapper (Class library project) for this with both a console and a ASP.NET MVC Core website test harness to allow me to call and test the API easily.  As my capabilities and confidence with this API increase my plan is to slowly replace the visual test harness side with a movie/TV tracking application.
 
-This project is still in development and will have further optimization as time goes on.
+NOTE!:
+
+This project is still in active development and will have further optimizations made as time goes on. My main focus is to implement the main core functions of the API and then as it progresses add in quality of life and efficiency improvements.
 
 Technologies / Principles Used:
 
 - C#
 - ASP.NET MVC Core
-- REST
+- Console
+- Class Library
+- REST API
 - TMDB API
 - NET Core (Console & Class Library)
 - RestSharp
