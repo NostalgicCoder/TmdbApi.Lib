@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TmdbApi.Lib;
 using TestHarness.Visual.Models;
+using TestHarness.Visual.Data;
 
 namespace TestHarness.Visual.Controllers
 {
@@ -8,6 +9,16 @@ namespace TestHarness.Visual.Controllers
     {
         private Tmdb _tmdb = new Tmdb();
         private ErrorViewModel _errorViewModel;
+
+        private readonly ApplicationDbContext _db;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public MovieController(ApplicationDbContext db)
+        {
+            _db = db;
+        }
 
         public IActionResult Index(string keyword)
         {
@@ -27,8 +38,35 @@ namespace TestHarness.Visual.Controllers
             return View(media);
         }
 
-        public IActionResult MarkAsWatched(Media media)
+        public async Task<IActionResult> MarkAsWatched(Media media)
         {
+            WatchedMedia watchedMedia = _db.WatchedMedia.Where(x => x.TMDBId == media.SelectedTMDBId).FirstOrDefault();
+
+            if(watchedMedia == null)
+            {
+                watchedMedia = new WatchedMedia();
+
+                watchedMedia.TMDBId = media.SelectedTMDBId;
+                watchedMedia.ContentType = media.SelectedContentType;
+                watchedMedia.WatchedQty = 1;
+                watchedMedia.FirstWatched = DateTime.Now;
+                watchedMedia.LastWatched = DateTime.Now;
+
+                await _db.WatchedMedia.AddAsync(watchedMedia);
+            }
+            else
+            {
+                watchedMedia.LastWatched = DateTime.Now;
+                watchedMedia.WatchedQty = watchedMedia.WatchedQty + 1;
+
+                _db.WatchedMedia.Update(watchedMedia);
+            }
+
+            if (ModelState.IsValid)
+            {
+                await _db.SaveChangesAsync();
+            }
+
             return RedirectToAction("MoviesNowPlaying", "Movie");
         }
 
@@ -36,7 +74,7 @@ namespace TestHarness.Visual.Controllers
         {
             Media media = new Media();
 
-            media.Id = id;
+            media.SelectedTMDBId = id;
             media.TMDBData = _tmdb.SearchForFilmAndCreditsById(id);
 
             if (media.TMDBData.FilmIdResult != null && media.TMDBData.CreditsByFilmId != null)
@@ -56,7 +94,7 @@ namespace TestHarness.Visual.Controllers
         {
             Media media = new Media();
 
-            media.Id = id;
+            media.SelectedTMDBId = id;
             media.TMDBData = _tmdb.SearchForTVById(id);
 
             if(media.TMDBData.TVIdResult != null)

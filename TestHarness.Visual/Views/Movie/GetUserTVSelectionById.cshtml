@@ -9,11 +9,11 @@
 <form method="post" asp-action="MarkAsWatched">
 
     @{
-        Model.Type = "TV";
+        Model.SelectedContentType = "TV";
     }
 
-    <input type="hidden" asp-for="@Model.Id" />
-    <input type="hidden" asp-for="@Model.Type" />
+    <input type="hidden" asp-for="@Model.SelectedTMDBId" />
+    <input type="hidden" asp-for="@Model.SelectedContentType" />
 
     <button type="submit" class="btn btn-primary">Mark At Watched<i class="bi bi-filter"></i></button>
 
