@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TmdbApi.Lib.Models;
 using TmdbApi.Lib;
 using TestHarness.Visual.Models;
 
@@ -12,18 +11,37 @@ namespace TestHarness.Visual.Controllers
 
         public IActionResult Index(string keyword)
         {
-            ResultReturn result = _tmdb.SearchForFilmTV(keyword);
+            Media media = new Media();
 
-            return View(result);
+            media.TMDBData = _tmdb.SearchForFilmTV(keyword);
+
+            return View(media);
+        }
+
+        public IActionResult MoviesNowPlaying()
+        {
+            Media media = new Media();
+
+            media.TMDBData = _tmdb.MoviesNowPlaying();
+
+            return View(media);
+        }
+
+        public IActionResult MarkAsWatched(Media media)
+        {
+            return RedirectToAction("MoviesNowPlaying", "Movie");
         }
 
         public IActionResult GetUserFilmSelectionById(int id)
         {
-            ResultReturn result = _tmdb.SearchForFilmAndCreditsById(id);
+            Media media = new Media();
 
-            if (result.FilmIdResult != null && result.CreditsByFilmId != null)
+            media.Id = id;
+            media.TMDBData = _tmdb.SearchForFilmAndCreditsById(id);
+
+            if (media.TMDBData.FilmIdResult != null && media.TMDBData.CreditsByFilmId != null)
             {
-                return View(result);
+                return View(media);
             }
             else
             {
@@ -36,11 +54,14 @@ namespace TestHarness.Visual.Controllers
 
         public IActionResult GetUserTVSelectionById(int id)
         {
-            ResultReturn result = _tmdb.SearchForTVById(id);
+            Media media = new Media();
 
-            if(result.TVIdResult != null)
+            media.Id = id;
+            media.TMDBData = _tmdb.SearchForTVById(id);
+
+            if(media.TMDBData.TVIdResult != null)
             {
-                return View(result);
+                return View(media);
             }
             else
             {
@@ -49,13 +70,6 @@ namespace TestHarness.Visual.Controllers
 
                 return View("Error", _errorViewModel);
             }
-        }
-
-        public IActionResult MoviesNowPlaying()
-        {
-            ResultReturn result = _tmdb.MoviesNowPlaying();
-
-            return View(result);
         }
     }
 }

@@ -1,19 +1,33 @@
 ﻿@using TmdbApi.Lib.Models;
 
-@model ResultReturn;
+@model Media;
 
 @{
     ViewData["Title"] = "Search Results";
 }
 
+<form method="post" asp-action="Index">
+
+    <label>Keyword:</label>
+    <input asp-for="Keyword" class="form-control" style="width:400px" />
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Search<i class="bi bi-filter"></i></button>
+
+</form>
+
+<p></p>
+
 @{
-    if (Model.FilmResults.results.Count() != 0)
+
+    if (Model.TMDBData.FilmResults.results.Count() != 0)
     {
         <h4>Film:</h4>
 
         <p></p>
 
-        @foreach (var obj in Model.FilmResults.results)
+        @foreach (var obj in Model.TMDBData.FilmResults.results)
         {
             <div class="inner_block">
                 <table>
@@ -62,7 +76,7 @@
 }
 
 @{
-    if (Model.TVResults.results.Count() != 0)
+    if (Model.TMDBData.TVResults.results.Count() != 0)
     {
 
         <p></p>
@@ -71,7 +85,7 @@
 
         <p></p>
 
-        @foreach (var obj in Model.TVResults.results)
+        @foreach (var obj in Model.TMDBData.TVResults.results)
         {
             <div class="inner_block">
                 <table>

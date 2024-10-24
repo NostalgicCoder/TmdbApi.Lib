@@ -1,20 +1,33 @@
 ﻿@using TmdbApi.Lib.Models;
 
-@model ResultReturn;
+@model Media;
 
 @{
     ViewData["Title"] = "MoviesNowPlaying";
 }
+
+<form method="post" asp-action="Index">
+
+    <label>Keyword:</label>
+    <input asp-for="Keyword" class="form-control" style="width:400px" />
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Search<i class="bi bi-filter"></i></button>
+
+</form>
+
+<p></p>
 
 <h4>Movies Now Playing:</h4>
 
 <p></p>
 
 @{
-    if (Model.MoviesNowPlaying.results.Count() != 0)
+    if (Model.TMDBData.MoviesNowPlaying.results.Count() != 0)
     {
 
-        @foreach (var obj in Model.MoviesNowPlaying.results)
+        @foreach (var obj in Model.TMDBData.MoviesNowPlaying.results)
         {
             if(obj.original_language == "en")
             {

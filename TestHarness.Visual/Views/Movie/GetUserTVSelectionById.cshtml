@@ -1,15 +1,30 @@
 ﻿@using TmdbApi.Lib.Models;
 
-@model ResultReturn;
+@model Media;
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-@{
-    string url = "https://image.tmdb.org/t/p/original" + Model.TVIdResult.poster_path;
+<form method="post" asp-action="MarkAsWatched">
 
-    @if (string.IsNullOrEmpty(Model.TVIdResult.poster_path))
+    @{
+        Model.Type = "TV";
+    }
+
+    <input type="hidden" asp-for="@Model.Id" />
+    <input type="hidden" asp-for="@Model.Type" />
+
+    <button type="submit" class="btn btn-primary">Mark At Watched<i class="bi bi-filter"></i></button>
+
+</form>
+
+<p></p>
+
+@{
+    string url = "https://image.tmdb.org/t/p/original" + Model.TMDBData.TVIdResult.poster_path;
+
+    @if (string.IsNullOrEmpty(Model.TMDBData.TVIdResult.poster_path))
     {
         <img id="Cinema.jpg" class="filmTvDetailPosterImgSize" src="~/Images/Cinema.jpg" />
     }
@@ -21,24 +36,24 @@
 
 <p></p>
 
-<h3>@Model.TVIdResult.name</h3>
+<h3>@Model.TMDBData.TVIdResult.name</h3>
 
 <p></p>
 
 @{
-    if (!string.IsNullOrEmpty(Model.TVIdResult.first_air_date))
+    if (!string.IsNullOrEmpty(Model.TMDBData.TVIdResult.first_air_date))
     {
-        <li>First Air Date: @Convert.ToDateTime(Model.TVIdResult.first_air_date).Year.ToString()</li>
+        <li>First Air Date: @Convert.ToDateTime(Model.TMDBData.TVIdResult.first_air_date).Year.ToString()</li>
     }
 }
 
-<li>Vote Average: @Math.Round(Model.TVIdResult.vote_average, 1)</li>
-<li>Genres: @String.Join(", ", Model.TVIdResult.genres.Select(x => x.name).ToArray())</li>
+<li>Vote Average: @Math.Round(Model.TMDBData.TVIdResult.vote_average, 1)</li>
+<li>Genres: @String.Join(", ", Model.TMDBData.TVIdResult.genres.Select(x => x.name).ToArray())</li>
 
 @{
-    if(!string.IsNullOrEmpty(Model.TVIdResult.tagline))
+    if (!string.IsNullOrEmpty(Model.TMDBData.TVIdResult.tagline))
     {
-        <li>Tagline: @Model.TVIdResult.tagline</li>
+        <li>Tagline: @Model.TMDBData.TVIdResult.tagline</li>
     }
 }
 
@@ -48,4 +63,4 @@
 
 <p></p>
 
-@Model.TVIdResult.overview
+@Model.TMDBData.TVIdResult.overview

@@ -1,15 +1,30 @@
 ﻿@using TmdbApi.Lib.Models;
 
-@model ResultReturn;
+@model Media;
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-@{
-    string url = "https://image.tmdb.org/t/p/original" + Model.FilmIdResult.poster_path;
+<form method="post" asp-action="MarkAsWatched">
 
-    @if (string.IsNullOrEmpty(Model.FilmIdResult.poster_path))
+    @{
+        Model.Type = "Film";
+    }
+
+    <input type="hidden" asp-for="@Model.Id" />
+    <input type="hidden" asp-for="@Model.Type" />
+
+    <button type="submit" class="btn btn-primary">Mark At Watched<i class="bi bi-filter"></i></button>
+
+</form>
+
+<p></p>
+
+@{
+    string url = "https://image.tmdb.org/t/p/original" + Model.TMDBData.FilmIdResult.poster_path;
+
+    @if (string.IsNullOrEmpty(Model.TMDBData.FilmIdResult.poster_path))
     {
         <img id="Cinema.jpg" class="filmTvDetailPosterImgSize" src="~/Images/Cinema.jpg" />
     }
@@ -21,25 +36,25 @@
 
 <p></p>
 
-<h3>@Model.FilmIdResult.original_title</h3>
+<h3>@Model.TMDBData.FilmIdResult.original_title</h3>
 
 <p></p>
 
 @{
-    if(!string.IsNullOrEmpty(Model.FilmIdResult.release_date))
+    if (!string.IsNullOrEmpty(Model.TMDBData.FilmIdResult.release_date))
     {
-        <li>Release Year: @Convert.ToDateTime(Model.FilmIdResult.release_date).Year.ToString()</li>
+        <li>Release Year: @Convert.ToDateTime(Model.TMDBData.FilmIdResult.release_date).Year.ToString()</li>
     }
 }
 
-<li>Vote Average: @Math.Round(Model.FilmIdResult.vote_average, 1)</li>
-<li>Runtime: @Model.FilmIdResult.runtime.ToString() mins</li>
-<li>Genres: @String.Join(", ", Model.FilmIdResult.genres.Select(x => x.name).ToArray())</li>
+<li>Vote Average: @Math.Round(Model.TMDBData.FilmIdResult.vote_average, 1)</li>
+<li>Runtime: @Model.TMDBData.FilmIdResult.runtime.ToString() mins</li>
+<li>Genres: @String.Join(", ", Model.TMDBData.FilmIdResult.genres.Select(x => x.name).ToArray())</li>
 
 @{
-    if (!string.IsNullOrEmpty(Model.FilmIdResult.tagline))
+    if (!string.IsNullOrEmpty(Model.TMDBData.FilmIdResult.tagline))
     {
-        <li>Tagline: @Model.FilmIdResult.tagline</li>
+        <li>Tagline: @Model.TMDBData.FilmIdResult.tagline</li>
     }
 }
 
@@ -49,7 +64,7 @@
 
 <p></p>
 
-@Model.FilmIdResult.overview
+@Model.TMDBData.FilmIdResult.overview
 
 <p></p>
 
@@ -58,13 +73,13 @@
 @{
     List<Cast> castColl;
 
-    if (Model.CreditsByFilmId.cast.Count() > 15)
+    if (Model.TMDBData.CreditsByFilmId.cast.Count() > 15)
     {
-        castColl = Model.CreditsByFilmId.cast.OrderBy(item => item.order).Take(15).ToList();
+        castColl = Model.TMDBData.CreditsByFilmId.cast.OrderBy(item => item.order).Take(15).ToList();
     }
     else
     {
-        castColl = Model.CreditsByFilmId.cast.OrderBy(item => item.order).ToList();
+        castColl = Model.TMDBData.CreditsByFilmId.cast.OrderBy(item => item.order).ToList();
     }
 
     foreach (Cast cast in castColl)
