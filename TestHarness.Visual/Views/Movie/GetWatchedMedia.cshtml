@@ -4,21 +4,32 @@
     ViewData["Title"] = "My Watched Media:";
 }
 
-<h1>My Watched Media:</h1>
+<h2>My Watched Media:</h2>
 
-<table style="width:100%">
+<p></p>
+
+<h4>Films:</h4>
+
+<p></p>
+
+<table class="siteTheme" style="width:100%">
     <thead>
         <tr>
-            <th>
+            <th class="siteTheme">
+            </th>
+            <th class="siteTheme">
                 Title:
             </th>
-            <th>
+            <th class="siteTheme">
+                Year:
+            </th>
+            <th class="siteTheme">
                 Qty:
             </th>
-            <th>
+            <th class="siteTheme">
                 First Watched:
             </th>
-            <th>
+            <th class="siteTheme">
                 Last Watched:
             </th>
         </tr>
@@ -27,33 +38,110 @@
         @foreach (var obj in Model.WatchedMediaResults.WatchedFilms)
         {
             <tr>
-                <td>
+                <td class="siteTheme" style="width:77px;">
+                    @{
+                        string url = "https://image.tmdb.org/t/p/original" + obj.ResultReturn.FilmIdResult.poster_path;
+
+                        @if (string.IsNullOrEmpty(obj.ResultReturn.FilmIdResult.poster_path))
+                        {
+                            <img id="Cinema.jpg" class="myWatchedMediaPosterImgSize" src="~/Images/Cinema.jpg" />
+                        }
+                        else
+                        {
+                            <img src="@url" class="myWatchedMediaPosterImgSize" border="1" />
+                        }
+                    }
+                </td>
+                <td class="siteTheme">
                     @obj.ResultReturn.FilmIdResult.original_title <br />
                 </td>
-                <td>
+                <td class="siteTheme" style="text-align: center; width:50px;">
+                    @{
+                        if (!string.IsNullOrEmpty(obj.ResultReturn.FilmIdResult.release_date))
+                        {
+                            @Convert.ToDateTime(obj.ResultReturn.FilmIdResult.release_date).Year.ToString()
+                            ;
+                        }
+                    }
+                </td>
+                <td class="siteTheme" style="text-align: center; width:40px;">
                     @obj.WatchedMedia.WatchedQty.ToString()
                 </td>
-                <td>
+                <td class="siteTheme" style="text-align: center; width:92px;">
                     @obj.WatchedMedia.FirstWatched.ToString()
                 </td>
-                <td>
+                <td class="siteTheme" style="text-align: center; width:92px;">
                     @obj.WatchedMedia.LastWatched.ToString()
                 </td>
             </tr>
         }
+    </tbody>
+</table>
+
+<p></p>
+
+<h4>TV:</h4>
+
+<p></p>
+
+<table class="siteTheme" style="width:100%">
+    <thead>
+        <tr>
+            <th class="siteTheme">
+            </th>
+            <th class="siteTheme">
+                Title:
+            </th>
+            <th class="siteTheme">
+                Year:
+            </th>
+            <th class="siteTheme">
+                Qty:
+            </th>
+            <th class="siteTheme">
+                First Watched:
+            </th>
+            <th class="siteTheme">
+                Last Watched:
+            </th>
+        </tr>
+    </thead>
+    <tbody>
         @foreach (var obj in Model.WatchedMediaResults.WatchedTV)
         {
             <tr>
-                <td>
+                <td class="siteTheme" style="width:77px;">
+                    @{
+                        string url = "https://image.tmdb.org/t/p/original" + obj.ResultReturn.TVIdResult.poster_path;
+
+                        @if (string.IsNullOrEmpty(obj.ResultReturn.TVIdResult.poster_path))
+                        {
+                            <img id="Cinema.jpg" class="myWatchedMediaPosterImgSize" src="~/Images/Cinema.jpg" />
+                        }
+                        else
+                        {
+                            <img src="@url" class="myWatchedMediaPosterImgSize" border="1" />
+                        }
+                    }
+                </td>
+                <td class="siteTheme">
                     @obj.ResultReturn.TVIdResult.name
                 </td>
-                <td>
+                <td class="siteTheme" style="text-align: center; width:50px;">
+                    @{
+                        if (!string.IsNullOrEmpty(obj.ResultReturn.TVIdResult.first_air_date))
+                        {
+                            @Convert.ToDateTime(obj.ResultReturn.TVIdResult.first_air_date).Year.ToString()
+                        }
+                    }
+                </td>
+                <td class="siteTheme" style="text-align: center; width:40px">
                     @obj.WatchedMedia.WatchedQty.ToString()
                 </td>
-                <td>
+                <td class="siteTheme" style="text-align: center; width:92px;">
                     @obj.WatchedMedia.FirstWatched.ToString()
                 </td>
-                <td>
+                <td class="siteTheme" style="text-align: center; width:92px;">
                     @obj.WatchedMedia.LastWatched.ToString()
                 </td>
             </tr>

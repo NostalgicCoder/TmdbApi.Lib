@@ -44,3 +44,21 @@ body {
     width: 40%;
     height: 40%;
 }
+
+.myWatchedMediaPosterImgSize {
+    width: 65px;
+    height: 93px;
+}
+
+table.siteTheme, th.siteTheme, td.siteTheme {
+    border: 2px solid;
+}
+
+th.siteTheme, td.siteTheme {
+    padding: 5px;
+}
+
+th.siteTheme {
+    text-align: center;
+    background-color: lightgray;
+}
