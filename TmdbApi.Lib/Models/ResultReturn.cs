@@ -8,5 +8,15 @@
         public Rootobject TVIdResult { get; set; }
         public Rootobject MoviesNowPlaying { get; set; }
         public Rootobject CreditsByFilmId { get; set; }
+
+        public ResultReturn()
+        {
+            FilmResults = new Rootobject();
+            TVResults = new Rootobject();
+            FilmIdResult = new Rootobject();
+            TVIdResult = new Rootobject();
+            MoviesNowPlaying = new Rootobject();
+            CreditsByFilmId = new Rootobject();
+        }
     }
 }

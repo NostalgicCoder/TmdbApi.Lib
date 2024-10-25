@@ -1,0 +1,62 @@
+﻿@model Media;
+
+@{
+    ViewData["Title"] = "My Watched Media:";
+}
+
+<h1>My Watched Media:</h1>
+
+<table style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Title:
+            </th>
+            <th>
+                Qty:
+            </th>
+            <th>
+                First Watched:
+            </th>
+            <th>
+                Last Watched:
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model.WatchedMediaResults.WatchedFilms)
+        {
+            <tr>
+                <td>
+                    @obj.ResultReturn.FilmIdResult.original_title <br />
+                </td>
+                <td>
+                    @obj.WatchedMedia.WatchedQty.ToString()
+                </td>
+                <td>
+                    @obj.WatchedMedia.FirstWatched.ToString()
+                </td>
+                <td>
+                    @obj.WatchedMedia.LastWatched.ToString()
+                </td>
+            </tr>
+        }
+        @foreach (var obj in Model.WatchedMediaResults.WatchedTV)
+        {
+            <tr>
+                <td>
+                    @obj.ResultReturn.TVIdResult.name
+                </td>
+                <td>
+                    @obj.WatchedMedia.WatchedQty.ToString()
+                </td>
+                <td>
+                    @obj.WatchedMedia.FirstWatched.ToString()
+                </td>
+                <td>
+                    @obj.WatchedMedia.LastWatched.ToString()
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

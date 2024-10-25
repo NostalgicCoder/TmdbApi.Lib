@@ -8,6 +8,6 @@ namespace TestHarness.Visual.Models
         public string SelectedContentType { get; set; }
         public string Keyword { get; set; }
         public ResultReturn TMDBData { get; set; }
-        public IEnumerable<WatchedMedia> WatchedMedia { get; set; }
+        public WatchedMediaResults WatchedMediaResults { get; set; }
     }
 }
