@@ -21,6 +21,12 @@ Technologies / Principles Used:
 - NET Core (Console & Class Library)
 - RestSharp
 - Newtonsoft.Json
+- Entity Framework - Code first approach
+- SQL Server Express backend database
+
+Requirements:
+
+SQL backend database to be installed.
 
 Resources / Credits:
 

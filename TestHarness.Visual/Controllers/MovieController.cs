@@ -44,7 +44,7 @@ namespace TestHarness.Visual.Controllers
             Media media = new Media();
             WatchedMediaResults watchedMediaResults = new WatchedMediaResults();
 
-            foreach (WatchedMedia item in _db.WatchedMedia.OrderBy(x => x.LastWatched))
+            foreach (WatchedMedia item in _db.WatchedMedia.OrderByDescending(x => x.LastWatched))
             {
                 WatchedMediaItem watchedMediaItem = new WatchedMediaItem();
 

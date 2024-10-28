@@ -16,12 +16,16 @@
     <thead>
         <tr>
             <th class="siteTheme">
+                Poster:
             </th>
             <th class="siteTheme">
                 Title:
             </th>
             <th class="siteTheme">
                 Year:
+            </th>
+            <th class="siteTheme">
+                Genre(s):
             </th>
             <th class="siteTheme">
                 Qty:
@@ -64,6 +68,9 @@
                         }
                     }
                 </td>
+                <td class="siteTheme" style="width:200px;">
+                    @String.Join(", ", obj.ResultReturn.FilmIdResult.genres.Select(x => x.name).ToArray())
+                </td>
                 <td class="siteTheme" style="text-align: center; width:40px;">
                     @obj.WatchedMedia.WatchedQty.ToString()
                 </td>
@@ -88,12 +95,16 @@
     <thead>
         <tr>
             <th class="siteTheme">
+                Poster:
             </th>
             <th class="siteTheme">
                 Title:
             </th>
             <th class="siteTheme">
                 Year:
+            </th>
+            <th class="siteTheme">
+                Genre(s):
             </th>
             <th class="siteTheme">
                 Qty:
@@ -134,6 +145,9 @@
                             @Convert.ToDateTime(obj.ResultReturn.TVIdResult.first_air_date).Year.ToString()
                         }
                     }
+                </td>
+                <td class="siteTheme" style="width:200px;">
+                    @String.Join(", ", obj.ResultReturn.TVIdResult.genres.Select(x => x.name).ToArray())
                 </td>
                 <td class="siteTheme" style="text-align: center; width:40px">
                     @obj.WatchedMedia.WatchedQty.ToString()
