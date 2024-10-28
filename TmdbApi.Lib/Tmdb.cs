@@ -64,7 +64,7 @@ namespace TmdbApi.Lib
         /// </summary>
         /// <param name="keyword"></param>
         /// <returns></returns>
-        public ResultReturn SearchForFilmTV(string keyword)
+        public ResultReturn SearchForFilmTv(string keyword)
         {
             ResultReturn resultReturn = new ResultReturn();
 
@@ -98,8 +98,16 @@ namespace TmdbApi.Lib
             return CallTmdbApi(query);
         }
 
+
+
+
+
+
+
+
+
         /// <summary>
-        /// Search the movie and credits endpoints for data that matches the specified movieId
+        /// Search for film and credits by TMDB id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -114,7 +122,7 @@ namespace TmdbApi.Lib
         }
 
         /// <summary>
-        /// Search for film information by movieId
+        /// Search for film by TMDB id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -126,7 +134,7 @@ namespace TmdbApi.Lib
         }
 
         /// <summary>
-        /// Search for cast and crew information by movieId
+        /// Search for film credits by TMDB id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -138,19 +146,42 @@ namespace TmdbApi.Lib
         }
 
         /// <summary>
-        /// Search the TV endpoint for a specific result that matches the id
+        /// Search for tv series and credits by TMDB id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ResultReturn SearchForTVById(int id)
+        public ResultReturn SearchForTvAndCreditsById(int id)
         {
             ResultReturn resultReturn = new ResultReturn();
 
-            string query = Endpoint.SearchTVId + id;
-
-            resultReturn.TVIdResult = CallTmdbApi(query);
+            resultReturn.TVIdResult = SearchForTvById(id);
+            resultReturn.CreditsByTvId = SearchForCreditsByTvId(id);
 
             return resultReturn;
+        }
+
+        /// <summary>
+        /// Search for tv series by TMDB id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Rootobject SearchForTvById(int id)
+        {
+            string query = Endpoint.SearchTVId + id;
+
+            return CallTmdbApi(query);
+        }
+
+        /// <summary>
+        /// Search for tv series credits by TMDB id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Rootobject SearchForCreditsByTvId(int id)
+        {
+            string query = Endpoint.SearchTVId + id + Endpoint.Credits;
+
+            return CallTmdbApi(query);
         }
 
         /// <summary>

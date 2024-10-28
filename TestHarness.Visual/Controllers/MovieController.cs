@@ -2,7 +2,6 @@
 using TmdbApi.Lib;
 using TestHarness.Visual.Models;
 using TestHarness.Visual.Data;
-using TmdbApi.Lib.Models;
 
 namespace TestHarness.Visual.Controllers
 {
@@ -25,7 +24,7 @@ namespace TestHarness.Visual.Controllers
         {
             Media media = new Media();
 
-            media.TMDBData = _tmdb.SearchForFilmTV(keyword);
+            media.TMDBData = _tmdb.SearchForFilmTv(keyword);
 
             return View(media);
         }
@@ -57,7 +56,7 @@ namespace TestHarness.Visual.Controllers
                         watchedMediaResults.WatchedFilms.Add(watchedMediaItem);
                         break;
                     case "TV":
-                        watchedMediaItem.ResultReturn = _tmdb.SearchForTVById(item.TMDBId);
+                        watchedMediaItem.ResultReturn = _tmdb.SearchForTvAndCreditsById(item.TMDBId);
                         watchedMediaResults.WatchedTV.Add(watchedMediaItem);
                         break;
                 }
@@ -122,7 +121,7 @@ namespace TestHarness.Visual.Controllers
             Media media = new Media();
 
             media.SelectedTMDBId = id;
-            media.TMDBData = _tmdb.SearchForTVById(id);
+            media.TMDBData = _tmdb.SearchForTvAndCreditsById(id);
 
             if (media.TMDBData.TVIdResult != null)
             {

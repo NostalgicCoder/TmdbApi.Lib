@@ -11,7 +11,7 @@
         public const string Languages = "/configuration/languages";
         public const string Countries = "/configuration/countries";
 
-        // The below endpoints need to be tagged onto the end of a 'SearchMovieId' request alongside a valid movieId
+        // The below endpoints need to be tagged onto the end of a '/movie/' or '/tv/' request alongside a valid TMDB id
         public const string Providers = "/watch/providers";
         public const string Credits = "/credits";
         public const string MovieImages = "/images";

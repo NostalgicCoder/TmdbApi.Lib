@@ -29,6 +29,19 @@ body {
     /*border: 1px solid black;*/
 }
 
+table.siteTheme, th.siteTheme, td.siteTheme {
+    border: 2px solid;
+}
+
+th.siteTheme, td.siteTheme {
+    padding: 5px;
+}
+
+th.siteTheme {
+    text-align: center;
+    background-color: lightgray;
+}
+
 .filmTvPosterImgSize {
     /*Poster sizing issues are caused if this is set to a % value*/
     width: 198px;
@@ -50,15 +63,8 @@ body {
     height: 93px;
 }
 
-table.siteTheme, th.siteTheme, td.siteTheme {
-    border: 2px solid;
-}
-
-th.siteTheme, td.siteTheme {
-    padding: 5px;
-}
-
-th.siteTheme {
-    text-align: center;
-    background-color: lightgray;
+div.castInfoContainer {
+    max-height: 25px; /* Stops a long cast members name going onto two lines */
+    word-wrap: break-word;
+    overflow: hidden;
 }
