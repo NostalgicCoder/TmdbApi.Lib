@@ -1,0 +1,39 @@
+﻿@model Media;
+
+@{
+    ViewData["Title"] = @Model.TMDBData.PersonIdResult.name;
+}
+
+<h3>@Model.TMDBData.PersonIdResult.name</h3>
+
+<p></p>
+
+@{
+    string url = string.Empty;
+
+    url = "https://image.tmdb.org/t/p/original" + @Model.TMDBData.PersonIdResult.profile_path;
+
+    @if (string.IsNullOrEmpty(Model.TMDBData.PersonIdResult.profile_path))
+    {
+        <img id="Cinema.jpg" class="filmTvDetailPosterImgSize" src="~/Images/Cinema.jpg" />
+    }
+    else
+    {
+        <img src="@url" class="filmTvDetailPosterImgSize" />
+    }
+}
+
+<p></p>
+
+<li>Known For: @Model.TMDBData.PersonIdResult.known_for_department</li>
+<li>Gender: @Model.TMDBData.PersonIdResult.gender</li>
+<li>D.O.B: @Model.TMDBData.PersonIdResult.birthday</li>
+<li>Place Of Birth: @Model.TMDBData.PersonIdResult.place_of_birth</li>
+
+<p></p>
+
+<h4>Biography:</h4>
+
+<p></p>
+
+@Model.TMDBData.PersonIdResult.biography

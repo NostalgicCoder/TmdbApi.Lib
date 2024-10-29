@@ -69,7 +69,7 @@ namespace TmdbApi.Lib
             ResultReturn resultReturn = new ResultReturn();
 
             resultReturn.FilmResults = SearchForFilm(keyword);
-            resultReturn.TVResults = SearchForTv(keyword);
+            resultReturn.TvResults = SearchForTv(keyword);
             resultReturn.PersonResults = SearchForPerson(keyword);
 
             return resultReturn;
@@ -94,7 +94,7 @@ namespace TmdbApi.Lib
         /// <returns></returns>
         public Rootobject SearchForTv(string keyword)
         {
-            string query = Endpoint.SearchTV + keyword + "&include_adult=false&language=en-US&page=1";
+            string query = Endpoint.SearchTv + keyword + "&include_adult=false&language=en-US&page=1";
 
             return CallTmdbApi(query);
         }
@@ -159,7 +159,7 @@ namespace TmdbApi.Lib
         {
             ResultReturn resultReturn = new ResultReturn();
 
-            resultReturn.TVIdResult = SearchForTvById(id);
+            resultReturn.TvIdResult = SearchForTvById(id);
             resultReturn.CreditsByTvId = SearchForCreditsByTvId(id);
 
             return resultReturn;
@@ -172,7 +172,7 @@ namespace TmdbApi.Lib
         /// <returns></returns>
         public Rootobject SearchForTvById(int id)
         {
-            string query = Endpoint.SearchTVId + id;
+            string query = Endpoint.SearchTvId + id;
 
             return CallTmdbApi(query);
         }
@@ -184,9 +184,25 @@ namespace TmdbApi.Lib
         /// <returns></returns>
         public Rootobject SearchForCreditsByTvId(int id)
         {
-            string query = Endpoint.SearchTVId + id + Endpoint.Credits;
+            string query = Endpoint.SearchTvId + id + Endpoint.Credits;
 
             return CallTmdbApi(query);
+        }
+
+        /// <summary>
+        /// Search for person by TMDB id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResultReturn SearchForPersonById(int id)
+        {
+            ResultReturn resultReturn = new ResultReturn();
+
+            string query = Endpoint.SearchPersonId + id;
+
+            resultReturn.PersonIdResult = CallTmdbApi(query);
+
+            return resultReturn;
         }
 
         /// <summary>

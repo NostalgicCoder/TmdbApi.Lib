@@ -123,9 +123,9 @@
             <tr>
                 <td class="siteTheme" style="width:77px;">
                     @{
-                        string url = "https://image.tmdb.org/t/p/original" + obj.ResultReturn.TVIdResult.poster_path;
+                        string url = "https://image.tmdb.org/t/p/original" + obj.ResultReturn.TvIdResult.poster_path;
 
-                        @if (string.IsNullOrEmpty(obj.ResultReturn.TVIdResult.poster_path))
+                        @if (string.IsNullOrEmpty(obj.ResultReturn.TvIdResult.poster_path))
                         {
                             <img id="Cinema.jpg" class="myWatchedMediaPosterImgSize" src="~/Images/Cinema.jpg" />
                         }
@@ -136,18 +136,18 @@
                     }
                 </td>
                 <td class="siteTheme">
-                    @obj.ResultReturn.TVIdResult.name
+                    @obj.ResultReturn.TvIdResult.name
                 </td>
                 <td class="siteTheme" style="text-align: center; width:50px;">
                     @{
-                        if (!string.IsNullOrEmpty(obj.ResultReturn.TVIdResult.first_air_date))
+                        if (!string.IsNullOrEmpty(obj.ResultReturn.TvIdResult.first_air_date))
                         {
-                            @Convert.ToDateTime(obj.ResultReturn.TVIdResult.first_air_date).Year.ToString()
+                            @Convert.ToDateTime(obj.ResultReturn.TvIdResult.first_air_date).Year.ToString()
                         }
                     }
                 </td>
                 <td class="siteTheme" style="width:200px;">
-                    @String.Join(", ", obj.ResultReturn.TVIdResult.genres.Select(x => x.name).ToArray())
+                    @String.Join(", ", obj.ResultReturn.TvIdResult.genres.Select(x => x.name).ToArray())
                 </td>
                 <td class="siteTheme" style="text-align: center; width:40px">
                     @obj.WatchedMedia.WatchedQty.ToString()

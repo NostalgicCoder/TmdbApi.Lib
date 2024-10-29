@@ -57,5 +57,13 @@ namespace TmdbApi.Lib.Models
         public string type { get; set; }
         public Cast[] cast { get; set; }
         public Crew[] crew { get; set; }
+        public string[] also_known_as { get; set; }
+        public string biography { get; set; }
+        public string birthday { get; set; }
+        public object deathday { get; set; }
+        public int gender { get; set; }
+        public string known_for_department { get; set; }
+        public string place_of_birth { get; set; }
+        public string profile_path { get; set; }
     }
 }

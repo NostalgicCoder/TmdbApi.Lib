@@ -98,14 +98,18 @@
                         @{
                             string castUrl = "https://image.tmdb.org/t/p/original" + cast.profile_path;
 
-                            @if (string.IsNullOrEmpty(cast.profile_path))
-                            {
-                                <img id="Cinema.jpg" class="castImgSize" src="~/Images/Cinema.jpg" />
-                            }
-                            else
-                            {
-                                <img src="@castUrl" class="castImgSize" />
-                            }
+                            <a href="@Url.Action("GetUserPersonSelectionById", "Movie", new { id = cast.id })">
+
+                                @if (string.IsNullOrEmpty(cast.profile_path))
+                                {
+                                    <img id="Cinema.jpg" class="castImgSize" src="~/Images/Cinema.jpg" />
+                                }
+                                else
+                                {
+                                    <img src="@castUrl" class="castImgSize" />
+                                }
+
+                            </a>
                         }
                     </td>
                 </tr>

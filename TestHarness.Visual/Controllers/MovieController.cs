@@ -123,7 +123,7 @@ namespace TestHarness.Visual.Controllers
             media.SelectedTMDBId = id;
             media.TMDBData = _tmdb.SearchForTvAndCreditsById(id);
 
-            if (media.TMDBData.TVIdResult != null)
+            if (media.TMDBData.TvIdResult != null)
             {
                 return View(media);
             }
@@ -131,6 +131,26 @@ namespace TestHarness.Visual.Controllers
             {
                 _errorViewModel = new ErrorViewModel();
                 _errorViewModel.Error = "TVIdResult has been returned NULL.";
+
+                return View("Error", _errorViewModel);
+            }
+        }
+
+        public IActionResult GetUserPersonSelectionById(int id)
+        {
+            Media media = new Media();
+
+            media.SelectedTMDBId = id;
+            media.TMDBData = _tmdb.SearchForPersonById(id);
+
+            if (media.TMDBData.PersonIdResult != null)
+            {
+                return View(media);
+            }
+            else
+            {
+                _errorViewModel = new ErrorViewModel();
+                _errorViewModel.Error = "PersonIdResult has been returned NULL.";
 
                 return View("Error", _errorViewModel);
             }

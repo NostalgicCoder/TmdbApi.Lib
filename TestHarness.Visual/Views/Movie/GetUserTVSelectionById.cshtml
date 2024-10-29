@@ -22,9 +22,9 @@
 <p></p>
 
 @{
-    string url = "https://image.tmdb.org/t/p/original" + Model.TMDBData.TVIdResult.poster_path;
+    string url = "https://image.tmdb.org/t/p/original" + Model.TMDBData.TvIdResult.poster_path;
 
-    @if (string.IsNullOrEmpty(Model.TMDBData.TVIdResult.poster_path))
+    @if (string.IsNullOrEmpty(Model.TMDBData.TvIdResult.poster_path))
     {
         <img id="Cinema.jpg" class="filmTvDetailPosterImgSize" src="~/Images/Cinema.jpg" />
     }
@@ -36,24 +36,24 @@
 
 <p></p>
 
-<h3>@Model.TMDBData.TVIdResult.name</h3>
+<h3>@Model.TMDBData.TvIdResult.name</h3>
 
 <p></p>
 
 @{
-    if (!string.IsNullOrEmpty(Model.TMDBData.TVIdResult.first_air_date))
+    if (!string.IsNullOrEmpty(Model.TMDBData.TvIdResult.first_air_date))
     {
-        <li>First Air Date: @Convert.ToDateTime(Model.TMDBData.TVIdResult.first_air_date).Year.ToString()</li>
+        <li>First Air Date: @Convert.ToDateTime(Model.TMDBData.TvIdResult.first_air_date).Year.ToString()</li>
     }
 }
 
-<li>Vote Average: @Math.Round(Model.TMDBData.TVIdResult.vote_average, 1)</li>
-<li>Genres: @String.Join(", ", Model.TMDBData.TVIdResult.genres.Select(x => x.name).ToArray())</li>
+<li>Vote Average: @Math.Round(Model.TMDBData.TvIdResult.vote_average, 1)</li>
+<li>Genres: @String.Join(", ", Model.TMDBData.TvIdResult.genres.Select(x => x.name).ToArray())</li>
 
 @{
-    if (!string.IsNullOrEmpty(Model.TMDBData.TVIdResult.tagline))
+    if (!string.IsNullOrEmpty(Model.TMDBData.TvIdResult.tagline))
     {
-        <li>Tagline: @Model.TMDBData.TVIdResult.tagline</li>
+        <li>Tagline: @Model.TMDBData.TvIdResult.tagline</li>
     }
 }
 
@@ -63,7 +63,7 @@
 
 <p></p>
 
-@Model.TMDBData.TVIdResult.overview
+@Model.TMDBData.TvIdResult.overview
 
 <p></p>
 
@@ -97,14 +97,18 @@
                         @{
                             string castUrl = "https://image.tmdb.org/t/p/original" + cast.profile_path;
 
-                            @if (string.IsNullOrEmpty(cast.profile_path))
-                            {
-                                <img id="Cinema.jpg" class="castImgSize" src="~/Images/Cinema.jpg" />
-                            }
-                            else
-                            {
-                                <img src="@castUrl" class="castImgSize" />
-                            }
+                            <a href="@Url.Action("GetUserPersonSelectionById", "Movie", new { id = cast.id })">
+
+                                @if (string.IsNullOrEmpty(cast.profile_path))
+                                {
+                                    <img id="Cinema.jpg" class="castImgSize" src="~/Images/Cinema.jpg" />
+                                }
+                                else
+                                {
+                                    <img src="@castUrl" class="castImgSize" />
+                                }
+
+                            </a>
                         }
                     </td>
                 </tr>

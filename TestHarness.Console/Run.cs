@@ -11,6 +11,7 @@ namespace TestHarness.Console
             tmdb.GetConfigurationData();
             tmdb.SearchForFilmTvPerson("Robocop");
             tmdb.SearchForFilmAndCreditsById(5548);
+            tmdb.SearchForPersonById(2461);
             tmdb.GetMovieImages(5548);
             tmdb.MoviesNowPlaying();
 

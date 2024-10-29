@@ -2,15 +2,16 @@
 {
     public class Endpoint
     {
-        public const string Configuration = "/configuration";
         public const string SearchMovie = "/search/movie?query=";
         public const string SearchMovieId = "/movie/";
-        public const string SearchTVId = "/tv/";
-        public const string SearchTV = "/search/tv?query=";
+        public const string SearchTv = "/search/tv?query=";
+        public const string SearchTvId = "/tv/";
         public const string SearchPerson = "/search/person?query=";
+        public const string SearchPersonId = "/person/";
         public const string MoviesNowPlaying = "/movie/now_playing?language=en-US&page=1&region=GB";
         public const string Languages = "/configuration/languages";
         public const string Countries = "/configuration/countries";
+        public const string Configuration = "/configuration";
 
         // The below endpoints need to be tagged onto the end of a '/movie/' or '/tv/' request alongside a valid TMDB id
         public const string Providers = "/watch/providers";

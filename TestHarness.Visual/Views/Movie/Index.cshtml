@@ -76,7 +76,7 @@
 }
 
 @{
-    if (Model.TMDBData.TVResults.results.Count() != 0)
+    if (Model.TMDBData.TvResults.results.Count() != 0)
     {
 
         <p></p>
@@ -85,7 +85,7 @@
 
         <p></p>
 
-        @foreach (var obj in Model.TMDBData.TVResults.results)
+        @foreach (var obj in Model.TMDBData.TvResults.results)
         {
             <div class="inner_block">
                 <table>
@@ -153,14 +153,18 @@
 
                                 url = "https://image.tmdb.org/t/p/original" + obj.profile_path;
 
-                                @if (string.IsNullOrEmpty(obj.profile_path))
-                                {
-                                    <img id="Cinema.jpg" class="personSearchImgSize" src="~/Images/Cinema.jpg" />
-                                }
-                                else
-                                {
-                                    <img src="@url" class="personSearchImgSize" />
-                                }
+                                <a href="@Url.Action("GetUserPersonSelectionById", "Movie", new { id = obj.id })">
+
+                                    @if (string.IsNullOrEmpty(obj.profile_path))
+                                    {
+                                        <img id="Cinema.jpg" class="personSearchImgSize" src="~/Images/Cinema.jpg" />
+                                    }
+                                    else
+                                    {
+                                        <img src="@url" class="personSearchImgSize" />
+                                    }
+
+                                </a>
                             }
                         </td>
                         <td class="personSearch">
