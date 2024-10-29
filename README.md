@@ -1,10 +1,25 @@
-------------------------------------------------------
-TMDB (The Movie Database) Rest API & Movie/TV Tracker
-------------------------------------------------------
+-----------------------------------------------------------------------------
+Movie/TV Tracker Application & TMDB (The Movie Database) Rest API C# Wrapper
+-----------------------------------------------------------------------------
 
 First created on: 09/09/2024
 
-I am a avid film fan in my personal life so when i discovered the TMDB API (The Movie Database - www.themoviedb.org) from my nephew that had used it on one of his personal projects i was keen to give it a try.  I have begun creating a C# wrapper (Class library project) for this with both a console and a ASP.NET MVC Core website test harness to allow me to call and test the API easily.  As my capabilities and confidence with this API increase my plan is to slowly replace the visual test harness side with a movie/TV tracking application.
+I am a avid film fan so when my nephew introduced me to the TMDB Rest API on one of his demo projects i was keen to give it a go myself and try it out.
+
+1.
+
+The first part of this project is a C# wrapper (Class library project) i have created for the TMDB Rest API with a console test harness.  This class library makes integration of the TMDB Rest API into other applications simple.
+
+2.
+
+The second part of this project is a full-stack application consisting of a ASP.NET MVC Core website frontend with a SQL Server database backend.  The application utilises the C# wrapped version of the TMDB Rest API to perform the below capabilities:
+
+- Movie, tv show, actor/actress search.
+- Display of movies currently showing in the cinema in the UK.
+- Display of movie information.
+- Display of tv show information.
+- Display of actor/actress information.
+- Ability to mark films/tv shows the user has watched and have them displayed under a dedicated section for reference.
 
 NOTE!:
 
@@ -42,6 +57,10 @@ Visual examples of some of the returned data from the rest based TMDB Api.
 ![Alt text](Images/TmdbApi-3.jpg)
 ![Alt text](Images/TmdbApi-4.jpg)
 ![Alt text](Images/TmdbApi-5.jpg)
+![Alt text](Images/TmdbApi-6.jpg)
+![Alt text](Images/TmdbApi-7.jpg)
+![Alt text](Images/TmdbApi-8.jpg)
+![Alt text](Images/TmdbApi-9.jpg)
 
 
 

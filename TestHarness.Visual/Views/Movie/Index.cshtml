@@ -56,22 +56,22 @@
 
                                 <a href="@Url.Action("GetUserFilmSelectionById", "Movie", new { id = obj.id })">
 
-                                @if(string.IsNullOrEmpty(obj.poster_path))
-                                {
+                                    @if (string.IsNullOrEmpty(obj.poster_path))
+                                    {
                                         <img id="Cinema.jpg" class="filmTvPosterImgSize" src="~/Images/Cinema.jpg" />
-                                }
-                                else
-                                {
+                                    }
+                                    else
+                                    {
                                         <img src="@url" class="filmTvPosterImgSize" />
-                                }
-                                
+                                    }
+
                                 </a>
                             }
                         </td>
                     </tr>
                 </table>
             </div>
-        }       
+        }
     }
 }
 

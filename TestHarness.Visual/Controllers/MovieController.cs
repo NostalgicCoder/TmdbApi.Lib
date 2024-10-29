@@ -2,6 +2,7 @@
 using TmdbApi.Lib;
 using TestHarness.Visual.Models;
 using TestHarness.Visual.Data;
+using TmdbApi.Lib.Enum;
 
 namespace TestHarness.Visual.Controllers
 {
