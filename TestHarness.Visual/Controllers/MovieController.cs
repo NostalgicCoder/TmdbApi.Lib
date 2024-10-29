@@ -24,7 +24,7 @@ namespace TestHarness.Visual.Controllers
         {
             Media media = new Media();
 
-            media.TMDBData = _tmdb.SearchForFilmTv(keyword);
+            media.TMDBData = _tmdb.SearchForFilmTvPerson(keyword);
 
             return View(media);
         }

@@ -33,7 +33,7 @@ table.siteTheme, th.siteTheme, td.siteTheme {
     border: 2px solid;
 }
 
-th.siteTheme, td.siteTheme {
+th.siteTheme, td.siteTheme, td.personSearch {
     padding: 5px;
 }
 
@@ -56,6 +56,11 @@ th.siteTheme {
 .castImgSize {
     width: 40%;
     height: 40%;
+}
+
+.personSearchImgSize {
+    width: 65px;
+    height: 93px;
 }
 
 .myWatchedMediaPosterImgSize {

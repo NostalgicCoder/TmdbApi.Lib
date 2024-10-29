@@ -1,4 +1,6 @@
-﻿namespace TmdbApi.Lib.Models
+﻿using static TmdbApi.Lib.Tmdb;
+
+namespace TmdbApi.Lib.Models
 {
     public class Result
     {
@@ -20,5 +22,9 @@
         public string original_name { get; set; }
         public string first_air_date { get; set; }
         public string name { get; set; }
+        public int gender { get; set; }
+        public string known_for_department { get; set; }
+        public string profile_path { get; set; }
+        public Known_For[] known_for { get; set; }
     }
 }

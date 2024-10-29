@@ -6,7 +6,7 @@ namespace TmdbApi.Lib.Interfaces
     {
         Rootobject CallTmdbApi(string query);
         void GetConfigurationData();
-        ResultReturn SearchForFilmTv(string keyword);
+        ResultReturn SearchForFilmTvPerson(string keyword);
         Rootobject SearchForFilm(string keyword);
         Rootobject SearchForTv(string keyword);
         ResultReturn SearchForFilmAndCreditsById(int id);

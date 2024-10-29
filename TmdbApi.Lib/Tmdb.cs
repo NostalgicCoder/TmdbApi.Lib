@@ -60,16 +60,17 @@ namespace TmdbApi.Lib
         }
 
         /// <summary>
-        /// Search the Movie/TV endpoint for results that match the keyword
+        /// Search the Movie/TV/Person endpoint for results that match the keyword
         /// </summary>
         /// <param name="keyword"></param>
         /// <returns></returns>
-        public ResultReturn SearchForFilmTv(string keyword)
+        public ResultReturn SearchForFilmTvPerson(string keyword)
         {
             ResultReturn resultReturn = new ResultReturn();
 
             resultReturn.FilmResults = SearchForFilm(keyword);
             resultReturn.TVResults = SearchForTv(keyword);
+            resultReturn.PersonResults = SearchForPerson(keyword);
 
             return resultReturn;
         }
@@ -98,13 +99,17 @@ namespace TmdbApi.Lib
             return CallTmdbApi(query);
         }
 
+        /// <summary>
+        /// Search the person endpoint for results that match the keyword
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
+        public Rootobject SearchForPerson(string keyword)
+        {
+            string query = Endpoint.SearchPerson + keyword + "&include_adult=false&language=en-US&page=1";
 
-
-
-
-
-
-
+            return CallTmdbApi(query);
+        }
 
         /// <summary>
         /// Search for film and credits by TMDB id

@@ -8,7 +8,7 @@
 
 <form method="post" asp-action="Index">
 
-    <label>Keyword: (Search for a movie, tv show)</label>
+    <label>Keyword: (Search for a movie, tv show, person)</label>
     <input asp-for="Keyword" class="form-control" style="width:400px" />
 
     <br />
@@ -125,6 +125,48 @@
 
                                 </a>
                             }
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        }
+    }
+}
+
+@{
+    if (Model.TMDBData.PersonResults.results.Count() != 0)
+    {
+        <p></p>
+
+        <h4>Person:</h4>
+
+        <p></p>
+
+        @foreach (var obj in Model.TMDBData.PersonResults.results)
+        {
+            <div>
+                <table>
+                    <tr>
+                        <td class="personSearch">
+                            @{
+                                string url = string.Empty;
+
+                                url = "https://image.tmdb.org/t/p/original" + obj.profile_path;
+
+                                @if (string.IsNullOrEmpty(obj.profile_path))
+                                {
+                                    <img id="Cinema.jpg" class="personSearchImgSize" src="~/Images/Cinema.jpg" />
+                                }
+                                else
+                                {
+                                    <img src="@url" class="personSearchImgSize" />
+                                }
+                            }
+                        </td>
+                        <td class="personSearch">
+                            <b>@obj.name</b><br />
+                            @obj.known_for_department:
+                            @String.Join(", ", obj.known_for.Select(x => x.original_title).ToArray())
                         </td>
                     </tr>
                 </table>
