@@ -58,14 +58,14 @@ th.siteTheme {
     height: 40%;
 }
 
-.personSearchImgSize {
+.personSearchImgSize, .myWatchedMediaImgSize {
     width: 65px;
     height: 93px;
 }
 
-.myWatchedMediaPosterImgSize {
-    width: 65px;
-    height: 93px;
+.personCreditsImgSize {
+    width: 42px;
+    height: 58px;
 }
 
 div.castInfoContainer {

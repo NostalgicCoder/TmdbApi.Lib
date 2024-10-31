@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------------
-Movie/TV Tracker Application & TMDB (The Movie Database) Rest API C# Wrapper
+Movie/TV Tracker & TMDB (The Movie Database) Rest API C# Wrapper
 -----------------------------------------------------------------------------
 
 First created on: 09/09/2024
@@ -52,15 +52,19 @@ Images:
 
 Visual examples of some of the returned data from the rest based TMDB Api.
 
-![Alt text](Images/TmdbApi-1.jpg)
-![Alt text](Images/TmdbApi-2.jpg)
-![Alt text](Images/TmdbApi-3.jpg)
-![Alt text](Images/TmdbApi-4.jpg)
-![Alt text](Images/TmdbApi-5.jpg)
-![Alt text](Images/TmdbApi-6.jpg)
-![Alt text](Images/TmdbApi-7.jpg)
-![Alt text](Images/TmdbApi-8.jpg)
-![Alt text](Images/TmdbApi-9.jpg)
+![Alt text](Images/MovieTvTrackerStart1.jpg)
+![Alt text](Images/MovieTvTrackerStart2.jpg)
+![Alt text](Images/MovieTvTrackerStart3.jpg)
+![Alt text](Images/MovieTvTrackerStart4.jpg)
+![Alt text](Images/MovieTvTrackerFilmResult1.jpg)
+![Alt text](Images/MovieTvTrackerFilmResult2.jpg)
+![Alt text](Images/MovieTvTrackerTvResult1.jpg)
+![Alt text](Images/MovieTvTrackerPersonResult1.jpg)
+![Alt text](Images/MovieTvTrackerPersonResult2.jpg)
+![Alt text](Images/MovieTvTrackerPersonResult3.jpg)
+![Alt text](Images/MovieTvTrackerWatchedMedia1.jpg)
+
+
 
 
 
