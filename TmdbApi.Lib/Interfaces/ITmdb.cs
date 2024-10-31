@@ -17,5 +17,8 @@ namespace TmdbApi.Lib.Interfaces
         Rootobject SearchForCreditsByTvId(int id);
         void GetMovieImages(int id);
         ResultReturn MoviesNowPlaying();
+        ResultReturn SearchForPersonAndCreditsById(int id);
+        Rootobject SearchForPersonById(int id);
+        Rootobject SearchForCombinedCreditsByPersonId(int id);
     }
 }

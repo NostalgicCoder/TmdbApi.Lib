@@ -142,7 +142,7 @@ namespace TestHarness.Visual.Controllers
             Media media = new Media();
 
             media.SelectedTMDBId = id;
-            media.TMDBData = _tmdb.SearchForPersonById(id);
+            media.TMDBData = _tmdb.SearchForPersonAndCreditsById(id);
 
             if (media.TMDBData.PersonIdResult != null)
             {

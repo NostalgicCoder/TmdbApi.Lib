@@ -190,19 +190,43 @@ namespace TmdbApi.Lib
         }
 
         /// <summary>
+        /// Search for person and their combined movie/tv credits by TMDB id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ResultReturn SearchForPersonAndCreditsById(int id)
+        {
+            ResultReturn resultReturn = new ResultReturn();
+
+            resultReturn.PersonIdResult = SearchForPersonById(id);
+            resultReturn.CombinedCreditsByPersonId = SearchForCombinedCreditsByPersonId(id);
+
+            return resultReturn;
+        }
+
+        /// <summary>
         /// Search for person by TMDB id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ResultReturn SearchForPersonById(int id)
+        public Rootobject SearchForPersonById(int id)
         {
-            ResultReturn resultReturn = new ResultReturn();
-
             string query = Endpoint.SearchPersonId + id;
 
-            resultReturn.PersonIdResult = CallTmdbApi(query);
+            return CallTmdbApi(query);
+        }
 
-            return resultReturn;
+        /// <summary>
+        /// Search for combined movie/tv credits for a person by TMDB id
+        /// - Doesnt return 'Known for' movies/tv for a person
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Rootobject SearchForCombinedCreditsByPersonId(int id)
+        {
+            string query = Endpoint.SearchPersonId + id + Endpoint.PersonCombinedCredits;
+
+            return CallTmdbApi(query);
         }
 
         /// <summary>

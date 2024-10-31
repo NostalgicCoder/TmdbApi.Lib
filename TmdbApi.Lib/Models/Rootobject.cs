@@ -1,6 +1,4 @@
-﻿using static TmdbApi.Lib.Tmdb;
-
-namespace TmdbApi.Lib.Models
+﻿namespace TmdbApi.Lib.Models
 {
     public class Rootobject
     {

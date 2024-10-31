@@ -13,9 +13,12 @@
         public const string Countries = "/configuration/countries";
         public const string Configuration = "/configuration";
 
-        // The below endpoints need to be tagged onto the end of a '/movie/' or '/tv/' request alongside a valid TMDB id
+        // The below endpoints need to be tagged onto the end of a '/movie/' or '/tv/' or '/person/' request alongside a valid TMDB id
         public const string Providers = "/watch/providers";
         public const string Credits = "/credits";
         public const string MovieImages = "/images";
+        public const string PersonCombinedCredits = "/combined_credits";
+        public const string PersonMovieCredits = "/movie_credits";
+        public const string PersonTvCredits = "/tv_credits";
     }
 }

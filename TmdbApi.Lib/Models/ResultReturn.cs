@@ -11,6 +11,7 @@
         public Rootobject MoviesNowPlaying { get; set; }
         public Rootobject CreditsByFilmId { get; set; }
         public Rootobject CreditsByTvId { get; set; }
+        public Rootobject CombinedCreditsByPersonId { get; set; }
 
         public ResultReturn()
         {
@@ -23,6 +24,7 @@
             MoviesNowPlaying = new Rootobject();
             CreditsByFilmId = new Rootobject();
             CreditsByTvId = new Rootobject();
+            CombinedCreditsByPersonId = new Rootobject();
         }
     }
 }
