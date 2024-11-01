@@ -116,7 +116,16 @@
                 <tr>
                     <td>
                         <div class="castInfoContainer">
-                            @cast.character
+                            @{
+                                if (!string.IsNullOrEmpty(cast.character))
+                                {
+                                    @cast.character
+                                }
+                                else
+                                {
+                                    @: Unknown
+                                }
+                            }
                         </div>
                     </td>
                 </tr>
