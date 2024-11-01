@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmdbApi.Lib", "TmdbApi.Lib\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHarness.Console", "TestHarness.Console\TestHarness.Console.csproj", "{F8B12D94-DFD4-4D9F-9420-0F244BFFFCD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHarness.Visual", "TestHarness.Visual\TestHarness.Visual.csproj", "{AB2587C6-28A9-48E5-A5F0-58BE34AFA780}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieTvTracker.Web", "TestHarness.Visual\MovieTvTracker.Web.csproj", "{AB2587C6-28A9-48E5-A5F0-58BE34AFA780}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

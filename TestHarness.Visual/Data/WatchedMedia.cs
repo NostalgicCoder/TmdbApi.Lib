@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TestHarness.Visual.Data
+namespace MovieTvTracker.Web.Data
 {
     public class WatchedMedia
     {

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TestHarness.Visual.Data;
+using MovieTvTracker.Web.Data;
 
 #nullable disable
 
-namespace TestHarness.Visual.Migrations
+namespace MovieTvTracker.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace TestHarness.Visual.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TestHarness.Visual.Data.FavoriteActor", b =>
+            modelBuilder.Entity("MovieTvTracker.Web.Data.FavoriteActor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,7 +38,7 @@ namespace TestHarness.Visual.Migrations
                     b.ToTable("FavoriteActor");
                 });
 
-            modelBuilder.Entity("TestHarness.Visual.Data.WatchedMedia", b =>
+            modelBuilder.Entity("MovieTvTracker.Web.Data.WatchedMedia", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

@@ -1,7 +1,7 @@
-﻿using TestHarness.Visual.Data;
+﻿using MovieTvTracker.Web.Data;
 using TmdbApi.Lib.Models;
 
-namespace TestHarness.Visual.Models
+namespace MovieTvTracker.Web.Models
 {
     public class WatchedMediaItem
     {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace TestHarness.Visual.Migrations
+namespace MovieTvTracker.Web.Migrations
 {
     /// <inheritdoc />
     public partial class EntertainmentDb : Migration

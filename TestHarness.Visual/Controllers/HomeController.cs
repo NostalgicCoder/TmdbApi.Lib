@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace TestHarness.Visual.Controllers
+namespace MovieTvTracker.Web.Controllers
 {
     public class HomeController : Controller
     {

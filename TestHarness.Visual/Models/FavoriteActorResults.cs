@@ -1,6 +1,6 @@
-﻿using TestHarness.Visual.Data;
+﻿using MovieTvTracker.Web.Data;
 
-namespace TestHarness.Visual.Models
+namespace MovieTvTracker.Web.Models
 {
     public class FavoriteActorResults
     {

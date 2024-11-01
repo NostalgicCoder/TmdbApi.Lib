@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TmdbApi.Lib;
-using TestHarness.Visual.Models;
-using TestHarness.Visual.Data;
+using MovieTvTracker.Web.Models;
+using MovieTvTracker.Web.Data;
 using TmdbApi.Lib.Interfaces;
 
-namespace TestHarness.Visual.Controllers
+namespace MovieTvTracker.Web.Controllers
 {
     public class MovieController : Controller
     {

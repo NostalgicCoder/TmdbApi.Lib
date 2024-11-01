@@ -1,4 +1,4 @@
-namespace TestHarness.Visual.Models
+namespace MovieTvTracker.Web.Models
 {
     public class ErrorViewModel
     {

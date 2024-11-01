@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace TestHarness.Visual.Data
+namespace MovieTvTracker.Web.Data
 {
     public class ApplicationDbContext : DbContext
     {

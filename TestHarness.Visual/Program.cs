@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using TestHarness.Visual.Data;
+using MovieTvTracker.Web.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
