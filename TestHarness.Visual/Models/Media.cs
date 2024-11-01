@@ -9,5 +9,6 @@ namespace TestHarness.Visual.Models
         public string Keyword { get; set; }
         public ResultReturn TMDBData { get; set; }
         public WatchedMediaResults WatchedMediaResults { get; set; }
+        public FavoriteActorResults FavoriteActorResults { get; set; }
     }
 }

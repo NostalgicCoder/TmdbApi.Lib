@@ -2,13 +2,14 @@
 using TmdbApi.Lib;
 using TestHarness.Visual.Models;
 using TestHarness.Visual.Data;
-using TmdbApi.Lib.Enum;
+using TmdbApi.Lib.Interfaces;
 
 namespace TestHarness.Visual.Controllers
 {
     public class MovieController : Controller
     {
-        private Tmdb _tmdb = new Tmdb();
+        private ITmdb _tmdb = new Tmdb();
+
         private ErrorViewModel _errorViewModel;
 
         private readonly ApplicationDbContext _db;
@@ -70,29 +71,61 @@ namespace TestHarness.Visual.Controllers
 
         public async Task<IActionResult> MarkAsWatched(Media media)
         {
-            WatchedMedia watchedMedia = _db.WatchedMedia.Where(x => x.TMDBId == media.SelectedTMDBId).FirstOrDefault();
-
-            if (watchedMedia == null)
+            try
             {
-                watchedMedia = new WatchedMedia();
+                WatchedMedia watchedMedia = _db.WatchedMedia.Where(x => x.TMDBId == media.SelectedTMDBId).FirstOrDefault();
 
-                watchedMedia.TMDBId = media.SelectedTMDBId;
-                watchedMedia.ContentType = media.SelectedContentType;
-                watchedMedia.WatchedQty = 1;
-                watchedMedia.FirstWatched = DateTime.Now;
-                watchedMedia.LastWatched = DateTime.Now;
+                if (watchedMedia == null)
+                {
+                    watchedMedia = new WatchedMedia();
 
-                await _db.WatchedMedia.AddAsync(watchedMedia);
+                    watchedMedia.TMDBId = media.SelectedTMDBId;
+                    watchedMedia.ContentType = media.SelectedContentType;
+                    watchedMedia.WatchedQty = 1;
+                    watchedMedia.FirstWatched = DateTime.Now;
+                    watchedMedia.LastWatched = DateTime.Now;
+
+                    await _db.WatchedMedia.AddAsync(watchedMedia);
+                }
+                else
+                {
+                    watchedMedia.LastWatched = DateTime.Now;
+                    watchedMedia.WatchedQty = watchedMedia.WatchedQty + 1;
+
+                    _db.WatchedMedia.Update(watchedMedia);
+                }
+
+                await _db.SaveChangesAsync();
             }
-            else
+            catch (Exception ex)
             {
-                watchedMedia.LastWatched = DateTime.Now;
-                watchedMedia.WatchedQty = watchedMedia.WatchedQty + 1;
-
-                _db.WatchedMedia.Update(watchedMedia);
+                // TODO: Add error handling
             }
 
-            await _db.SaveChangesAsync();
+            return RedirectToAction("MoviesNowPlaying", "Movie");
+        }
+
+        public async Task<IActionResult> MarkFavoriteActor(Media media)
+        {
+            try
+            {
+                FavoriteActor favoriteActor = _db.FavoriteActor.Where(x => x.TMDBId == media.TMDBData.PersonIdResult.id).FirstOrDefault();
+
+                if (favoriteActor == null)
+                {
+                    favoriteActor = new FavoriteActor()
+                    {
+                        TMDBId = media.TMDBData.PersonIdResult.id
+                    };
+
+                    await _db.FavoriteActor.AddAsync(favoriteActor);
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                // TODO: Add error handling
+            }
 
             return RedirectToAction("MoviesNowPlaying", "Movie");
         }

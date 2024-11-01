@@ -1,4 +1,5 @@
-﻿using TmdbApi.Lib.Models;
+﻿using TestHarness.Visual.Data;
+using TmdbApi.Lib.Models;
 
 namespace TestHarness.Visual.Models
 {

@@ -21,6 +21,16 @@
     }
 }
 
+<form method="post" asp-action="MarkFavoriteActor">
+
+    <input type="hidden" asp-for="@Model.TMDBData.PersonIdResult.id" />
+
+    <button type="submit" class="btn btn-primary">Mark Favorite Actor<i class="bi bi-filter"></i></button>
+
+</form>
+
+<p></p>
+
 <h3>@Model.TMDBData.PersonIdResult.name</h3>
 
 <p></p>

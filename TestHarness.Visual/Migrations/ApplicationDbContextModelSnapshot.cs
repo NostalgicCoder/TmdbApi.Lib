@@ -22,7 +22,23 @@ namespace TestHarness.Visual.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TestHarness.Visual.Models.WatchedMedia", b =>
+            modelBuilder.Entity("TestHarness.Visual.Data.FavoriteActor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("TMDBId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FavoriteActor");
+                });
+
+            modelBuilder.Entity("TestHarness.Visual.Data.WatchedMedia", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

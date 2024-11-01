@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TestHarness.Visual.Models;
 
 namespace TestHarness.Visual.Data
 {
@@ -11,5 +10,6 @@ namespace TestHarness.Visual.Data
 
         // Add items here if doing migrations 'Code First'
         public DbSet<WatchedMedia> WatchedMedia { get; set; }
+        public DbSet<FavoriteActor> FavoriteActor { get; set; }
     }
 }
