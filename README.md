@@ -20,6 +20,7 @@ The second part of this project is a full-stack application consisting of a ASP.
 - Display of tv show information.
 - Display of actor/actress information.
 - Ability to mark films/tv shows the user has watched and have them displayed under a dedicated section for reference.
+- Ability to mark favorite actors and have them displayed under a dedicated section for reference.
 
 NOTE!:
 
@@ -63,6 +64,12 @@ Visual examples of some of the returned data from the rest based TMDB Api.
 ![Alt text](Images/MovieTvTrackerPersonResult2.jpg)
 ![Alt text](Images/MovieTvTrackerPersonResult3.jpg)
 ![Alt text](Images/MovieTvTrackerWatchedMedia1.jpg)
+![Alt text](Images/MovieTvTrackerFavoriteActor1.jpg)
+
+
+
+
+
 
 
 

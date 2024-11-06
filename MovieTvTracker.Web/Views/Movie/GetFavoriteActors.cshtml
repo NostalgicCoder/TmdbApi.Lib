@@ -1,0 +1,58 @@
+﻿@model Media;
+
+@{
+    ViewData["Title"] = "GetFavoriteActors";
+}
+
+<h2>My Favorite Actors:</h2>
+
+<p></p>
+
+<li>Actor Count: @Model.FavoriteActorResults.Count()</li>
+
+<p></p>
+
+<table class="siteTheme" style="width:100%">
+    <thead>
+        <tr>
+            <th class="siteTheme">
+                Poster:
+            </th>
+            <th class="siteTheme">
+                Name:
+            </th>
+            <th class="siteTheme">
+                TMDB Popularity:
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model.FavoriteActorResults.OrderByDescending(item => item.PersonIdResult.popularity))
+        {
+            <tr>
+                <td class="siteTheme" style="width:77px;">
+                    @{
+                        string url = "https://image.tmdb.org/t/p/original" + obj.PersonIdResult.profile_path;
+
+                        @if (string.IsNullOrEmpty(obj.PersonIdResult.profile_path))
+                        {
+                            <img id="Cinema.jpg" class="myFavoriteActorsImgSize" src="~/Images/Cinema.jpg" />
+                        }
+                        else
+                        {
+                            <img src="@url" class="myFavoriteActorsImgSize" />
+                        }
+                    }
+                </td>
+                <td class="siteTheme">
+                    @obj.PersonIdResult.name
+                </td>
+                <td class="siteTheme">
+                    @{
+                        @Math.Round(obj.PersonIdResult.popularity, 0);
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

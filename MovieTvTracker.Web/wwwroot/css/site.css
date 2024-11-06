@@ -58,7 +58,7 @@ th.siteTheme {
     height: 40%;
 }
 
-.personSearchImgSize, .myWatchedMediaImgSize {
+.personSearchImgSize, .myWatchedMediaImgSize, .myFavoriteActorsImgSize {
     width: 65px;
     height: 93px;
 }

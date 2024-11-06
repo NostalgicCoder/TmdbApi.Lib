@@ -40,6 +40,10 @@ namespace MovieTvTracker.Web.Controllers
             return View(media);
         }
 
+        /// <summary>
+        /// Aquire watched media (film/tv) results from the database, run those results through TMDB API to get information and then feed that to the model that supplies the view.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult GetWatchedMedia()
         {
             Media media = new Media();
@@ -69,6 +73,34 @@ namespace MovieTvTracker.Web.Controllers
             return View(media);
         }
 
+        /// <summary>
+        /// Aquire favorite actor results from the database, run those results through TMDB API to get information and then feed that to the model that supplies the view.
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult GetFavoriteActors()
+        {
+            Media media = new Media();
+
+            foreach (FavoriteActor item in _db.FavoriteActor)
+            {
+                try
+                {
+                    media.FavoriteActorResults.Add(_tmdb.SearchForPersonAndCreditsById(item.TMDBId));
+                }
+                catch(Exception ex)
+                {
+                    // TODO: Add error handling
+                }
+            }
+
+            return View(media);
+        }
+
+        /// <summary>
+        /// Check if the selected TMDB ID exists in the database, if a result already exists update minimal req fields otherwise create a brand new 'WatchedMedia' entity result in the database.
+        /// </summary>
+        /// <param name="media"></param>
+        /// <returns></returns>
         public async Task<IActionResult> MarkAsWatched(Media media)
         {
             try
@@ -105,6 +137,11 @@ namespace MovieTvTracker.Web.Controllers
             return RedirectToAction("MoviesNowPlaying", "Movie");
         }
 
+        /// <summary>
+        /// Check if the selected TMDB ID exists in the database, if a result doesnt already exist then create a 'FavoriteActor' entity and add it to the database
+        /// </summary>
+        /// <param name="media"></param>
+        /// <returns></returns>
         public async Task<IActionResult> MarkFavoriteActor(Media media)
         {
             try
