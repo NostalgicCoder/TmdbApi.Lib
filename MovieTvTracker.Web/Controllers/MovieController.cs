@@ -28,9 +28,14 @@ namespace MovieTvTracker.Web.Controllers
         {
             Media media = new Media();
 
-            media.TMDBData = _tmdb.SearchForFilmTvPerson(keyword);
+            if(ModelState.IsValid)
+            {
+                media.TMDBData = _tmdb.SearchForFilmTvPerson(keyword);
 
-            return View(media);
+                return View(media);
+            }
+
+            return RedirectToAction("MoviesNowPlaying", "Movie");
         }
 
         [HttpGet]
@@ -52,28 +57,36 @@ namespace MovieTvTracker.Web.Controllers
         public IActionResult GetWatchedMedia()
         {
             Media media = new Media();
-            WatchedMediaResults watchedMediaResults = new WatchedMediaResults();
 
-            foreach (WatchedMedia item in _db.WatchedMedia.OrderByDescending(x => x.LastWatched))
+            try
             {
-                WatchedMediaItem watchedMediaItem = new WatchedMediaItem();
+                media.WatchedMediaResults = new WatchedMediaResults();
 
-                watchedMediaItem.WatchedMedia = item;
-
-                switch (item.ContentType)
+                foreach (WatchedMedia item in _db.WatchedMedia.OrderByDescending(x => x.LastWatched))
                 {
-                    case "Film":
-                        watchedMediaItem.ResultReturn = _tmdb.SearchForFilmAndCreditsById(item.TMDBId);
-                        watchedMediaResults.WatchedFilms.Add(watchedMediaItem);
-                        break;
-                    case "TV":
-                        watchedMediaItem.ResultReturn = _tmdb.SearchForTvAndCreditsById(item.TMDBId);
-                        watchedMediaResults.WatchedTV.Add(watchedMediaItem);
-                        break;
+                    switch (item.ContentType)
+                    {
+                        case "Film":
+                            media.WatchedMediaResults.WatchedFilms.Add(new WatchedMediaItem
+                            {
+                                ResultReturn = _tmdb.SearchForFilmAndCreditsById(item.TMDBId),
+                                WatchedMedia = item
+                            });
+                            break;
+                        case "TV":
+                            media.WatchedMediaResults.WatchedTV.Add(new WatchedMediaItem
+                            {
+                                ResultReturn = _tmdb.SearchForTvAndCreditsById(item.TMDBId),
+                                WatchedMedia = item
+                            });
+                            break;
+                    }
                 }
             }
-
-            media.WatchedMediaResults = watchedMediaResults;
+            catch (Exception ex)
+            {
+                // TODO: Add error handling
+            }
 
             return View(media);
         }
@@ -87,16 +100,26 @@ namespace MovieTvTracker.Web.Controllers
         {
             Media media = new Media();
 
-            foreach (FavoriteActor item in _db.FavoriteActor)
+            try
             {
-                try
+                foreach (FavoriteActor item in _db.FavoriteActor)
                 {
-                    media.FavoriteActorResults.Add(_tmdb.SearchForPersonAndCreditsById(item.TMDBId));
+                    try
+                    {
+                        media.FavoriteActorResults.Add(_tmdb.SearchForPersonAndCreditsById(item.TMDBId));
+                    }
+                    catch (Exception ex)
+                    {
+                        /*
+                         Catch per result errors, so if one '.add' fails the whole thing doesnt stop
+                        TODO: Add error handling
+                         */
+                    }
                 }
-                catch(Exception ex)
-                {
-                    // TODO: Add error handling
-                }
+            }
+            catch (Exception ex)
+            {
+                // TODO: Add error handling
             }
 
             return View(media);
