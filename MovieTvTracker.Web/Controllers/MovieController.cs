@@ -22,6 +22,8 @@ namespace MovieTvTracker.Web.Controllers
             _db = db;
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Index(string keyword)
         {
             Media media = new Media();
@@ -31,6 +33,7 @@ namespace MovieTvTracker.Web.Controllers
             return View(media);
         }
 
+        [HttpGet]
         public IActionResult MoviesNowPlaying()
         {
             Media media = new Media();
@@ -44,6 +47,8 @@ namespace MovieTvTracker.Web.Controllers
         /// Aquire watched media (film/tv) results from the database, run those results through TMDB API to get information and then feed that to the model that supplies the view.
         /// </summary>
         /// <returns></returns>
+        /// 
+        [HttpGet]
         public IActionResult GetWatchedMedia()
         {
             Media media = new Media();
@@ -77,6 +82,7 @@ namespace MovieTvTracker.Web.Controllers
         /// Aquire favorite actor results from the database, run those results through TMDB API to get information and then feed that to the model that supplies the view.
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public IActionResult GetFavoriteActors()
         {
             Media media = new Media();
@@ -101,6 +107,8 @@ namespace MovieTvTracker.Web.Controllers
         /// </summary>
         /// <param name="media"></param>
         /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> MarkAsWatched(Media media)
         {
             try
@@ -142,6 +150,8 @@ namespace MovieTvTracker.Web.Controllers
         /// </summary>
         /// <param name="media"></param>
         /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> MarkFavoriteActor(Media media)
         {
             try
@@ -167,6 +177,7 @@ namespace MovieTvTracker.Web.Controllers
             return RedirectToAction("MoviesNowPlaying", "Movie");
         }
 
+        [HttpGet]
         public IActionResult GetUserFilmSelectionById(int id)
         {
             Media media = new Media();
@@ -187,6 +198,7 @@ namespace MovieTvTracker.Web.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult GetUserTVSelectionById(int id)
         {
             Media media = new Media();
@@ -207,6 +219,7 @@ namespace MovieTvTracker.Web.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult GetUserPersonSelectionById(int id)
         {
             Media media = new Media();

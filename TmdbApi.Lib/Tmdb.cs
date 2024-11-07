@@ -15,6 +15,11 @@ namespace TmdbApi.Lib
         private string _readAccessToken = "PRIVATE";
         private string _imgPath;
 
+        /// <summary>
+        /// Call TMDB API with authorization token and request query, deserialize response into a recognised object type.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public Rootobject CallTmdbApi(string query)
         {
             RestRequest request = new RestRequest(query);
