@@ -8,8 +8,13 @@
 
 <p></p>
 
-<li>Film Count: @Model.WatchedMediaResults.WatchedFilms.Count()</li>
-<li>TV Count: @Model.WatchedMediaResults.WatchedTV.Count();</li>
+<div class="card border-secondary mb-3" style="width: 100%">
+    <div class="card-header">Watched Media Information:</div>
+    <div class="card-body">
+        <li>Film Count: @Model.WatchedMediaResults.WatchedFilms.Count()</li>
+        <li>TV Count: @Model.WatchedMediaResults.WatchedTV.Count()</li>
+    </div>
+</div>
 
 <p></p>
 

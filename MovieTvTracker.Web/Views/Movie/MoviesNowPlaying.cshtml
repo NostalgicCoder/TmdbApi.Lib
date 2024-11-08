@@ -8,12 +8,12 @@
 
 <form method="post" asp-action="Index">
 
-    <label>Keyword: (Search for a movie, tv show, person)</label>
-    <input asp-for="Keyword" class="form-control" style="width:400px" />
+    <label class="form-label">Search:</label>
+    <input asp-for="Keyword" class="form-control" placeholder="Search for a movie, tv show, person" autocomplete="on" style="width:400px">
 
     <br />
 
-    <button type="submit" class="btn btn-primary">Search<i class="bi bi-filter"></i></button>
+    <button type="submit" class="btn btn-primary">Search</button>
 
 </form>
 
