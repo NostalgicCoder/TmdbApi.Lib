@@ -29,28 +29,30 @@
 
         @foreach (var obj in Model.TMDBData.MoviesNowPlaying.results)
         {
-            if(obj.original_language == "en")
+            if (obj.original_language == "en")
             {
                 <div class="inner_block">
                     <table>
                         <tr>
                             <td>
-                                @{
-                                    if (!string.IsNullOrEmpty(obj.release_date))
-                                    {
-                                        DateTime releaseDate = Convert.ToDateTime(obj.release_date);
+                                <div class="titleContainer">
+                                    @{
+                                        if (!string.IsNullOrEmpty(obj.release_date))
+                                        {
+                                            DateTime releaseDate = Convert.ToDateTime(obj.release_date);
 
-                                        <span>@obj.original_title (@releaseDate.Year)</span>
+                                            <span>@obj.original_title (@releaseDate.Year)</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@obj.original_title</span>
+                                        }
                                     }
-                                    else
-                                    {
-                                        <span>@obj.original_title</span>
-                                    }
-                                }
+                                </div>
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td style="padding-top: 5px;">
                                 @{
                                     string url = string.Empty;
 

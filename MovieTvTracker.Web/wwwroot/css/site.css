@@ -46,21 +46,26 @@ th.siteTheme {
     /*Poster sizing issues are caused if this is set to a % value*/
     width: 198px;
     height: 298px;
+    border-radius: 8px;
+    /*border-radius: 5px 25px;*/
 }
 
 .filmTvDetailPosterImgSize {
     width: 20%;
     height: 20%;
+    border-radius: 8px;
 }
 
 .castImgSize {
     width: 40%;
     height: 40%;
+    border-radius: 5px;
 }
 
 .personSearchImgSize, .myWatchedMediaImgSize, .myFavoriteActorsImgSize {
     width: 65px;
     height: 93px;
+    border-radius: 5px;
 }
 
 .personCreditsImgSize {
@@ -72,4 +77,14 @@ div.castInfoContainer {
     max-height: 25px; /* Stops a long cast members name going onto two lines */
     word-wrap: break-word;
     overflow: hidden;
+}
+
+div.titleContainer {
+    align-content: center;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    height: 54px;
+    overflow: hidden;
+    background-color: #fdfdfb;
 }
