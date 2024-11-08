@@ -35,6 +35,7 @@ Technologies / Principles Used:
 - REST API
 - TMDB API
 - NET Core (Console & Class Library)
+- CSS / Bootstrap Themes & Icons
 - RestSharp
 - Newtonsoft.Json
 - Entity Framework - Code first approach
@@ -42,12 +43,15 @@ Technologies / Principles Used:
 
 Requirements:
 
-SQL backend database to be installed.
+- SQL backend database to be installed.
 
 Resources / Credits:
 
 - https://www.themoviedb.org/?language=en-GB
 - https://developer.themoviedb.org/reference/intro/getting-started
+- https://getbootstrap.com/docs/5.3/getting-started/introduction/
+- https://icons.getbootstrap.com/
+- https://bootswatch.com/sandstone/
 
 Images:
 
