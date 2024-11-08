@@ -40,95 +40,104 @@
 
 <p></p>
 
-@{
-    if (!string.IsNullOrEmpty(Model.TMDBData.TvIdResult.first_air_date))
-    {
-        <li>First Air Date: @Convert.ToDateTime(Model.TMDBData.TvIdResult.first_air_date).Year.ToString()</li>
-    }
-}
+<div class="card border-secondary mb-3" style="width: 100%">
+    <div class="card-header">General Information:</div>
+    <div class="card-body">
+        @{
+            if (!string.IsNullOrEmpty(Model.TMDBData.TvIdResult.first_air_date))
+            {
+                <li>First Air Date: @Convert.ToDateTime(Model.TMDBData.TvIdResult.first_air_date).Year.ToString()</li>
+            }
+        }
 
-<li>Vote Average: @Math.Round(Model.TMDBData.TvIdResult.vote_average, 1)</li>
-<li>Genres: @String.Join(", ", Model.TMDBData.TvIdResult.genres.Select(x => x.name).ToArray())</li>
+        <li>Vote Average: @Math.Round(Model.TMDBData.TvIdResult.vote_average, 1)</li>
+        <li>Genres: @String.Join(", ", Model.TMDBData.TvIdResult.genres.Select(x => x.name).ToArray())</li>
 
-@{
-    if (!string.IsNullOrEmpty(Model.TMDBData.TvIdResult.tagline))
-    {
-        <li>Tagline: @Model.TMDBData.TvIdResult.tagline</li>
-    }
-}
-
-<p></p>
-
-<h4>Overview:</h4>
-
-<p></p>
-
-@Model.TMDBData.TvIdResult.overview
+        @{
+            if (!string.IsNullOrEmpty(Model.TMDBData.TvIdResult.tagline))
+            {
+                <li>Tagline: @Model.TMDBData.TvIdResult.tagline</li>
+            }
+        }
+    </div>
+</div>
 
 <p></p>
 
-<h4>Main Cast:</h4>
+<div class="card border-secondary mb-3" style="width: 100%">
+    <div class="card-header">Overview:</div>
+    <div class="card-body">
+        @Model.TMDBData.TvIdResult.overview
+    </div>
+</div>
 
-@{
-    List<Cast> castColl;
+<p></p>
 
-    if (Model.TMDBData.CreditsByTvId.cast.Count() > 15)
-    {
-        castColl = Model.TMDBData.CreditsByTvId.cast.OrderBy(item => item.order).Take(15).ToList();
-    }
-    else
-    {
-        castColl = Model.TMDBData.CreditsByTvId.cast.OrderBy(item => item.order).ToList();
-    }
+<div class="card border-secondary mb-3" style="width: 100%">
+    <div class="card-header">Main Cast:</div>
+    <div class="card-body">
+        @{
+            List<Cast> castColl;
 
-    foreach (Cast cast in castColl)
-    {
-        <div class="inner_block">
-            <table>
-                <tr>
-                    <td>
-                        <div class="castInfoContainer">
-                            @cast.name
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        @{
-                            string castUrl = "https://image.tmdb.org/t/p/original" + cast.profile_path;
+            if (Model.TMDBData.CreditsByTvId.cast.Count() > 15)
+            {
+                castColl = Model.TMDBData.CreditsByTvId.cast.OrderBy(item => item.order).Take(15).ToList();
+            }
+            else
+            {
+                castColl = Model.TMDBData.CreditsByTvId.cast.OrderBy(item => item.order).ToList();
+            }
 
-                            <a href="@Url.Action("GetUserPersonSelectionById", "Movie", new { id = cast.id })">
+            foreach (Cast cast in castColl)
+            {
+                <div class="inner_block">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="castInfoContainer">
+                                    @cast.name
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @{
+                                    string castUrl = "https://image.tmdb.org/t/p/original" + cast.profile_path;
 
-                                @if (string.IsNullOrEmpty(cast.profile_path))
-                                {
-                                    <img id="Cinema.jpg" class="castImgSize" src="~/Images/Cinema.jpg" />
+                                    <a href="@Url.Action("GetUserPersonSelectionById", "Movie", new { id = cast.id })">
+
+                                        @if (string.IsNullOrEmpty(cast.profile_path))
+                                        {
+                                            <img id="Cinema.jpg" class="castImgSize" src="~/Images/Cinema.jpg" />
+                                        }
+                                        else
+                                        {
+                                            <img src="@castUrl" class="castImgSize" />
+                                        }
+
+                                    </a>
                                 }
-                                else
-                                {
-                                    <img src="@castUrl" class="castImgSize" />
-                                }
-
-                            </a>
-                        }
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="castInfoContainer">
-                            @{
-                                if (!string.IsNullOrEmpty(cast.character))
-                                {
-                                    @cast.character
-                                }
-                                else
-                                {
-                                    @: Unknown
-                                }
-                            }
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    }
-}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="castInfoContainer">
+                                    @{
+                                        if (!string.IsNullOrEmpty(cast.character))
+                                        {
+                                            @cast.character
+                                        }
+                                        else
+                                        {
+                                            @: Unknown
+                                        }
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            }
+        }
+    </div>
+</div>

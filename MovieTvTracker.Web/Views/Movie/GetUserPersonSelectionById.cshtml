@@ -21,16 +21,6 @@
     }
 }
 
-<form method="post" asp-action="MarkFavoriteActor">
-
-    <input type="hidden" asp-for="@Model.TMDBData.PersonIdResult.id" />
-
-    <button type="submit" class="btn btn-primary">Mark Favorite Actor</button>
-
-</form>
-
-<p></p>
-
 <h3>@Model.TMDBData.PersonIdResult.name</h3>
 
 <p></p>
@@ -52,18 +42,34 @@
 
 <p></p>
 
-<li>Known For: @Model.TMDBData.PersonIdResult.known_for_department</li>
-<li>Gender: @gender</li>
-<li>Date Of Birth: @dob</li>
-<li>Place Of Birth: @Model.TMDBData.PersonIdResult.place_of_birth</li>
+<form method="post" asp-action="MarkFavoriteActor">
+
+    <input type="hidden" asp-for="@Model.TMDBData.PersonIdResult.id" />
+
+    <button type="submit" class="btn btn-primary">Mark Favorite Actor</button>
+
+</form>
 
 <p></p>
 
-<h4>Biography:</h4>
+<div class="card border-secondary mb-3" style="width: 100%">
+    <div class="card-header">General Information:</div>
+    <div class="card-body">
+        <li>Known For: @Model.TMDBData.PersonIdResult.known_for_department</li>
+        <li>Gender: @gender</li>
+        <li>Date Of Birth: @dob</li>
+        <li>Place Of Birth: @Model.TMDBData.PersonIdResult.place_of_birth</li>
+    </div>
+</div>
 
 <p></p>
 
-@Model.TMDBData.PersonIdResult.biography
+<div class="card border-secondary mb-3" style="width: 100%">
+    <div class="card-header">Biography:</div>
+    <div class="card-body">
+        @Model.TMDBData.PersonIdResult.biography
+    </div>
+</div>
 
 <p></p>
 

@@ -6,18 +6,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<form method="post" asp-action="MarkAsWatched">
-
-    @{
-        Model.SelectedContentType = "Film";
-    }
-
-    <input type="hidden" asp-for="@Model.SelectedTMDBId" />
-    <input type="hidden" asp-for="@Model.SelectedContentType" />
-
-    <button type="submit" class="btn btn-primary">Mark As Watched</button>
-
-</form>
+<h3>@Model.TMDBData.FilmIdResult.original_title</h3>
 
 <p></p>
 
@@ -36,100 +25,119 @@
 
 <p></p>
 
-<h3>@Model.TMDBData.FilmIdResult.original_title</h3>
+<form method="post" asp-action="MarkAsWatched">
+
+    @{
+        Model.SelectedContentType = "Film";
+    }
+
+    <input type="hidden" asp-for="@Model.SelectedTMDBId" />
+    <input type="hidden" asp-for="@Model.SelectedContentType" />
+
+    <button type="submit" class="btn btn-primary">Mark As Watched</button>
+
+</form>
+<p></p>
+
+<div class="card border-secondary mb-3" style="width: 100%">
+    <div class="card-header">General Information:</div>
+    <div class="card-body">
+        @{
+            if (!string.IsNullOrEmpty(Model.TMDBData.FilmIdResult.release_date))
+            {
+                <li>Release Year: @Convert.ToDateTime(Model.TMDBData.FilmIdResult.release_date).Year.ToString()</li>
+            }
+        }
+
+        <li>Vote Average: @Math.Round(Model.TMDBData.FilmIdResult.vote_average, 1)</li>
+        <li>Runtime: @Model.TMDBData.FilmIdResult.runtime.ToString() mins</li>
+        <li>Genres: @String.Join(", ", Model.TMDBData.FilmIdResult.genres.Select(x => x.name).ToArray())</li>
+
+        @{
+            if (!string.IsNullOrEmpty(Model.TMDBData.FilmIdResult.tagline))
+            {
+                <li>Tagline: @Model.TMDBData.FilmIdResult.tagline</li>
+            }
+        }
+    </div>
+</div>
 
 <p></p>
 
-@{
-    if (!string.IsNullOrEmpty(Model.TMDBData.FilmIdResult.release_date))
-    {
-        <li>Release Year: @Convert.ToDateTime(Model.TMDBData.FilmIdResult.release_date).Year.ToString()</li>
-    }
-}
-
-<li>Vote Average: @Math.Round(Model.TMDBData.FilmIdResult.vote_average, 1)</li>
-<li>Runtime: @Model.TMDBData.FilmIdResult.runtime.ToString() mins</li>
-<li>Genres: @String.Join(", ", Model.TMDBData.FilmIdResult.genres.Select(x => x.name).ToArray())</li>
-
-@{
-    if (!string.IsNullOrEmpty(Model.TMDBData.FilmIdResult.tagline))
-    {
-        <li>Tagline: @Model.TMDBData.FilmIdResult.tagline</li>
-    }
-}
+<div class="card border-secondary mb-3" style="width: 100%">
+    <div class="card-header">Overview:</div>
+    <div class="card-body">
+        @Model.TMDBData.FilmIdResult.overview
+    </div>
+</div>
 
 <p></p>
 
-<h4>Overview:</h4>
+<div class="card border-secondary mb-3" style="width: 100%">
+    <div class="card-header">Main Cast:</div>
+    <div class="card-body">
+        @{
+            List<Cast> castColl;
 
-<p></p>
+            if (Model.TMDBData.CreditsByFilmId.cast.Count() > 15)
+            {
+                castColl = Model.TMDBData.CreditsByFilmId.cast.OrderBy(item => item.order).Take(15).ToList();
+            }
+            else
+            {
+                castColl = Model.TMDBData.CreditsByFilmId.cast.OrderBy(item => item.order).ToList();
+            }
 
-@Model.TMDBData.FilmIdResult.overview
+            foreach (Cast cast in castColl)
+            {
+                <div class="inner_block">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="castInfoContainer">
+                                    @cast.name
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @{
+                                    string castUrl = "https://image.tmdb.org/t/p/original" + cast.profile_path;
 
-<p></p>
+                                    <a href="@Url.Action("GetUserPersonSelectionById", "Movie", new { id = cast.id })">
 
-<h4>Main Cast:</h4>
+                                        @if (string.IsNullOrEmpty(cast.profile_path))
+                                        {
+                                            <img id="Cinema.jpg" class="castImgSize" src="~/Images/Cinema.jpg" />
+                                        }
+                                        else
+                                        {
+                                            <img src="@castUrl" class="castImgSize" />
+                                        }
 
-@{
-    List<Cast> castColl;
-
-    if (Model.TMDBData.CreditsByFilmId.cast.Count() > 15)
-    {
-        castColl = Model.TMDBData.CreditsByFilmId.cast.OrderBy(item => item.order).Take(15).ToList();
-    }
-    else
-    {
-        castColl = Model.TMDBData.CreditsByFilmId.cast.OrderBy(item => item.order).ToList();
-    }
-
-    foreach (Cast cast in castColl)
-    {
-        <div class="inner_block">
-            <table>
-                <tr>
-                    <td>
-                        <div class="castInfoContainer">
-                            @cast.name
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        @{
-                            string castUrl = "https://image.tmdb.org/t/p/original" + cast.profile_path;
-
-                            <a href="@Url.Action("GetUserPersonSelectionById", "Movie", new { id = cast.id })">
-
-                                @if (string.IsNullOrEmpty(cast.profile_path))
-                                {
-                                    <img id="Cinema.jpg" class="castImgSize" src="~/Images/Cinema.jpg" />
+                                    </a>
                                 }
-                                else
-                                {
-                                    <img src="@castUrl" class="castImgSize" />
-                                }
-
-                            </a>
-                        }
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="castInfoContainer">
-                            @{
-                                if (!string.IsNullOrEmpty(cast.character))
-                                {
-                                    @cast.character
-                                }
-                                else
-                                {
-                                    @: Unknown
-                                }
-                            }
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    }
-}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="castInfoContainer">
+                                    @{
+                                        if (!string.IsNullOrEmpty(cast.character))
+                                        {
+                                            @cast.character
+                                        }
+                                        else
+                                        {
+                                            @: Unknown
+                                        }
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            }
+        }
+    </div>
+</div>
