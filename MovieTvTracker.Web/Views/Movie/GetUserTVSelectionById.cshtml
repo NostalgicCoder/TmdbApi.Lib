@@ -6,18 +6,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<form method="post" asp-action="MarkAsWatched">
-
-    @{
-        Model.SelectedContentType = "TV";
-    }
-
-    <input type="hidden" asp-for="@Model.SelectedTMDBId" />
-    <input type="hidden" asp-for="@Model.SelectedContentType" />
-
-    <button type="submit" class="btn btn-primary">Mark As Watched</button>
-
-</form>
+<h3>@Model.TMDBData.TvIdResult.name</h3>
 
 <p></p>
 
@@ -36,7 +25,18 @@
 
 <p></p>
 
-<h3>@Model.TMDBData.TvIdResult.name</h3>
+<form method="post" asp-action="MarkAsWatched">
+
+    @{
+        Model.SelectedContentType = "TV";
+    }
+
+    <input type="hidden" asp-for="@Model.SelectedTMDBId" />
+    <input type="hidden" asp-for="@Model.SelectedContentType" />
+
+    <button type="submit" class="btn btn-primary">Mark As Watched <i class="bi bi-plus-circle"></i></button>
+
+</form>
 
 <p></p>
 
