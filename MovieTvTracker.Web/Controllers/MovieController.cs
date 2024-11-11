@@ -3,6 +3,7 @@ using TmdbApi.Lib;
 using MovieTvTracker.Web.Models;
 using MovieTvTracker.Web.Data;
 using TmdbApi.Lib.Interfaces;
+using MovieTvTracker.Web.Class;
 
 namespace MovieTvTracker.Web.Controllers
 {
@@ -58,6 +59,8 @@ namespace MovieTvTracker.Web.Controllers
         {
             Media media = new Media();
 
+            GetStatistics stats = new GetStatistics();
+
             try
             {
                 media.WatchedMediaResults = new WatchedMediaResults();
@@ -82,6 +85,8 @@ namespace MovieTvTracker.Web.Controllers
                             break;
                     }
                 }
+
+                media = stats.GetPopularYearsAndGenres(media);
             }
             catch (Exception ex)
             {

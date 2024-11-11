@@ -9,11 +9,13 @@ namespace MovieTvTracker.Web.Models
         public string Keyword { get; set; }
         public ResultReturn TMDBData { get; set; }
         public WatchedMediaResults WatchedMediaResults { get; set; }
+        public Stats Stats { get; set; }
         public List<ResultReturn> FavoriteActorResults { get; set; }
-
+        
         public Media()
         {
             FavoriteActorResults = new List<ResultReturn>();
+            Stats = new Stats();    
         }
     }
 }

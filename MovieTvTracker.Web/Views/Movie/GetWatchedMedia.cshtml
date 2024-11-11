@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "My Watched Media:";
+
+    string yearRange = string.Format("{0} > {1}", Model.Stats.FilmYears.Last().Year.ToString(), Model.Stats.FilmYears.First().Year.ToString());
 }
 
 <h2>My Watched Media:</h2>
@@ -13,6 +15,7 @@
     <div class="card-body">
         <li>Film Count: @Model.WatchedMediaResults.WatchedFilms.Count()</li>
         <li>TV Count: @Model.WatchedMediaResults.WatchedTV.Count()</li>
+        <li>Watched Films Year Range: @yearRange</li>
     </div>
 </div>
 
@@ -52,7 +55,7 @@
         @foreach (var obj in Model.WatchedMediaResults.WatchedFilms)
         {
             <tr>
-                <td class="siteTheme" style="width:77px;">
+                <td class="siteTheme" style="width:73px;">
                     @{
                         string url = "https://image.tmdb.org/t/p/original" + obj.ResultReturn.FilmIdResult.poster_path;
 

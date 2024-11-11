@@ -39,7 +39,7 @@
         @foreach (var obj in Model.FavoriteActorResults.OrderByDescending(item => item.PersonIdResult.popularity))
         {
             <tr>
-                <td class="siteTheme" style="width:77px;">
+                <td class="siteTheme" style="width:73px;">
                     @{
                         string url = "https://image.tmdb.org/t/p/original" + obj.PersonIdResult.profile_path;
 
