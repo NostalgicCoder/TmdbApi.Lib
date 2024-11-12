@@ -4,6 +4,7 @@ using MovieTvTracker.Web.Models;
 using MovieTvTracker.Web.Data;
 using TmdbApi.Lib.Interfaces;
 using MovieTvTracker.Web.Class;
+using MovieTvTracker.Web.Interfaces;
 
 namespace MovieTvTracker.Web.Controllers
 {
@@ -27,7 +28,7 @@ namespace MovieTvTracker.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(string keyword)
         {
-            Media media = new Media();
+            IMedia media = new Media();
 
             if(ModelState.IsValid)
             {
@@ -42,7 +43,7 @@ namespace MovieTvTracker.Web.Controllers
         [HttpGet]
         public IActionResult MoviesNowPlaying()
         {
-            Media media = new Media();
+            IMedia media = new Media();
 
             media.TMDBData = _tmdb.MoviesNowPlaying();
 
@@ -57,8 +58,8 @@ namespace MovieTvTracker.Web.Controllers
         [HttpGet]
         public IActionResult GetWatchedMedia()
         {
-            Media media = new Media();
-            GetStatistics stats = new GetStatistics();
+            IMedia media = new Media();
+            IGetStatistics stats = new GetStatistics();
 
             try
             {
@@ -102,7 +103,7 @@ namespace MovieTvTracker.Web.Controllers
         [HttpGet]
         public IActionResult GetFavoriteActors()
         {
-            Media media = new Media();
+            IMedia media = new Media();
 
             try
             {
@@ -207,7 +208,7 @@ namespace MovieTvTracker.Web.Controllers
         [HttpGet]
         public IActionResult GetUserFilmSelectionById(int id)
         {
-            Media media = new Media();
+            IMedia media = new Media();
 
             media.SelectedTMDBId = id;
             media.TMDBData = _tmdb.SearchForFilmAndCreditsById(id);
@@ -228,7 +229,7 @@ namespace MovieTvTracker.Web.Controllers
         [HttpGet]
         public IActionResult GetUserTVSelectionById(int id)
         {
-            Media media = new Media();
+            IMedia media = new Media();
 
             media.SelectedTMDBId = id;
             media.TMDBData = _tmdb.SearchForTvAndCreditsById(id);
@@ -249,8 +250,8 @@ namespace MovieTvTracker.Web.Controllers
         [HttpGet]
         public IActionResult GetUserPersonSelectionById(int id)
         {
-            Media media = new Media();
-            Helper helper = new Helper();
+            IMedia media = new Media();
+            IHelper helper = new Helper();
 
             media.SelectedTMDBId = id;
             media.TMDBData = _tmdb.SearchForPersonAndCreditsById(id);

@@ -1,15 +1,15 @@
-﻿using MovieTvTracker.Web.Models;
+﻿using MovieTvTracker.Web.Interfaces;
 
 namespace MovieTvTracker.Web.Class
 {
-    public class Helper
+    public class Helper : IHelper
     {
         /// <summary>
         /// Get the birthday and deathday (If exists) of a person and calculate how old the person is in years and if dead on day of death, handle for bad data
         /// </summary>
         /// <param name="media"></param>
         /// <returns></returns>
-        public string ProcessDob(Media media)
+        public string ProcessDob(IMedia media)
         {
             string msg = "Unknown";
 

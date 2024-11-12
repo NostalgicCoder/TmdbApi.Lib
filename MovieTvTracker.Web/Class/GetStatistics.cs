@@ -1,9 +1,10 @@
-﻿using MovieTvTracker.Web.Models;
+﻿using MovieTvTracker.Web.Interfaces;
+using MovieTvTracker.Web.Models;
 using TmdbApi.Lib.Models;
 
 namespace MovieTvTracker.Web.Class
 {
-    public class GetStatistics
+    public class GetStatistics : IGetStatistics
     {
         /// <summary>
         /// Get the most popular years, genres of films for the user based on the database / TMDB API data provided
@@ -11,7 +12,7 @@ namespace MovieTvTracker.Web.Class
         /// </summary>
         /// <param name="media"></param>
         /// <returns></returns>
-        public Media GetPopularYearsAndGenres(Media media)
+        public IMedia GetPopularYearsAndGenres(IMedia media)
         {
             foreach (WatchedMediaItem item in media.WatchedMediaResults.WatchedFilms)
             {

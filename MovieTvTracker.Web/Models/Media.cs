@@ -1,8 +1,9 @@
-﻿using TmdbApi.Lib.Models;
+﻿using MovieTvTracker.Web.Interfaces;
+using TmdbApi.Lib.Models;
 
 namespace MovieTvTracker.Web.Models
 {
-    public class Media
+    public class Media : IMedia
     {
         public Int32 SelectedTMDBId { get; set; }
         public string SelectedContentType { get; set; }
