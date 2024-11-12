@@ -7,6 +7,7 @@ namespace MovieTvTracker.Web.Models
         public Int32 SelectedTMDBId { get; set; }
         public string SelectedContentType { get; set; }
         public string Keyword { get; set; }
+        public string PersonDob { get; set; }
         public ResultReturn TMDBData { get; set; }
         public WatchedMediaResults WatchedMediaResults { get; set; }
         public Stats Stats { get; set; }

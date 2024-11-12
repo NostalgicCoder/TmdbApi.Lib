@@ -44,6 +44,7 @@ Technologies / Principles Used:
 Requirements:
 
 - SQL backend database to be installed.
+- Developer license key for TMDB API
 
 Resources / Credits:
 
@@ -54,8 +55,6 @@ Resources / Credits:
 - https://bootswatch.com/sandstone/
 
 Images:
-
-Visual examples of some of the returned data from the rest based TMDB Api.
 
 ![Alt text](Images/MovieTvTrackerStart1.jpg)
 ![Alt text](Images/MovieTvTrackerStart2.jpg)
@@ -69,6 +68,11 @@ Visual examples of some of the returned data from the rest based TMDB Api.
 ![Alt text](Images/MovieTvTrackerPersonResult3.jpg)
 ![Alt text](Images/MovieTvTrackerWatchedMedia1.jpg)
 ![Alt text](Images/MovieTvTrackerFavoriteActor1.jpg)
+![Alt text](Images/MovieTvTrackerEnd1.jpg)
+![Alt text](Images/MovieTvTrackerEnd2.jpg)
+
+
+
 
 
 

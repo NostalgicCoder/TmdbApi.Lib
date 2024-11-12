@@ -4,9 +4,22 @@
 
 @{
     ViewData["Title"] = "Home Page";
+
+    string firstAirDate = "Unknown";
+    string lastAirDate = "Unknown";
+
+    if (!string.IsNullOrEmpty(Model.TMDBData.TvIdResult.first_air_date))
+    {
+        firstAirDate = Convert.ToDateTime(Model.TMDBData.TvIdResult.first_air_date).Year.ToString();
+    }
+
+    if (!string.IsNullOrEmpty(Model.TMDBData.TvIdResult.last_air_date))
+    {
+        lastAirDate = Convert.ToDateTime(Model.TMDBData.TvIdResult.last_air_date).Year.ToString();
+    }
 }
 
-<h3>@Model.TMDBData.TvIdResult.name</h3>
+<h3>@Model.TMDBData.TvIdResult.name (@firstAirDate - @lastAirDate)</h3>
 
 <p></p>
 
@@ -43,13 +56,6 @@
 <div class="card border-secondary mb-3" style="width: 100%">
     <div class="card-header">General Information:</div>
     <div class="card-body">
-        @{
-            if (!string.IsNullOrEmpty(Model.TMDBData.TvIdResult.first_air_date))
-            {
-                <li>First Air Date: @Convert.ToDateTime(Model.TMDBData.TvIdResult.first_air_date).Year.ToString()</li>
-            }
-        }
-
         <li>Vote Average: @Math.Round(Model.TMDBData.TvIdResult.vote_average, 1)</li>
         <li>Genres: @String.Join(", ", Model.TMDBData.TvIdResult.genres.Select(x => x.name).ToArray())</li>
 

@@ -58,7 +58,6 @@ namespace MovieTvTracker.Web.Controllers
         public IActionResult GetWatchedMedia()
         {
             Media media = new Media();
-
             GetStatistics stats = new GetStatistics();
 
             try
@@ -251,9 +250,11 @@ namespace MovieTvTracker.Web.Controllers
         public IActionResult GetUserPersonSelectionById(int id)
         {
             Media media = new Media();
+            Helper helper = new Helper();
 
             media.SelectedTMDBId = id;
             media.TMDBData = _tmdb.SearchForPersonAndCreditsById(id);
+            media.PersonDob = helper.ProcessDob(media);
 
             if (media.TMDBData.PersonIdResult != null)
             {

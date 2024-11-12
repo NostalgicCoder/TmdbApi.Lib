@@ -4,9 +4,16 @@
 
 @{
     ViewData["Title"] = "Home Page";
+
+    string releaseYear = "Unknown";
+
+    if (!string.IsNullOrEmpty(Model.TMDBData.FilmIdResult.release_date))
+    {
+        releaseYear = Convert.ToDateTime(Model.TMDBData.FilmIdResult.release_date).Year.ToString();
+    }
 }
 
-<h3>@Model.TMDBData.FilmIdResult.original_title</h3>
+<h3>@Model.TMDBData.FilmIdResult.original_title (@releaseYear)</h3>
 
 <p></p>
 
@@ -42,13 +49,6 @@
 <div class="card border-secondary mb-3" style="width: 100%">
     <div class="card-header">General Information:</div>
     <div class="card-body">
-        @{
-            if (!string.IsNullOrEmpty(Model.TMDBData.FilmIdResult.release_date))
-            {
-                <li>Release Year: @Convert.ToDateTime(Model.TMDBData.FilmIdResult.release_date).Year.ToString()</li>
-            }
-        }
-
         <li>Vote Average: @Math.Round(Model.TMDBData.FilmIdResult.vote_average, 1)</li>
         <li>Runtime: @Model.TMDBData.FilmIdResult.runtime.ToString() mins</li>
         <li>Genres: @String.Join(", ", Model.TMDBData.FilmIdResult.genres.Select(x => x.name).ToArray())</li>
