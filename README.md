@@ -21,6 +21,7 @@ The second part of this project is a full-stack application consisting of a ASP.
 - Display of actor/actress information.
 - Ability to mark films/tv shows the user has watched and have them displayed under a dedicated section for reference.
 - Ability to mark favorite actors and have them displayed under a dedicated section for reference.
+- Show graph data of film years and genres the user has watched
 
 NOTE!:
 
@@ -30,12 +31,14 @@ Technologies / Principles Used:
 
 - C#
 - ASP.NET MVC Core
-- Console
-- Class Library
+- JQuery
+- CSS / Bootstrap Themes & Icons
+- Chart.js
 - REST API
 - TMDB API
-- NET Core (Console & Class Library)
-- CSS / Bootstrap Themes & Icons
+- Console
+- Class Library
+- NET Core
 - RestSharp
 - Newtonsoft.Json
 - Entity Framework - Code first approach
@@ -53,6 +56,8 @@ Resources / Credits:
 - https://getbootstrap.com/docs/5.3/getting-started/introduction/
 - https://icons.getbootstrap.com/
 - https://bootswatch.com/sandstone/
+- https://www.chartjs.org/docs/latest/
+- https://www.w3schools.com/ai/ai_chartjs.asp
 
 Images:
 
@@ -67,6 +72,7 @@ Images:
 ![Alt text](Images/MovieTvTrackerPersonResult2.jpg)
 ![Alt text](Images/MovieTvTrackerPersonResult3.jpg)
 ![Alt text](Images/MovieTvTrackerWatchedMedia1.jpg)
+![Alt text](Images/MovieTvTrackerWatchedMedia2.jpg)
 ![Alt text](Images/MovieTvTrackerFavoriteActor1.jpg)
 ![Alt text](Images/MovieTvTrackerEnd1.jpg)
 ![Alt text](Images/MovieTvTrackerEnd2.jpg)

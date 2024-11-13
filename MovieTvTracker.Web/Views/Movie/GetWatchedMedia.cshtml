@@ -4,7 +4,111 @@
     ViewData["Title"] = "My Watched Media:";
 
     string yearRange = string.Format("{0} > {1}", Model.Stats.FilmYears.Last().Year.ToString(), Model.Stats.FilmYears.First().Year.ToString());
+
+    var XYear = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.FilmYears.Select(x => x.Year).ToList());
+    var YYear = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.FilmYears.Select(x => x.Qty).ToList());
+    var XGenre = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.FilmGenres.Select(x => x.Genre).ToList());
+    var YGenre = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.FilmGenres.Select(x => x.Qty).ToList());
 }
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+
+    $(function(){ 
+
+        var xYear = @Html.Raw(XYear);
+        var yYear = @Html.Raw(YYear);
+        var xGenre = @Html.Raw(XGenre);
+        var yGenre = @Html.Raw(YGenre);
+        var barColors = "#405b85";
+
+        new Chart("chartYear", {
+            type: "bar",
+            data: {
+                labels: xYear,
+                datasets: [{
+                    label: "Qty",
+                    backgroundColor: barColors,
+                    data: yYear,
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "Release Year Of Films Watched"
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            beginAtZero: true
+                        },
+                        gridLines: {
+                            display: true,
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            min: 0,
+                            beginAtZero: true
+                        },
+                        gridLines: {
+                            display: false,
+                        }
+                    }]
+                }
+            }
+        });
+
+        new Chart("chartGenre", {
+            type: "bar",
+            data: {
+                labels: xGenre,
+                datasets: [{
+                    label: "Qty",
+                    backgroundColor: barColors,
+                    data: yGenre,
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "Genre Of Films Watched"
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            beginAtZero: true
+                        },
+                        gridLines: {
+                            display: true,
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            min: 0,
+                            beginAtZero: true
+                        },
+                        gridLines: {
+                            display: false,
+                        }
+                    }]
+                }
+            }
+        });
+
+    });
+
+</script>
 
 <h2>My Watched Media:</h2>
 
@@ -16,6 +120,22 @@
         <li>Film Count: @Model.WatchedMediaResults.WatchedFilms.Count()</li>
         <li>TV Count: @Model.WatchedMediaResults.WatchedTV.Count()</li>
         <li>Watched Films Year Range: @yearRange</li>
+    </div>
+</div>
+
+<p></p>
+
+<div class="card border-secondary mb-3" style="width: 100%">
+    <div class="card-body">
+        <canvas id="chartYear" style="height:200px"></canvas>
+    </div>
+</div>
+
+<p></p>
+
+<div class="card border-secondary mb-3" style="width: 100%">
+    <div class="card-body">
+        <canvas id="chartGenre" style="height:200px"></canvas>
     </div>
 </div>
 
@@ -59,18 +179,18 @@
                     @{
                         string url = "https://image.tmdb.org/t/p/original" + obj.ResultReturn.FilmIdResult.poster_path;
 
-                        <a href="@Url.Action("GetUserFilmSelectionById", "Movie", new { id = obj.ResultReturn.FilmIdResult.id })">
+                                <a href="@Url.Action("GetUserFilmSelectionById", "Movie", new { id = obj.ResultReturn.FilmIdResult.id })">
 
-                            @if (string.IsNullOrEmpty(obj.ResultReturn.FilmIdResult.poster_path))
+                                    @if (string.IsNullOrEmpty(obj.ResultReturn.FilmIdResult.poster_path))
                             {
-                                <img id="Cinema.jpg" class="myWatchedMediaImgSize" src="~/Images/Cinema.jpg" />
+                                        <img id="Cinema.jpg" class="myWatchedMediaImgSize" src="~/Images/Cinema.jpg" />
                             }
                             else
                             {
-                                <img src="@url" class="myWatchedMediaImgSize" border="1" />
+                                        <img src="@url" class="myWatchedMediaImgSize" border="1" />
                             }
 
-                        </a>
+                                </a>
                     }
                 </td>
                 <td class="siteTheme">
@@ -80,7 +200,7 @@
                     @{
                         if (!string.IsNullOrEmpty(obj.ResultReturn.FilmIdResult.release_date))
                         {
-                            @Convert.ToDateTime(obj.ResultReturn.FilmIdResult.release_date).Year.ToString()
+                                    @Convert.ToDateTime(obj.ResultReturn.FilmIdResult.release_date).Year.ToString()
                             ;
                         }
                     }
@@ -142,18 +262,18 @@
                     @{
                         string url = "https://image.tmdb.org/t/p/original" + obj.ResultReturn.TvIdResult.poster_path;
 
-                        <a href="@Url.Action("GetUserTVSelectionById", "Movie", new { id = obj.ResultReturn.TvIdResult.id })">
+                                <a href="@Url.Action("GetUserTVSelectionById", "Movie", new { id = obj.ResultReturn.TvIdResult.id })">
 
-                            @if (string.IsNullOrEmpty(obj.ResultReturn.TvIdResult.poster_path))
+                                    @if (string.IsNullOrEmpty(obj.ResultReturn.TvIdResult.poster_path))
                             {
-                                <img id="Cinema.jpg" class="myWatchedMediaImgSize" src="~/Images/Cinema.jpg" />
+                                        <img id="Cinema.jpg" class="myWatchedMediaImgSize" src="~/Images/Cinema.jpg" />
                             }
                             else
                             {
-                                <img src="@url" class="myWatchedMediaImgSize" border="1" />
+                                        <img src="@url" class="myWatchedMediaImgSize" border="1" />
                             }
 
-                        </a>
+                                </a>
                     }
                 </td>
                 <td class="siteTheme">
@@ -163,7 +283,7 @@
                     @{
                         if (!string.IsNullOrEmpty(obj.ResultReturn.TvIdResult.first_air_date))
                         {
-                            @Convert.ToDateTime(obj.ResultReturn.TvIdResult.first_air_date).Year.ToString()
+                                    @Convert.ToDateTime(obj.ResultReturn.TvIdResult.first_air_date).Year.ToString()
                         }
                     }
                 </td>

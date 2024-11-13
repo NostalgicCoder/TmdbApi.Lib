@@ -48,7 +48,7 @@ namespace MovieTvTracker.Web.Class
                 }
             }
 
-            media.Stats.FilmYears = media.Stats.FilmYears.OrderByDescending(x => x.Year).ToList();
+            media.Stats.FilmYears = media.Stats.FilmYears.OrderBy(x => x.Year).ToList();
             media.Stats.FilmGenres = media.Stats.FilmGenres.OrderByDescending(x => x.Genre).ToList();
 
             return media;
