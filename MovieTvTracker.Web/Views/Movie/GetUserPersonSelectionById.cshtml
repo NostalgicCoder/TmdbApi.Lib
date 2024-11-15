@@ -42,10 +42,11 @@
 <div class="card border-secondary mb-3" style="width: 100%">
     <div class="card-header">General Information:</div>
     <div class="card-body">
-        <li>Known For: @Model.TMDBData.PersonIdResult.known_for_department</li>
+        <li>Career: @Model.TMDBData.PersonIdResult.known_for_department</li>
         <li>Gender: @gender</li>
         <li>Date Of Birth: @Model.PersonDob</li>
         <li>Place Of Birth: @Model.TMDBData.PersonIdResult.place_of_birth</li>
+        <li>Known For: @Model.TMDBData.KnownForMovies</li>
     </div>
 </div>
 

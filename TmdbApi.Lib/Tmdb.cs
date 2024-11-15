@@ -195,7 +195,8 @@ namespace TmdbApi.Lib
         }
 
         /// <summary>
-        /// Search for person and their combined movie/tv credits by TMDB id
+        /// Search for person and their combined movie/tv credits and known for movies by TMDB id
+        /// - Regarding 'KnownForMovies' - https://www.themoviedb.org/talk/51742ec8760ee3470c4bd73f
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -205,6 +206,8 @@ namespace TmdbApi.Lib
 
             resultReturn.PersonIdResult = SearchForPersonById(id);
             resultReturn.CombinedCreditsByPersonId = SearchForCombinedCreditsByPersonId(id);
+            // TMDB API doesnt have a API call to bring back movies a actor is know for, the below is the best way todo it currently but isnt perfect
+            resultReturn.KnownForMovies = string.Join(", ", resultReturn.CombinedCreditsByPersonId.cast.Where(item => item.media_type == "movie").OrderByDescending(item => item.vote_count).Take(3).OrderByDescending(item => item.vote_average).Select(item => item.original_title).ToArray());
 
             return resultReturn;
         }

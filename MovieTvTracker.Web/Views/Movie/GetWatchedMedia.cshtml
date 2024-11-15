@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "My Watched Media:";
 
-    string yearRange = string.Format("{0} > {1}", Model.Stats.FilmYears.Last().Year.ToString(), Model.Stats.FilmYears.First().Year.ToString());
+    string yearRange = string.Format("{0} > {1}", Model.Stats.FilmYears.First().Year.ToString(), Model.Stats.FilmYears.Last().Year.ToString());
 
     var XYear = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.FilmYears.Select(x => x.Year).ToList());
     var YYear = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.FilmYears.Select(x => x.Qty).ToList());

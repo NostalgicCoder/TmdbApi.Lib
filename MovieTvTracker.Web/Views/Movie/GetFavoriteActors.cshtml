@@ -33,6 +33,9 @@
             <th class="siteTheme">
                 TMDB Popularity:
             </th>
+            <th class="siteTheme">
+                Known For:
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -43,14 +46,18 @@
                     @{
                         string url = "https://image.tmdb.org/t/p/original" + obj.PersonIdResult.profile_path;
 
-                        @if (string.IsNullOrEmpty(obj.PersonIdResult.profile_path))
-                        {
-                            <img id="Cinema.jpg" class="myFavoriteActorsImgSize" src="~/Images/Cinema.jpg" />
-                        }
-                        else
-                        {
-                            <img src="@url" class="myFavoriteActorsImgSize" />
-                        }
+                        <a href="@Url.Action("GetUserPersonSelectionById", "Movie", new { id = obj.PersonIdResult.id })">
+
+                            @if (string.IsNullOrEmpty(obj.PersonIdResult.profile_path))
+                            {
+                                <img id="Cinema.jpg" class="myFavoriteActorsImgSize" src="~/Images/Cinema.jpg" />
+                            }
+                            else
+                            {
+                                <img src="@url" class="myFavoriteActorsImgSize" />
+                            }
+
+                        </a>
                     }
                 </td>
                 <td class="siteTheme">
@@ -60,6 +67,9 @@
                     @{
                         @Math.Round(obj.PersonIdResult.popularity, 0);
                     }
+                </td>
+                <td class="siteTheme">
+                    @obj.KnownForMovies
                 </td>
             </tr>
         }
