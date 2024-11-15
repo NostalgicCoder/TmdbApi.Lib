@@ -126,6 +126,7 @@ namespace TmdbApi.Lib
 
         /// <summary>
         /// Search for film and credits by TMDB id
+        /// - Reformat data from TMDB API result to format a friendly display score
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -135,6 +136,7 @@ namespace TmdbApi.Lib
 
             resultReturn.FilmIdResult = SearchForFilmById(id);
             resultReturn.CreditsByFilmId = SearchForCreditsByFilmId(id);
+            resultReturn.Score = string.Format("{0}% ({1} votes)", @Math.Round((resultReturn.FilmIdResult.vote_average * 10), 0), resultReturn.FilmIdResult.vote_count);
 
             return resultReturn;
         }
@@ -165,6 +167,7 @@ namespace TmdbApi.Lib
 
         /// <summary>
         /// Search for tv series and credits by TMDB id
+        /// - Reformat data from TMDB API result to format a friendly display score
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -174,6 +177,7 @@ namespace TmdbApi.Lib
 
             resultReturn.TvIdResult = SearchForTvById(id);
             resultReturn.CreditsByTvId = SearchForCreditsByTvId(id);
+            resultReturn.Score = string.Format("{0}% ({1} votes)", @Math.Round((resultReturn.TvIdResult.vote_average * 10), 0), resultReturn.TvIdResult.vote_count);
 
             return resultReturn;
         }

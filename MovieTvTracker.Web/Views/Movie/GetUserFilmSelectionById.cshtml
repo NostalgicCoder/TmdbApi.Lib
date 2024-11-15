@@ -49,7 +49,7 @@
 <div class="card border-secondary mb-3" style="width: 100%">
     <div class="card-header">General Information:</div>
     <div class="card-body">
-        <li>Vote Average: @Math.Round(Model.TMDBData.FilmIdResult.vote_average, 1)</li>
+        <li>Score: @Model.TMDBData.Score</li>
         <li>Runtime: @Model.TMDBData.FilmIdResult.runtime.ToString() mins</li>
         <li>Genres: @String.Join(", ", Model.TMDBData.FilmIdResult.genres.Select(x => x.name).ToArray())</li>
 

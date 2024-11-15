@@ -16,7 +16,7 @@
 
 <script type="text/javascript">
 
-    $(function(){ 
+    $(function() {
 
         var xYear = @Html.Raw(XYear);
         var yYear = @Html.Raw(YYear);
@@ -117,8 +117,8 @@
 <div class="card border-secondary mb-3" style="width: 100%">
     <div class="card-header">Watched Media Information:</div>
     <div class="card-body">
-        <li>Film Count: @Model.WatchedMediaResults.WatchedFilms.Count()</li>
-        <li>TV Count: @Model.WatchedMediaResults.WatchedTV.Count()</li>
+        <li>Film Count: @string.Format("{0} ({1} - Watched this month)", Model.WatchedMediaResults.WatchedFilms.Count(), Model.WatchedMediaResults.WatchedFilms.Where(item => item.WatchedMedia.LastWatched.Month == DateTime.Now.Month).Count())</li>
+        <li>TV Count: @string.Format("{0} ({1} - Watched this month)", Model.WatchedMediaResults.WatchedTV.Count(), Model.WatchedMediaResults.WatchedTV.Where(item => item.WatchedMedia.LastWatched.Month == DateTime.Now.Month).Count())</li>
         <li>Watched Films Year Range: @yearRange</li>
     </div>
 </div>
@@ -158,6 +158,9 @@
                 Year:
             </th>
             <th class="siteTheme">
+                Score:
+            </th>
+            <th class="siteTheme">
                 Genre(s):
             </th>
             <th class="siteTheme">
@@ -179,18 +182,18 @@
                     @{
                         string url = "https://image.tmdb.org/t/p/original" + obj.ResultReturn.FilmIdResult.poster_path;
 
-                                <a href="@Url.Action("GetUserFilmSelectionById", "Movie", new { id = obj.ResultReturn.FilmIdResult.id })">
+                        <a href="@Url.Action("GetUserFilmSelectionById", "Movie", new { id = obj.ResultReturn.FilmIdResult.id })">
 
-                                    @if (string.IsNullOrEmpty(obj.ResultReturn.FilmIdResult.poster_path))
+                            @if (string.IsNullOrEmpty(obj.ResultReturn.FilmIdResult.poster_path))
                             {
-                                        <img id="Cinema.jpg" class="myWatchedMediaImgSize" src="~/Images/Cinema.jpg" />
+                                <img id="Cinema.jpg" class="myWatchedMediaImgSize" src="~/Images/Cinema.jpg" />
                             }
                             else
                             {
-                                        <img src="@url" class="myWatchedMediaImgSize" border="1" />
+                                <img src="@url" class="myWatchedMediaImgSize" border="1" />
                             }
 
-                                </a>
+                        </a>
                     }
                 </td>
                 <td class="siteTheme">
@@ -200,10 +203,12 @@
                     @{
                         if (!string.IsNullOrEmpty(obj.ResultReturn.FilmIdResult.release_date))
                         {
-                                    @Convert.ToDateTime(obj.ResultReturn.FilmIdResult.release_date).Year.ToString()
-                            ;
+                            @Convert.ToDateTime(obj.ResultReturn.FilmIdResult.release_date).Year.ToString();
                         }
                     }
+                </td>
+                <td class="siteTheme" style="width:150px;">
+                    @obj.ResultReturn.Score
                 </td>
                 <td class="siteTheme" style="width:200px;">
                     @String.Join(", ", obj.ResultReturn.FilmIdResult.genres.Select(x => x.name).ToArray())
@@ -241,6 +246,9 @@
                 Year:
             </th>
             <th class="siteTheme">
+                Score:
+            </th>
+            <th class="siteTheme">
                 Genre(s):
             </th>
             <th class="siteTheme">
@@ -262,18 +270,18 @@
                     @{
                         string url = "https://image.tmdb.org/t/p/original" + obj.ResultReturn.TvIdResult.poster_path;
 
-                                <a href="@Url.Action("GetUserTVSelectionById", "Movie", new { id = obj.ResultReturn.TvIdResult.id })">
+                        <a href="@Url.Action("GetUserTVSelectionById", "Movie", new { id = obj.ResultReturn.TvIdResult.id })">
 
-                                    @if (string.IsNullOrEmpty(obj.ResultReturn.TvIdResult.poster_path))
+                            @if (string.IsNullOrEmpty(obj.ResultReturn.TvIdResult.poster_path))
                             {
-                                        <img id="Cinema.jpg" class="myWatchedMediaImgSize" src="~/Images/Cinema.jpg" />
+                                <img id="Cinema.jpg" class="myWatchedMediaImgSize" src="~/Images/Cinema.jpg" />
                             }
                             else
                             {
-                                        <img src="@url" class="myWatchedMediaImgSize" border="1" />
+                                <img src="@url" class="myWatchedMediaImgSize" border="1" />
                             }
 
-                                </a>
+                        </a>
                     }
                 </td>
                 <td class="siteTheme">
@@ -283,9 +291,12 @@
                     @{
                         if (!string.IsNullOrEmpty(obj.ResultReturn.TvIdResult.first_air_date))
                         {
-                                    @Convert.ToDateTime(obj.ResultReturn.TvIdResult.first_air_date).Year.ToString()
+                            @Convert.ToDateTime(obj.ResultReturn.TvIdResult.first_air_date).Year.ToString()
                         }
                     }
+                </td>
+                <td class="siteTheme" style="width:150px;">
+                    @obj.ResultReturn.Score
                 </td>
                 <td class="siteTheme" style="width:200px;">
                     @String.Join(", ", obj.ResultReturn.TvIdResult.genres.Select(x => x.name).ToArray())
