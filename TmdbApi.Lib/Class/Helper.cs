@@ -1,7 +1,7 @@
-﻿using MovieTvTracker.Web.Interfaces;
+﻿using TmdbApi.Lib.Interfaces;
 using TmdbApi.Lib.Models;
 
-namespace MovieTvTracker.Web.Class
+namespace TmdbApi.Lib.Class
 {
     public class Helper : IHelper
     {

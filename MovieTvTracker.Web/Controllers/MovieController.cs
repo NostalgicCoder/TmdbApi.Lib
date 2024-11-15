@@ -251,7 +251,6 @@ namespace MovieTvTracker.Web.Controllers
         public IActionResult GetUserPersonSelectionById(int id)
         {
             IMedia media = new Media();
-            IHelper helper = new Helper();
 
             media.SelectedTMDBId = id;
             media.TMDBData = _tmdb.SearchForPersonAndCreditsById(id);

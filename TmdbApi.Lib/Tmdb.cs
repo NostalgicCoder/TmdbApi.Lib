@@ -1,5 +1,4 @@
-﻿using MovieTvTracker.Web.Class;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using RestSharp;
 using TmdbApi.Lib.Class;
 using TmdbApi.Lib.Interfaces;
@@ -9,8 +8,9 @@ namespace TmdbApi.Lib
 {
     public class Tmdb : ITmdb
     {
+        private IHelper _helper = new Helper();
+
         private RestClient _client = new RestClient("https://api.themoviedb.org/3");
-        private Helper _helper = new Helper();
 
         private List<string> _logoSizes;
         private List<string> _posterSizes;
@@ -44,6 +44,11 @@ namespace TmdbApi.Lib
                 {
                     return null;
                 }
+            }
+            else if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                // Usually caused when no '_readAccessToken' has been provided on the call
+                // TODO: Add in error handling
             }
 
             return null;
