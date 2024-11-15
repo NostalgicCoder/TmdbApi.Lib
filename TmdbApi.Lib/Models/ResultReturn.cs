@@ -13,6 +13,7 @@
         public Rootobject CreditsByTvId { get; set; }
         public Rootobject CombinedCreditsByPersonId { get; set; }
         public string KnownForMovies { get; set; }
+        public string PersonDobAge { get; set; }
 
         public ResultReturn()
         {

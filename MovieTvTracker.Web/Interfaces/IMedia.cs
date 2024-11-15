@@ -8,7 +8,6 @@ namespace MovieTvTracker.Web.Interfaces
         Int32 SelectedTMDBId { get; set; }
         string SelectedContentType { get; set; }
         string Keyword { get; set; }
-        string PersonDob { get; set; }
         ResultReturn TMDBData { get; set; }
         WatchedMediaResults WatchedMediaResults { get; set; }
         Stats Stats { get; set; }

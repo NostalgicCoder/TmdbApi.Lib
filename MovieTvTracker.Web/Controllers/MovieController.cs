@@ -255,7 +255,6 @@ namespace MovieTvTracker.Web.Controllers
 
             media.SelectedTMDBId = id;
             media.TMDBData = _tmdb.SearchForPersonAndCreditsById(id);
-            media.PersonDob = helper.ProcessDob(media);
 
             if (media.TMDBData.PersonIdResult != null)
             {

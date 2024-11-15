@@ -1,4 +1,5 @@
 ﻿using MovieTvTracker.Web.Interfaces;
+using TmdbApi.Lib.Models;
 
 namespace MovieTvTracker.Web.Class
 {
@@ -9,23 +10,23 @@ namespace MovieTvTracker.Web.Class
         /// </summary>
         /// <param name="media"></param>
         /// <returns></returns>
-        public string ProcessDob(IMedia media)
+        public string ProcessDob(Rootobject result)
         {
             string msg = "Unknown";
 
             try
             {
-                if (!string.IsNullOrEmpty(media.TMDBData.PersonIdResult.birthday))
+                if (!string.IsNullOrEmpty(result.birthday))
                 {
-                    DateTime birthday = Convert.ToDateTime(media.TMDBData.PersonIdResult.birthday);
+                    DateTime birthday = Convert.ToDateTime(result.birthday);
 
                     int ageSinceDob = CalcDuration(birthday, DateTime.Now);
 
                     msg = string.Format("{0} ({1} years old)", birthday.ToString("dd/MM/yyyy"), ageSinceDob);
 
-                    if (media.TMDBData.PersonIdResult.deathday != null)
+                    if (result.deathday != null)
                     {
-                        DateTime deathDay = Convert.ToDateTime(media.TMDBData.PersonIdResult.deathday);
+                        DateTime deathDay = Convert.ToDateTime(result.deathday);
 
                         int ageOnDeath = CalcDuration(birthday, deathDay);
 

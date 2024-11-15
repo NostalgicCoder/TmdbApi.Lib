@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MovieTvTracker.Web.Class;
+using Newtonsoft.Json;
 using RestSharp;
 using TmdbApi.Lib.Class;
 using TmdbApi.Lib.Interfaces;
@@ -9,6 +10,8 @@ namespace TmdbApi.Lib
     public class Tmdb : ITmdb
     {
         private RestClient _client = new RestClient("https://api.themoviedb.org/3");
+        private Helper _helper = new Helper();
+
         private List<string> _logoSizes;
         private List<string> _posterSizes;
 
@@ -197,6 +200,7 @@ namespace TmdbApi.Lib
         /// <summary>
         /// Search for person and their combined movie/tv credits and known for movies by TMDB id
         /// - Regarding 'KnownForMovies' - https://www.themoviedb.org/talk/51742ec8760ee3470c4bd73f
+        /// - Also configures the birthday/deathday information to return a useful value for 'PersonDobAge'
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -206,8 +210,9 @@ namespace TmdbApi.Lib
 
             resultReturn.PersonIdResult = SearchForPersonById(id);
             resultReturn.CombinedCreditsByPersonId = SearchForCombinedCreditsByPersonId(id);
-            // TMDB API doesnt have a API call to bring back movies a actor is know for, the below is the best way todo it currently but isnt perfect
+            // TMDB API doesnt have a API call to bring back movies a actor is known for, the below is the best way todo it currently but isnt perfect
             resultReturn.KnownForMovies = string.Join(", ", resultReturn.CombinedCreditsByPersonId.cast.Where(item => item.media_type == "movie").OrderByDescending(item => item.vote_count).Take(3).OrderByDescending(item => item.vote_average).Select(item => item.original_title).ToArray());
+            resultReturn.PersonDobAge = _helper.ProcessDob(resultReturn.PersonIdResult);
 
             return resultReturn;
         }
