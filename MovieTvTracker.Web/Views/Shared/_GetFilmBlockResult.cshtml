@@ -1,0 +1,46 @@
+﻿@model TmdbApi.Lib.Models.Result;
+
+<div class="inner_block">
+    <table>
+        <tr>
+            <td>
+                <div class="titleContainer">
+                    @{
+                        if (!string.IsNullOrEmpty(Model.release_date))
+                        {
+                            DateTime releaseDate = Convert.ToDateTime(Model.release_date);
+
+                            <span>@Model.original_title (@releaseDate.Year)</span>
+                        }
+                        else
+                        {
+                            <span>@Model.original_title</span>
+                        }
+                    }
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-top: 5px;">
+                @{
+                    string url = string.Empty;
+
+                    url = "https://image.tmdb.org/t/p/original" + Model.poster_path;
+
+                    <a href="@Url.Action("GetUserFilmSelectionById", "Movie", new { id = Model.id })">
+
+                        @if (string.IsNullOrEmpty(Model.poster_path))
+                        {
+                            <img id="Cinema.jpg" class="filmTvPosterImgSize" src="~/Images/Cinema.jpg" />
+                        }
+                        else
+                        {
+                            <img src="@url" class="filmTvPosterImgSize" />
+                        }
+
+                    </a>
+                }
+            </td>
+        </tr>
+    </table>
+</div>

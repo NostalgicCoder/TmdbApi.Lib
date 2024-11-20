@@ -6,16 +6,9 @@
     ViewData["Title"] = "MoviesNowPlaying";
 }
 
-<form method="post" asp-action="Index">
-
-    <label class="form-label">Search:</label>
-    <input asp-for="Keyword" class="form-control" placeholder="Search for a movie, tv show, person" autocomplete="on" style="width:400px">
-
-    <br />
-
-    <button type="submit" class="btn btn-primary">Search <i class="bi bi-search"></i></button>
-
-</form>
+@* Partial tag helper *@
+<partial name="_MediaSearch" model="Model"/>
+@* @await Html.PartialAsync("_MediaSearch", Model) *@
 
 <p></p>
 
@@ -26,55 +19,11 @@
 @{
     if (Model.TMDBData.MoviesNowPlaying.results.Count() != 0)
     {
-
         @foreach (var obj in Model.TMDBData.MoviesNowPlaying.results)
         {
             if (obj.original_language == "en")
             {
-                <div class="inner_block">
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="titleContainer">
-                                    @{
-                                        if (!string.IsNullOrEmpty(obj.release_date))
-                                        {
-                                            DateTime releaseDate = Convert.ToDateTime(obj.release_date);
-
-                                            <span>@obj.original_title (@releaseDate.Year)</span>
-                                        }
-                                        else
-                                        {
-                                            <span>@obj.original_title</span>
-                                        }
-                                    }
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-top: 5px;">
-                                @{
-                                    string url = string.Empty;
-
-                                    url = "https://image.tmdb.org/t/p/original" + obj.poster_path;
-
-                                    <a href="@Url.Action("GetUserFilmSelectionById", "Movie", new { id = obj.id })">
-
-                                        @if (string.IsNullOrEmpty(obj.poster_path))
-                                        {
-                                            <img id="Cinema.jpg" class="filmTvPosterImgSize" src="~/Images/Cinema.jpg" />
-                                        }
-                                        else
-                                        {
-                                            <img src="@url" class="filmTvPosterImgSize" />
-                                        }
-
-                                    </a>
-                                }
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                <partial name="_GetFilmBlockResult" model="@obj" />
             }
         }
     }

@@ -1,0 +1,12 @@
+﻿@model Media;
+
+<form method="post" asp-action="Index">
+
+    <label class="form-label">Search:</label>
+    <input asp-for="Keyword" class="form-control" placeholder="Search for a movie, tv show, person" autocomplete="on" style="width:400px">
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Search <i class="bi bi-search"></i></button>
+
+</form>
