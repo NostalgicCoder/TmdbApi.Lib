@@ -1,4 +1,5 @@
 ﻿using TmdbApi.Lib;
+using TmdbApi.Lib.Interfaces;
 
 namespace TestHarness.Console
 {
@@ -6,7 +7,7 @@ namespace TestHarness.Console
     {
         public void CallApi()
         {
-            Tmdb tmdb = new Tmdb();
+            ITmdb tmdb = new Tmdb();
 
             tmdb.GetConfigurationData();
             tmdb.SearchForFilmTvPerson("Robocop");
