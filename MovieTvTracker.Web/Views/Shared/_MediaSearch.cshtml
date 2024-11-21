@@ -2,11 +2,20 @@
 
 <form method="post" asp-action="Index">
 
-    <label class="form-label">Search:</label>
-    <input asp-for="Keyword" class="form-control" placeholder="Search for a movie, tv show, person" autocomplete="on" style="width:400px">
+    <div class='inline-block-child'>
+        <label class="form-label">Search:</label>
+        <input asp-for="Keyword" class="form-control" placeholder="Search for a movie, tv show, person" autocomplete="on" style="width:400px">
+    </div>
 
-    <br />
+    <div class='inline-block-child' style="padding-left: 5px;">
+        <button type="submit" class="btn btn-primary">Search <i class="bi bi-search"></i></button>
+    </div>
 
-    <button type="submit" class="btn btn-primary">Search <i class="bi bi-search"></i></button>
+    <div class='inline-block-child' style="padding-left: 5px;">
+        <div class="form-check form-switch">
+            <input asp-for="EnglishResultOnly" class="form-check-input" type="checkbox">
+            <label class="form-check-label" for="flexSwitchCheckChecked">English results only</label>
+        </div>
+    </div>
 
 </form>

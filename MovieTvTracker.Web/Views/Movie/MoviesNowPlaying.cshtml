@@ -21,10 +21,7 @@
     {
         @foreach (var obj in Model.TMDBData.MoviesNowPlaying.results)
         {
-            if (obj.original_language == "en")
-            {
-                <partial name="_GetFilmBlockResult" model="@obj" />
-            }
+            <partial name="_GetFilmBlockResult" model="@obj" />
         }
     }
 }

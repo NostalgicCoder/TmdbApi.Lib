@@ -5,6 +5,7 @@ using MovieTvTracker.Web.Data;
 using TmdbApi.Lib.Interfaces;
 using MovieTvTracker.Web.Class;
 using MovieTvTracker.Web.Interfaces;
+using TmdbApi.Lib.Models;
 
 namespace MovieTvTracker.Web.Controllers
 {
@@ -26,13 +27,21 @@ namespace MovieTvTracker.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(string keyword)
+        public IActionResult Index(string keyword, bool EnglishResultOnly)
         {
             IMedia media = new Media();
+
+            media.EnglishResultOnly = EnglishResultOnly;
 
             if(ModelState.IsValid)
             {
                 media.TMDBData = _tmdb.SearchForFilmTvPerson(keyword);
+
+                if(media.EnglishResultOnly)
+                {
+                    media.TMDBData.FilmResults.results = media.TMDBData.FilmResults.results.Where(item => item.original_language == "en").ToArray();
+                    media.TMDBData.TvResults.results = media.TMDBData.TvResults.results.Where(item => item.original_language == "en").ToArray();
+                }
 
                 return View(media);
             }
@@ -46,6 +55,8 @@ namespace MovieTvTracker.Web.Controllers
             IMedia media = new Media();
 
             media.TMDBData = _tmdb.MoviesNowPlaying();
+
+            media.TMDBData.MoviesNowPlaying.results = media.TMDBData.MoviesNowPlaying.results.Where(item => item.original_language == "en").ToArray();
 
             return View(media);
         }

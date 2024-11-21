@@ -136,7 +136,11 @@ namespace TmdbApi.Lib
 
             resultReturn.FilmIdResult = SearchForFilmById(id);
             resultReturn.CreditsByFilmId = SearchForCreditsByFilmId(id);
-            resultReturn.Score = string.Format("{0}% ({1} votes)", @Math.Round((resultReturn.FilmIdResult.vote_average * 10), 0), resultReturn.FilmIdResult.vote_count);
+
+            if (resultReturn.FilmIdResult != null)
+            {
+                resultReturn.Score = string.Format("{0}% ({1} votes)", @Math.Round((resultReturn.FilmIdResult.vote_average * 10), 0), resultReturn.FilmIdResult.vote_count);
+            }
 
             return resultReturn;
         }
@@ -177,7 +181,11 @@ namespace TmdbApi.Lib
 
             resultReturn.TvIdResult = SearchForTvById(id);
             resultReturn.CreditsByTvId = SearchForCreditsByTvId(id);
-            resultReturn.Score = string.Format("{0}% ({1} votes)", @Math.Round((resultReturn.TvIdResult.vote_average * 10), 0), resultReturn.TvIdResult.vote_count);
+
+            if(resultReturn.TvIdResult != null)
+            {
+                resultReturn.Score = string.Format("{0}% ({1} votes)", @Math.Round((resultReturn.TvIdResult.vote_average * 10), 0), resultReturn.TvIdResult.vote_count);
+            }
 
             return resultReturn;
         }
