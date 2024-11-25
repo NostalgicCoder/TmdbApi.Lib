@@ -9,10 +9,11 @@
     var YYear = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.FilmYears.Select(x => x.Qty).ToList());
     var XGenre = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.FilmGenres.Select(x => x.Genre).ToList());
     var YGenre = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.FilmGenres.Select(x => x.Qty).ToList());
+    var XTvGenre = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.TvGenres.Select(x => x.Genre).ToList());
+    var YTvGenre = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.TvGenres.Select(x => x.Qty).ToList());
 }
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<partial name="_ChartScriptsPartial"/>
 
 <script type="text/javascript">
 
@@ -22,6 +23,8 @@
         var yYear = @Html.Raw(YYear);
         var xGenre = @Html.Raw(XGenre);
         var yGenre = @Html.Raw(YGenre);
+        var xTvGenre = @Html.Raw(XTvGenre);
+        var yTvGenre = @Html.Raw(YTvGenre);
         var barColors = "#405b85";
 
         new Chart("chartYear", {
@@ -82,6 +85,47 @@
                 title: {
                     display: true,
                     text: "Genre Of Films Watched"
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            beginAtZero: true
+                        },
+                        gridLines: {
+                            display: true,
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            min: 0,
+                            beginAtZero: true
+                        },
+                        gridLines: {
+                            display: false,
+                        }
+                    }]
+                }
+            }
+        });
+
+        new Chart("chartTvGenre", {
+            type: "bar",
+            data: {
+                labels: xTvGenre,
+                datasets: [{
+                    label: "Qty",
+                    backgroundColor: barColors,
+                    data: yTvGenre,
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "Genre Of TV Watched"
                 },
                 scales: {
                     yAxes: [{
@@ -226,6 +270,14 @@
         }
     </tbody>
 </table>
+
+<p></p>
+
+<div class="card border-secondary mb-3" style="width: 100%">
+    <div class="card-body">
+        <canvas id="chartTvGenre" style="height:200px"></canvas>
+    </div>
+</div>
 
 <p></p>
 

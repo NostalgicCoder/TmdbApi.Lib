@@ -21,7 +21,8 @@ The second part of this project is a full-stack application consisting of a ASP.
 - Display of actor/actress information.
 - Ability to mark films/tv shows the user has watched and have them displayed under a dedicated section for reference.
 - Ability to mark favorite actors and have them displayed under a dedicated section for reference.
-- Show graph data of film years and genres the user has watched
+- Show graph data of film/tv years and genres the user has watched.
+- Filter by English only or worldwide search results.
 
 NOTE!:
 

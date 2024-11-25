@@ -5,7 +5,6 @@ using MovieTvTracker.Web.Data;
 using TmdbApi.Lib.Interfaces;
 using MovieTvTracker.Web.Class;
 using MovieTvTracker.Web.Interfaces;
-using TmdbApi.Lib.Models;
 
 namespace MovieTvTracker.Web.Controllers
 {
