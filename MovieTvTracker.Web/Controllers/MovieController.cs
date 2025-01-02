@@ -97,6 +97,7 @@ namespace MovieTvTracker.Web.Controllers
                 }
 
                 media = stats.GetPopularYearsAndGenres(media);
+                media = stats.GetQtyViewingStats(media);
             }
             catch (Exception ex)
             {
@@ -117,6 +118,8 @@ namespace MovieTvTracker.Web.Controllers
 
             try
             {
+                // Restrict to '75' to keep page performant
+                //foreach (FavoriteActor item in _db.FavoriteActor.Take(75))
                 foreach (FavoriteActor item in _db.FavoriteActor)
                 {
                     try

@@ -64,8 +64,40 @@ namespace MovieTvTracker.Web.Class
             }
             
             media.Stats.FilmYears = media.Stats.FilmYears.OrderBy(x => x.Year).ToList();
-            media.Stats.FilmGenres = media.Stats.FilmGenres.OrderByDescending(x => x.Genre).ToList();
-            media.Stats.TvGenres = media.Stats.TvGenres.OrderByDescending(x => x.Genre).ToList();
+            media.Stats.FilmGenres = media.Stats.FilmGenres.OrderByDescending(x => x.Qty).ToList();
+            media.Stats.TvGenres = media.Stats.TvGenres.OrderByDescending(x => x.Qty).ToList();
+            media.YearRange = string.Format("{0} > {1}", media.Stats.FilmYears.First().Year.ToString(), media.Stats.FilmYears.Last().Year.ToString());
+
+            return media;
+        }
+
+        public IMedia GetQtyViewingStats(IMedia media)
+        {
+            media.FilmsLastMonth = 0;
+            media.TvLastMonth = 0;
+
+            if (DateTime.Now.Month == 1)
+            {
+                media.FilmsLastMonth = media.WatchedMediaResults.WatchedFilms.Where(item => item.WatchedMedia.LastWatched.Month == 12 && item.WatchedMedia.LastWatched.Year == (DateTime.Now.Year - 1)).Count();
+            }
+            else
+            {
+                media.FilmsLastMonth = media.WatchedMediaResults.WatchedFilms.Where(item => item.WatchedMedia.LastWatched.Month == (DateTime.Now.Month - 1)).Count();
+            }
+
+            if (DateTime.Now.Month == 1)
+            {
+                media.TvLastMonth = media.WatchedMediaResults.WatchedTV.Where(item => item.WatchedMedia.LastWatched.Month == 12 && item.WatchedMedia.LastWatched.Year == (DateTime.Now.Year - 1)).Count();
+            }
+            else
+            {
+                media.TvLastMonth = media.WatchedMediaResults.WatchedTV.Where(item => item.WatchedMedia.LastWatched.Month == (DateTime.Now.Month - 1)).Count();
+            }
+
+            media.FilmsThisYear = media.WatchedMediaResults.WatchedFilms.Where(item => item.WatchedMedia.LastWatched.Year == DateTime.Now.Year).Count();
+            media.TvThisYear = media.WatchedMediaResults.WatchedTV.Where(item => item.WatchedMedia.LastWatched.Year == DateTime.Now.Year).Count();
+            media.FilmsThisMonth = media.WatchedMediaResults.WatchedFilms.Where(item => item.WatchedMedia.LastWatched.Month == DateTime.Now.Month).Count();
+            media.TvThisMonth = media.WatchedMediaResults.WatchedTV.Where(item => item.WatchedMedia.LastWatched.Month == DateTime.Now.Month).Count();
 
             return media;
         }

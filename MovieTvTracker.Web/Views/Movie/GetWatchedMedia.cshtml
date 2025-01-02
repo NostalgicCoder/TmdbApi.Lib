@@ -3,8 +3,6 @@
 @{
     ViewData["Title"] = "My Watched Media:";
 
-    string yearRange = string.Format("{0} > {1}", Model.Stats.FilmYears.First().Year.ToString(), Model.Stats.FilmYears.Last().Year.ToString());
-
     var XYear = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.FilmYears.Select(x => x.Year).ToList());
     var YYear = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.FilmYears.Select(x => x.Qty).ToList());
     var XGenre = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.FilmGenres.Select(x => x.Genre).ToList());
@@ -161,9 +159,19 @@
 <div class="card border-secondary mb-3" style="width: 100%">
     <div class="card-header">Watched Media Information:</div>
     <div class="card-body">
-        <li>Film Count: @string.Format("{0} ({1} - Watched this month)", Model.WatchedMediaResults.WatchedFilms.Count(), Model.WatchedMediaResults.WatchedFilms.Where(item => item.WatchedMedia.LastWatched.Month == DateTime.Now.Month).Count())</li>
-        <li>TV Count: @string.Format("{0} ({1} - Watched this month)", Model.WatchedMediaResults.WatchedTV.Count(), Model.WatchedMediaResults.WatchedTV.Where(item => item.WatchedMedia.LastWatched.Month == DateTime.Now.Month).Count())</li>
-        <li>Watched Films Year Range: @yearRange</li>
+        <li>Film Count: @Model.WatchedMediaResults.WatchedFilms.Count()</li>
+        <ul>
+            <li>This month: @Model.FilmsThisMonth</li>
+            <li>Last month: @Model.FilmsLastMonth</li>
+            <li>This year: @Model.FilmsThisYear</li>
+        </ul>
+        <li>TV Count: @Model.WatchedMediaResults.WatchedTV.Count()</li>
+        <ul>
+            <li>This month: @Model.TvThisMonth</li>
+            <li>Last month: @Model.TvLastMonth</li>
+            <li>This year: @Model.TvThisYear</li>
+        </ul>
+        <li>Watched Films Year Range: @Model.YearRange</li>
     </div>
 </div>
 

@@ -18,10 +18,10 @@ The second part of this project is a full-stack application consisting of a ASP.
 - Display of movies currently showing in the cinema in the UK.
 - Display of movie information.
 - Display of tv show information.
-- Display of actor/actress information.
+- Display of actor information.
 - Ability to mark films/tv shows the user has watched and have them displayed under a dedicated section for reference.
 - Ability to mark favorite actors and have them displayed under a dedicated section for reference.
-- Show graph data of film/tv years and genres the user has watched.
+- Show graph/stat data of film/tv quantity, years, genres the user has watched.
 - Filter by English only or worldwide search results.
 
 NOTE!:
@@ -74,6 +74,7 @@ Images:
 ![Alt text](Images/MovieTvTrackerPersonResult3.jpg)
 ![Alt text](Images/MovieTvTrackerWatchedMedia1.jpg)
 ![Alt text](Images/MovieTvTrackerWatchedMedia2.jpg)
+![Alt text](Images/MovieTvTrackerWatchedMedia3.jpg)
 ![Alt text](Images/MovieTvTrackerFavoriteActor1.jpg)
 ![Alt text](Images/MovieTvTrackerEnd1.jpg)
 ![Alt text](Images/MovieTvTrackerEnd2.jpg)

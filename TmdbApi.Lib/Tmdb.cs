@@ -50,6 +50,11 @@ namespace TmdbApi.Lib
                 // Usually caused when no '_readAccessToken' has been provided on the call
                 // TODO: Add in error handling
             }
+            else if (response.StatusCode == 0)
+            {
+                // Usually caused when there is no internet connection
+                // TODO: Add in error handling
+            }
 
             return null;
         }
