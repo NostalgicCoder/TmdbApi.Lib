@@ -13,6 +13,35 @@
     }
 }
 
+<script type="text/javascript">
+
+// fire once the window has fully loaded
+window.onload = function(){
+    
+    var runtime = @Html.Raw(Json.Serialize(Model.TMDBData.FilmIdResult.runtime))
+    
+    var idVal = document.getElementById('spanRuntime');
+    
+    if(runtime <= 120) // Less than 2hrs
+    {
+        idVal.style.color = 'green';
+        idVal.style.fontWeight = 'bold';
+    }
+    else if(runtime > 120 && runtime <=150) // Between 2 > 2.5hrs
+    {
+        idVal.style.color = 'orange';
+        idVal.style.fontWeight = 'bold';
+    }
+    else if(runtime > 150) // 2.5hrs or longer
+    {
+        idVal.style.color = 'red';
+        idVal.style.fontWeight = 'bold';
+    }
+
+}
+
+</script>
+
 <h3>@Model.TMDBData.FilmIdResult.original_title (@releaseYear)</h3>
 
 <p></p>
@@ -50,7 +79,7 @@
     <div class="card-header">General Information:</div>
     <div class="card-body">
         <li>Score: @Model.TMDBData.Score</li>
-        <li>Runtime: @Model.TMDBData.FilmIdResult.runtime.ToString() mins</li>
+        <li>Runtime: <span id="spanRuntime">@Model.TMDBData.FilmIdResult.runtime.ToString() mins</span></li>
         <li>Genres: @String.Join(", ", Model.TMDBData.FilmIdResult.genres.Select(x => x.name).ToArray())</li>
 
         @{
