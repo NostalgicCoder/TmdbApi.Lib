@@ -19,6 +19,31 @@
     }
 }
 
+<script type="text/javascript">
+
+    // fire once the window has fully loaded
+    window.onload = function() {
+
+        var vote = @Html.Raw(Json.Serialize(Model.TMDBData.TvIdResult.vote_average)) // Scores will come down like 6.6 or 7.1 so decimal value
+
+        var idVal = document.getElementById('spanScore');
+
+        if (vote >= 7) {
+            idVal.style.color = 'green';
+            idVal.style.fontWeight = 'bold';
+        }
+        else if (vote > 5 && vote < 7) {
+            idVal.style.color = 'orange';
+            idVal.style.fontWeight = 'bold';
+        }
+        else if (vote < 5) {
+            idVal.style.color = 'red';
+            idVal.style.fontWeight = 'bold';
+        }
+    }
+
+</script>
+
 <h3>@Model.TMDBData.TvIdResult.name (@firstAirDate - @lastAirDate)</h3>
 
 <p></p>
@@ -56,7 +81,7 @@
 <div class="card border-secondary mb-3" style="width: 100%">
     <div class="card-header">General Information:</div>
     <div class="card-body">
-        <li>Score: @Model.TMDBData.Score</li>
+        <li>Score: <span id="spanScore">@Model.TMDBData.Score</span></li>
         <li>Genres: @String.Join(", ", Model.TMDBData.TvIdResult.genres.Select(x => x.name).ToArray())</li>
 
         @{
