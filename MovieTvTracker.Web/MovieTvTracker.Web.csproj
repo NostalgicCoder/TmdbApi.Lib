@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Movie\GetWatchedMediaTv.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="wwwroot\Images\Cinema.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

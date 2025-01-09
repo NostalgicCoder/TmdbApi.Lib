@@ -1,0 +1,175 @@
+﻿@model Media;
+
+@{
+    ViewData["Title"] = "My Watched Media - TV:";
+
+    var XTvGenre = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.TvGenres.Select(x => x.Genre).ToList());
+    var YTvGenre = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Stats.TvGenres.Select(x => x.Qty).ToList());
+}
+
+<partial name="_ChartScriptsPartial"/>
+
+<script type="text/javascript">
+
+    $(function() {
+
+        var xTvGenre = @Html.Raw(XTvGenre);
+        var yTvGenre = @Html.Raw(YTvGenre);
+        var barColors = "#405b85";
+
+        new Chart("chartTvGenre", {
+            type: "bar",
+            data: {
+                labels: xTvGenre,
+                datasets: [{
+                    label: "Qty",
+                    backgroundColor: barColors,
+                    data: yTvGenre,
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "Genre Of TV Watched"
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            beginAtZero: true
+                        },
+                        gridLines: {
+                            display: true,
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            min: 0,
+                            beginAtZero: true
+                        },
+                        gridLines: {
+                            display: false,
+                        }
+                    }]
+                }
+            }
+        });
+
+    });
+
+</script>
+
+<h2>My Watched Media - TV:</h2>
+
+<p></p>
+
+<div class="card border-secondary mb-3" style="width: 100%">
+    <div class="card-header">Watched Media Information:</div>
+    <div class="card-body">
+        <li>TV Count: @Model.WatchedMediaResults.WatchedTV.Count()</li>
+        <ul>
+            <li>This month: @Model.TvThisMonth</li>
+            <li>Last month: @Model.TvLastMonth</li>
+            <li>This year: @Model.TvThisYear</li>
+        </ul>
+    </div>
+</div>
+
+<p></p>
+
+<div class="card border-secondary mb-3" style="width: 100%">
+    <div class="card-body">
+        <canvas id="chartTvGenre" style="height:200px"></canvas>
+    </div>
+</div>
+
+<p></p>
+
+<h4>TV:</h4>
+
+<p></p>
+
+<table class="siteTheme" style="width:100%">
+    <thead>
+        <tr>
+            <th class="siteTheme">
+                Poster:
+            </th>
+            <th class="siteTheme">
+                Title:
+            </th>
+            <th class="siteTheme">
+                Year:
+            </th>
+            <th class="siteTheme">
+                Score:
+            </th>
+            <th class="siteTheme">
+                Genre(s):
+            </th>
+            <th class="siteTheme">
+                Qty:
+            </th>
+            <th class="siteTheme">
+                First Watched:
+            </th>
+            <th class="siteTheme">
+                Last Watched:
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model.WatchedMediaResults.WatchedTV)
+        {
+            <tr>
+                <td class="siteTheme" style="width:77px;">
+                    @{
+                        string url = "https://image.tmdb.org/t/p/original" + obj.ResultReturn.TvIdResult.poster_path;
+
+                        <a href="@Url.Action("GetUserTVSelectionById", "Movie", new { id = obj.ResultReturn.TvIdResult.id })">
+
+                            @if (string.IsNullOrEmpty(obj.ResultReturn.TvIdResult.poster_path))
+                            {
+                                <img id="Cinema.jpg" class="myWatchedMediaImgSize" src="~/Images/Cinema.jpg" />
+                            }
+                            else
+                            {
+                                <img src="@url" class="myWatchedMediaImgSize" border="1" />
+                            }
+
+                        </a>
+                    }
+                </td>
+                <td class="siteTheme">
+                    @obj.ResultReturn.TvIdResult.name
+                </td>
+                <td class="siteTheme" style="text-align: center; width:50px;">
+                    @{
+                        if (!string.IsNullOrEmpty(obj.ResultReturn.TvIdResult.first_air_date))
+                        {
+                            @Convert.ToDateTime(obj.ResultReturn.TvIdResult.first_air_date).Year.ToString()
+                        }
+                    }
+                </td>
+                <td class="siteTheme" style="width:150px;">
+                    @obj.ResultReturn.Score
+                </td>
+                <td class="siteTheme" style="width:200px;">
+                    @String.Join(", ", obj.ResultReturn.TvIdResult.genres.Select(x => x.name).ToArray())
+                </td>
+                <td class="siteTheme" style="text-align: center; width:40px">
+                    @obj.WatchedMedia.WatchedQty.ToString()
+                </td>
+                <td class="siteTheme" style="text-align: center; width:92px;">
+                    @obj.WatchedMedia.FirstWatched.ToString()
+                </td>
+                <td class="siteTheme" style="text-align: center; width:92px;">
+                    @obj.WatchedMedia.LastWatched.ToString()
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

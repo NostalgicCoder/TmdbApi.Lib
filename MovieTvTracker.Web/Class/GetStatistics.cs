@@ -7,12 +7,11 @@ namespace MovieTvTracker.Web.Class
     public class GetStatistics : IGetStatistics
     {
         /// <summary>
-        /// Get the most popular years, genres of films / tv for the user based on the database / TMDB API data provided
-        /// - Could also have been done as a dictionary object but the below will be in a easier format for graphing / sorting
+        /// Collect data on the release year, genre of each film title and year range watched and save it to the 'stats' object for consumption later.
         /// </summary>
         /// <param name="media"></param>
         /// <returns></returns>
-        public IMedia GetPopularYearsAndGenres(IMedia media)
+        public IMedia GetFilmYearsRangeAndGenres(IMedia media)
         {
             foreach (WatchedMediaItem item in media.WatchedMediaResults.WatchedFilms)
             {
@@ -48,6 +47,20 @@ namespace MovieTvTracker.Web.Class
                 }
             }
 
+            media.Stats.FilmYears = media.Stats.FilmYears.OrderBy(x => x.Year).ToList();
+            media.Stats.FilmGenres = media.Stats.FilmGenres.OrderByDescending(x => x.Qty).ToList();
+            media.YearRange = string.Format("{0} > {1}", media.Stats.FilmYears.First().Year.ToString(), media.Stats.FilmYears.Last().Year.ToString());
+
+            return media;
+        }
+
+        /// <summary>
+        /// Collect data on the genre of each TV title watched and save it to the 'stats' object for consumption later.
+        /// </summary>
+        /// <param name="media"></param>
+        /// <returns></returns>
+        public IMedia GetTvGenres(IMedia media)
+        {
             foreach (WatchedMediaItem item in media.WatchedMediaResults.WatchedTV)
             {
                 foreach (Genre genre in item.ResultReturn.TvIdResult.genres)
@@ -62,15 +75,17 @@ namespace MovieTvTracker.Web.Class
                     }
                 }
             }
-            
-            media.Stats.FilmYears = media.Stats.FilmYears.OrderBy(x => x.Year).ToList();
-            media.Stats.FilmGenres = media.Stats.FilmGenres.OrderByDescending(x => x.Qty).ToList();
+
             media.Stats.TvGenres = media.Stats.TvGenres.OrderByDescending(x => x.Qty).ToList();
-            media.YearRange = string.Format("{0} > {1}", media.Stats.FilmYears.First().Year.ToString(), media.Stats.FilmYears.Last().Year.ToString());
 
             return media;
         }
 
+        /// <summary>
+        /// Perform queries on the watched media data to aquire stats (figures) on number of films, tv watched for specific periods of time.  Save data back to the 'media' object.
+        /// </summary>
+        /// <param name="media"></param>
+        /// <returns></returns>
         public IMedia GetQtyViewingStats(IMedia media)
         {
             media.FilmsLastMonth = 0;

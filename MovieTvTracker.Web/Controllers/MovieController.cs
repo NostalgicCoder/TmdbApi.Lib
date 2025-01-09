@@ -61,12 +61,11 @@ namespace MovieTvTracker.Web.Controllers
         }
 
         /// <summary>
-        /// Aquire watched media (film/tv) results from the database, run those results through TMDB API to get information and then feed that to the model that supplies the view.
+        /// Aquire watched media film results from the database, run those results through TMDB API to get information and then feed that to the model that supplies the view.
         /// </summary>
         /// <returns></returns>
-        /// 
         [HttpGet]
-        public IActionResult GetWatchedMedia()
+        public IActionResult GetWatchedMediaFilm()
         {
             IMedia media = new Media();
             IGetStatistics stats = new GetStatistics();
@@ -75,28 +74,50 @@ namespace MovieTvTracker.Web.Controllers
             {
                 media.WatchedMediaResults = new WatchedMediaResults();
 
-                foreach (WatchedMedia item in _db.WatchedMedia.OrderByDescending(x => x.LastWatched))
+                foreach (WatchedMedia item in _db.WatchedMedia.Where(x => x.ContentType == "Film").OrderByDescending(x => x.LastWatched))
                 {
-                    switch (item.ContentType)
+                    media.WatchedMediaResults.WatchedFilms.Add(new WatchedMediaItem
                     {
-                        case "Film":
-                            media.WatchedMediaResults.WatchedFilms.Add(new WatchedMediaItem
-                            {
-                                ResultReturn = _tmdb.SearchForFilmAndCreditsById(item.TMDBId),
-                                WatchedMedia = item
-                            });
-                            break;
-                        case "TV":
-                            media.WatchedMediaResults.WatchedTV.Add(new WatchedMediaItem
-                            {
-                                ResultReturn = _tmdb.SearchForTvAndCreditsById(item.TMDBId),
-                                WatchedMedia = item
-                            });
-                            break;
-                    }
+                        ResultReturn = _tmdb.SearchForFilmAndCreditsById(item.TMDBId),
+                        WatchedMedia = item
+                    });
                 }
 
-                media = stats.GetPopularYearsAndGenres(media);
+                media = stats.GetFilmYearsRangeAndGenres(media);
+                media = stats.GetQtyViewingStats(media);
+            }
+            catch (Exception ex)
+            {
+                // TODO: Add error handling
+            }
+
+            return View(media);
+        }
+
+        /// <summary>
+        /// Aquire watched media TV results from the database, run those results through TMDB API to get information and then feed that to the model that supplies the view.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetWatchedMediaTv()
+        {
+            IMedia media = new Media();
+            IGetStatistics stats = new GetStatistics();
+
+            try
+            {
+                media.WatchedMediaResults = new WatchedMediaResults();
+
+                foreach (WatchedMedia item in _db.WatchedMedia.Where(x => x.ContentType == "TV").OrderByDescending(x => x.LastWatched))
+                {
+                    media.WatchedMediaResults.WatchedTV.Add(new WatchedMediaItem
+                    {
+                        ResultReturn = _tmdb.SearchForTvAndCreditsById(item.TMDBId),
+                        WatchedMedia = item
+                    });
+                }
+
+                media = stats.GetTvGenres(media);
                 media = stats.GetQtyViewingStats(media);
             }
             catch (Exception ex)

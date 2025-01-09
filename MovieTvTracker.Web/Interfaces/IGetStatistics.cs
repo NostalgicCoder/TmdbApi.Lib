@@ -2,7 +2,8 @@
 {
     public interface IGetStatistics
     {
-        IMedia GetPopularYearsAndGenres(IMedia media);
+        IMedia GetFilmYearsRangeAndGenres(IMedia media);
+        IMedia GetTvGenres(IMedia media);
         IMedia GetQtyViewingStats(IMedia media);
     }
 }
