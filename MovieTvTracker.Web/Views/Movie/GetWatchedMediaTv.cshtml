@@ -11,6 +11,38 @@
 
 <script type="text/javascript">
 
+    window.onload = function() {
+
+        elements = document.getElementsByName("tvScore");
+
+        for (var i = elements.length; i--;) {
+
+            let elementIdInnerText = elements[i].innerText;
+            let patternMatches = elementIdInnerText.match(/\d\d%\s/i);
+
+            if (patternMatches != null) {
+
+                const myArray = elementIdInnerText.split("% ");
+
+                let score = myArray[0];
+
+                if (score >= 70) {
+                    elements[i].style.color = 'green';
+                    elements[i].style.fontWeight = 'bold';
+                }
+                else if (score >= 50 && score < 70) {
+                    elements[i].style.color = 'orange';
+                    elements[i].style.fontWeight = 'bold';
+                }
+                else if (score < 50) {
+                    elements[i].style.color = 'red';
+                    elements[i].style.fontWeight = 'bold';
+                }
+            }
+        }
+
+    }
+
     $(function() {
 
         var xTvGenre = @Html.Raw(XTvGenre);
@@ -155,7 +187,7 @@
                     }
                 </td>
                 <td class="siteTheme" style="width:150px;">
-                    @obj.ResultReturn.Score
+                    <span name="tvScore">@obj.ResultReturn.Score</span>
                 </td>
                 <td class="siteTheme" style="width:200px;">
                     @String.Join(", ", obj.ResultReturn.TvIdResult.genres.Select(x => x.name).ToArray())
