@@ -61,6 +61,12 @@ Resources / Credits:
 - https://www.chartjs.org/docs/latest/
 - https://www.w3schools.com/ai/ai_chartjs.asp
 
+Video Demo:
+
+NOTE! - Video length is short due to 10mb limit on videos on GitHub
+
+https://github.com/user-attachments/assets/3e7a49fe-6452-428d-ab64-529a6e0c6b20
+
 Images:
 
 ![Alt text](Images/MovieTvTrackerStart1.jpg)
