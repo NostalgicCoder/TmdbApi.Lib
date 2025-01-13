@@ -45,7 +45,7 @@ namespace TmdbApi.Lib
                     return null;
                 }
             }
-            else if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 // Usually caused when no '_readAccessToken' has been provided on the call
                 // TODO: Add in error handling
@@ -187,7 +187,7 @@ namespace TmdbApi.Lib
             resultReturn.TvIdResult = SearchForTvById(id);
             resultReturn.CreditsByTvId = SearchForCreditsByTvId(id);
 
-            if(resultReturn.TvIdResult != null)
+            if (resultReturn.TvIdResult != null)
             {
                 resultReturn.Score = string.Format("{0}% ({1} votes)", @Math.Round((resultReturn.TvIdResult.vote_average * 10), 0), resultReturn.TvIdResult.vote_count);
             }
