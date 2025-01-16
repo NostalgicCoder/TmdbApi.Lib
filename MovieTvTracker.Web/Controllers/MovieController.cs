@@ -5,6 +5,7 @@ using MovieTvTracker.Web.Data;
 using TmdbApi.Lib.Interfaces;
 using MovieTvTracker.Web.Class;
 using MovieTvTracker.Web.Interfaces;
+using TmdbApi.Lib.Enum;
 
 namespace MovieTvTracker.Web.Controllers
 {
@@ -35,11 +36,11 @@ namespace MovieTvTracker.Web.Controllers
             if(ModelState.IsValid)
             {
                 media.TMDBData = _tmdb.SearchForFilmTvPerson(keyword);
-
+             
                 if(media.EnglishResultOnly)
                 {
-                    media.TMDBData.FilmResults.results = media.TMDBData.FilmResults.results.Where(item => item.original_language == "en").ToArray();
-                    media.TMDBData.TvResults.results = media.TMDBData.TvResults.results.Where(item => item.original_language == "en").ToArray();
+                    media.TMDBData.FilmResults.results = media.TMDBData.FilmResults.results.Where(item => item.original_language == Language.English).ToArray();
+                    media.TMDBData.TvResults.results = media.TMDBData.TvResults.results.Where(item => item.original_language == Language.English).ToArray();
                 }
 
                 return View(media);
@@ -48,6 +49,10 @@ namespace MovieTvTracker.Web.Controllers
             return RedirectToAction("MoviesNowPlaying", "Movie");
         }
 
+        /// <summary>
+        /// Gets the current movies that are playing and being showing in UK cinemas that are English language
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult MoviesNowPlaying()
         {
@@ -55,7 +60,7 @@ namespace MovieTvTracker.Web.Controllers
 
             media.TMDBData = _tmdb.MoviesNowPlaying();
 
-            media.TMDBData.MoviesNowPlaying.results = media.TMDBData.MoviesNowPlaying.results.Where(item => item.original_language == "en").ToArray();
+            media.TMDBData.MoviesNowPlaying.results = media.TMDBData.MoviesNowPlaying.results.Where(item => item.original_language == Language.English).ToArray();
 
             return View(media);
         }
