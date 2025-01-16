@@ -42,18 +42,18 @@ namespace TmdbApi.Lib
                 }
                 catch (Exception ex)
                 {
-                    return null;
+                    throw new Exception("Unable to deserialize JSON to a object", ex.InnerException);
                 }
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 // Usually caused when no '_readAccessToken' has been provided on the call
-                // TODO: Add in error handling
+                throw new Exception("No valid TMDB API key provided");
             }
             else if (response.StatusCode == 0)
             {
                 // Usually caused when there is no internet connection
-                // TODO: Add in error handling
+                throw new Exception("No internet connection");
             }
 
             return null;
