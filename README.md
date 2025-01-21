@@ -22,7 +22,7 @@ The second part of this project is a full-stack application consisting of a ASP.
 - Ability to mark films/tv shows the user has watched and have them displayed under a dedicated section for reference.
 - Ability to mark favorite actors and have them displayed under a dedicated section for reference.
 - Show graph/stat data of film/tv quantity, years, genres the user has watched.
-- Highlight film/tv runtime or TMDB score with different colours based on value returned. 
+- Highlight film/tv runtime, TMDB score, TMDB popularity with different colours based on value returned. 
 - Filter by English only or worldwide search results.
 
 NOTE!:
