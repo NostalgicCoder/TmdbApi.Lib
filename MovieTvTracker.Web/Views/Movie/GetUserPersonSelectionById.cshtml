@@ -48,11 +48,11 @@
 
     @if (string.IsNullOrEmpty(Model.TMDBData.PersonIdResult.profile_path))
     {
-            <img id="Cinema.jpg" class="filmTvDetailPosterImgSize" src="~/Images/Cinema.jpg" />
+        <img id="Cinema.jpg" class="filmTvDetailPosterImgSize" src="~/Images/Cinema.jpg" />
     }
     else
     {
-            <img src="@castProfilePicUrl" class="filmTvDetailPosterImgSize" />
+        <img src="@castProfilePicUrl" class="filmTvDetailPosterImgSize" />
     }
 }
 
@@ -119,31 +119,36 @@
                         @{
                             string filmPosterUrl = "https://image.tmdb.org/t/p/original" + obj.poster_path;
 
-                                <a href="@Url.Action("GetUserFilmSelectionById", "Movie", new { id = obj.id })">
+                            <a href="@Url.Action("GetUserFilmSelectionById", "Movie", new { id = obj.id })">
 
-                                    @if (string.IsNullOrEmpty(obj.poster_path))
+                                @if (string.IsNullOrEmpty(obj.poster_path))
                                 {
-                                        <img id="Cinema.jpg" class="personCreditsImgSize" src="~/Images/Cinema.jpg" />
+                                    <img id="Cinema.jpg" class="personCreditsImgSize" src="~/Images/Cinema.jpg" />
                                 }
                                 else
                                 {
-                                        <img src="@filmPosterUrl" class="personCreditsImgSize" />
+                                    <img src="@filmPosterUrl" class="personCreditsImgSize" />
                                 }
 
-                                </a>
+                            </a>
                         }
                     </td>
                     <td class="siteTheme" style="width: 45px;">
                         @{
-                                @Convert.ToDateTime(obj.release_date).Year.ToString();
+                            @Convert.ToDateTime(obj.release_date).Year.ToString();
                         }
                     </td>
                     <td class="siteTheme">
                         <b>@obj.original_title</b><br />
 
-                        @if(!string.IsNullOrEmpty(obj.character))
+                        @if (!string.IsNullOrEmpty(obj.character))
                         {
-                            @:- @obj.character
+                            @:- @obj.character<br>
+                        }
+
+                        @if (obj.genre_ids.Contains((int)MovieGenre.Documentary))
+                        {
+                            @:- Documentary
                         }
                     </td>
                 </tr>
@@ -182,23 +187,23 @@
                         @{
                             string filmPosterUrl = "https://image.tmdb.org/t/p/original" + obj.poster_path;
 
-                                <a href="@Url.Action("GetUserTVSelectionById", "Movie", new { id = obj.id })">
+                            <a href="@Url.Action("GetUserTVSelectionById", "Movie", new { id = obj.id })">
 
-                                    @if (string.IsNullOrEmpty(obj.poster_path))
+                                @if (string.IsNullOrEmpty(obj.poster_path))
                                 {
-                                        <img id="Cinema.jpg" class="personCreditsImgSize" src="~/Images/Cinema.jpg" />
+                                    <img id="Cinema.jpg" class="personCreditsImgSize" src="~/Images/Cinema.jpg" />
                                 }
                                 else
                                 {
-                                        <img src="@filmPosterUrl" class="personCreditsImgSize" />
+                                    <img src="@filmPosterUrl" class="personCreditsImgSize" />
                                 }
 
-                                </a>
+                            </a>
                         }
                     </td>
                     <td class="siteTheme" style="width: 45px;">
                         @{
-                                @Convert.ToDateTime(obj.first_air_date).Year.ToString();
+                            @Convert.ToDateTime(obj.first_air_date).Year.ToString();
                         }
                     </td>
                     <td class="siteTheme">

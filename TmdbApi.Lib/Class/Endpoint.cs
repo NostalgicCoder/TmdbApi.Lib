@@ -12,6 +12,8 @@
         public const string Languages = "/configuration/languages";
         public const string Countries = "/configuration/countries";
         public const string Configuration = "/configuration";
+        public const string MovieGenres = "/genre/movie/list";
+        public const string TvGenres = "/genre/tv/list";
 
         // The below endpoints need to be tagged onto the end of a '/movie/' or '/tv/' or '/person/' request alongside a valid TMDB id
         public const string Providers = "/watch/providers";

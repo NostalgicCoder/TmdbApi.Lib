@@ -15,6 +15,8 @@ namespace TestHarness.Console
             tmdb.SearchForPersonById(2461);
             tmdb.GetMovieImages(5548);
             tmdb.MoviesNowPlaying();
+            tmdb.GetMovieGenreList();
+            tmdb.GetTvGenreList();
 
             System.Console.ReadLine();
         }

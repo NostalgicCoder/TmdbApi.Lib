@@ -294,5 +294,25 @@ namespace TmdbApi.Lib
 
             return resultReturn;
         }
+
+        /// <summary>
+        /// Returns the current list of available movie genres
+        /// </summary>
+        public void GetMovieGenreList()
+        {
+            string query = Endpoint.MovieGenres;
+
+            Rootobject result = CallTmdbApi(query);
+        }
+
+        /// <summary>
+        /// Returns the current list of available TV genres
+        /// </summary>
+        public void GetTvGenreList()
+        {
+            string query = Endpoint.TvGenres;
+
+            Rootobject result = CallTmdbApi(query);
+        }
     }
 }

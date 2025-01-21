@@ -4,8 +4,10 @@ namespace TmdbApi.Lib.Interfaces
 {
     public interface ITmdb
     {
-        Rootobject CallTmdbApi(string query);
+        void GetMovieGenreList();
+        void GetTvGenreList();
         void GetConfigurationData();
+        Rootobject CallTmdbApi(string query);
         ResultReturn SearchForFilmTvPerson(string keyword);
         Rootobject SearchForFilm(string keyword);
         Rootobject SearchForTv(string keyword);
