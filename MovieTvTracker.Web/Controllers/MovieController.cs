@@ -93,7 +93,7 @@ namespace MovieTvTracker.Web.Controllers
             }
             catch (Exception ex)
             {
-                // TODO: Add error handling
+                throw new Exception("GetWatchedMediaFilm", ex);
             }
 
             return View(media);
@@ -127,7 +127,7 @@ namespace MovieTvTracker.Web.Controllers
             }
             catch (Exception ex)
             {
-                // TODO: Add error handling
+                throw new Exception("GetWatchedMediaTv", ex);
             }
 
             return View(media);
@@ -144,8 +144,7 @@ namespace MovieTvTracker.Web.Controllers
 
             try
             {
-                // Restrict to '75' to keep page performant
-                //foreach (FavoriteActor item in _db.FavoriteActor.Take(75))
+                // TODO: Paginate results or reduce down weight of TMDB API call to keep this more performant as result count increases.  Can restrict down as temp measure using 'foreach (FavoriteActor item in _db.FavoriteActor.Take(75))'
                 foreach (FavoriteActor item in _db.FavoriteActor)
                 {
                     try
@@ -163,7 +162,7 @@ namespace MovieTvTracker.Web.Controllers
             }
             catch (Exception ex)
             {
-                // TODO: Add error handling
+                throw new Exception("GetFavoriteActors", ex);
             }
 
             return View(media);
@@ -206,7 +205,7 @@ namespace MovieTvTracker.Web.Controllers
             }
             catch (Exception ex)
             {
-                // TODO: Add error handling
+                throw new Exception("MarkAsWatched", ex);
             }
 
             return RedirectToAction("MoviesNowPlaying", "Movie");
@@ -238,12 +237,17 @@ namespace MovieTvTracker.Web.Controllers
             }
             catch (Exception ex)
             {
-                // TODO: Add error handling
+                throw new Exception("MarkFavoriteActor", ex);
             }
 
             return RedirectToAction("MoviesNowPlaying", "Movie");
         }
 
+        /// <summary>
+        /// Return the user selected film item from TMDB API and display in the view.  If no result can be found display the error view.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetUserFilmSelectionById(int id)
         {
@@ -265,6 +269,11 @@ namespace MovieTvTracker.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// Return the user selected TV item from TMDB API and display in the view.  If no result can be found display the error view.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetUserTVSelectionById(int id)
         {
@@ -286,6 +295,11 @@ namespace MovieTvTracker.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// Return the user selected person from TMDB API and display in the view.  If no result can be found display the error view.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetUserPersonSelectionById(int id)
         {

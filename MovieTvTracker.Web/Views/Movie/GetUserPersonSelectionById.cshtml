@@ -8,6 +8,35 @@
     Gender gender = (Gender)Model.TMDBData.PersonIdResult.gender;
 }
 
+<script type="text/javascript">
+
+    // fire once the window has fully loaded
+    window.onload = function() {
+
+        var tmdbPopularity = @Html.Raw(Json.Serialize(Model.TMDBData.PersonIdResult.popularity))
+
+        var idVal = document.getElementById('spanTmdbPopularity');
+
+        if (tmdbPopularity >= 100) 
+        {
+            idVal.style.color = 'green';
+            idVal.style.fontWeight = 'bold';
+        }
+        else if (tmdbPopularity >= 31 && tmdbPopularity <= 99) 
+        {
+            idVal.style.color = 'orange';
+            idVal.style.fontWeight = 'bold';
+        }
+        else if (tmdbPopularity <= 30) 
+        {
+            idVal.style.color = 'red';
+            idVal.style.fontWeight = 'bold';
+        }
+
+    }
+
+</script>
+
 <h3>@Model.TMDBData.PersonIdResult.name</h3>
 
 <p></p>
@@ -19,11 +48,11 @@
 
     @if (string.IsNullOrEmpty(Model.TMDBData.PersonIdResult.profile_path))
     {
-        <img id="Cinema.jpg" class="filmTvDetailPosterImgSize" src="~/Images/Cinema.jpg" />
+            <img id="Cinema.jpg" class="filmTvDetailPosterImgSize" src="~/Images/Cinema.jpg" />
     }
     else
     {
-        <img src="@castProfilePicUrl" class="filmTvDetailPosterImgSize" />
+            <img src="@castProfilePicUrl" class="filmTvDetailPosterImgSize" />
     }
 }
 
@@ -47,6 +76,7 @@
         <li>Date Of Birth: @Model.TMDBData.PersonDobAge</li>
         <li>Place Of Birth: @Model.TMDBData.PersonIdResult.place_of_birth</li>
         <li>Known For: @Model.TMDBData.KnownForMovies</li>
+        <li>TMDB Popularity: <span id="spanTmdbPopularity">@Math.Round(Model.TMDBData.PersonIdResult.popularity, 0)</span></li>
     </div>
 </div>
 
@@ -89,23 +119,23 @@
                         @{
                             string filmPosterUrl = "https://image.tmdb.org/t/p/original" + obj.poster_path;
 
-                            <a href="@Url.Action("GetUserFilmSelectionById", "Movie", new { id = obj.id })">
+                                <a href="@Url.Action("GetUserFilmSelectionById", "Movie", new { id = obj.id })">
 
-                                @if (string.IsNullOrEmpty(obj.poster_path))
+                                    @if (string.IsNullOrEmpty(obj.poster_path))
                                 {
-                                    <img id="Cinema.jpg" class="personCreditsImgSize" src="~/Images/Cinema.jpg" />
+                                        <img id="Cinema.jpg" class="personCreditsImgSize" src="~/Images/Cinema.jpg" />
                                 }
                                 else
                                 {
-                                    <img src="@filmPosterUrl" class="personCreditsImgSize" />
+                                        <img src="@filmPosterUrl" class="personCreditsImgSize" />
                                 }
 
-                            </a>
+                                </a>
                         }
                     </td>
                     <td class="siteTheme" style="width: 45px;">
                         @{
-                            @Convert.ToDateTime(obj.release_date).Year.ToString();
+                                @Convert.ToDateTime(obj.release_date).Year.ToString();
                         }
                     </td>
                     <td class="siteTheme">
@@ -152,23 +182,23 @@
                         @{
                             string filmPosterUrl = "https://image.tmdb.org/t/p/original" + obj.poster_path;
 
-                            <a href="@Url.Action("GetUserTVSelectionById", "Movie", new { id = obj.id })">
+                                <a href="@Url.Action("GetUserTVSelectionById", "Movie", new { id = obj.id })">
 
-                                @if (string.IsNullOrEmpty(obj.poster_path))
+                                    @if (string.IsNullOrEmpty(obj.poster_path))
                                 {
-                                    <img id="Cinema.jpg" class="personCreditsImgSize" src="~/Images/Cinema.jpg" />
+                                        <img id="Cinema.jpg" class="personCreditsImgSize" src="~/Images/Cinema.jpg" />
                                 }
                                 else
                                 {
-                                    <img src="@filmPosterUrl" class="personCreditsImgSize" />
+                                        <img src="@filmPosterUrl" class="personCreditsImgSize" />
                                 }
 
-                            </a>
+                                </a>
                         }
                     </td>
                     <td class="siteTheme" style="width: 45px;">
                         @{
-                            @Convert.ToDateTime(obj.first_air_date).Year.ToString();
+                                @Convert.ToDateTime(obj.first_air_date).Year.ToString();
                         }
                     </td>
                     <td class="siteTheme">
