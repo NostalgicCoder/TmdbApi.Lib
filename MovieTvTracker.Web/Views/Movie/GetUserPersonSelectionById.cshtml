@@ -146,9 +146,17 @@
                             @:- @obj.character<br>
                         }
 
-                        @if (obj.genre_ids.Contains((int)MovieGenre.Documentary))
+                        @if (obj.genre_ids.Contains((int)MovieGenre.Documentary) && obj.genre_ids.Contains((int)MovieGenre.Music) && (obj.character.Contains("Self") || obj.character.Contains("Herself") || obj.character.Contains("Himself")))
+                        {
+                            @:- Music Documentary
+                        }
+                        else if (obj.genre_ids.Contains((int)MovieGenre.Documentary) && (obj.character.Contains("Self") || obj.character.Contains("Herself") || obj.character.Contains("Himself")))
                         {
                             @:- Documentary
+                        }
+                        else if (obj.genre_ids.Contains((int)MovieGenre.Music) && (obj.character.Contains("Self") || obj.character.Contains("Herself") || obj.character.Contains("Himself")))
+                        {
+                            @:- Music Concert/Video
                         }
                     </td>
                 </tr>
