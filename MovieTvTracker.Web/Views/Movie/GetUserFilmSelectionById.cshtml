@@ -113,9 +113,9 @@ window.onload = function(){
 <div class="card border-secondary mb-3" style="width: 100%">
     <div class="card-header">General Information:</div>
     <div class="card-body">
-        <li>Score: <span id="spanScore">@Model.TMDBData.Score</span></li>
-        <li>Runtime: <span id="spanRuntime">@Model.TMDBData.FilmIdResult.runtime.ToString() mins</span></li>
-        <li>TMDB Popularity: <span id="spanTmdbPopularity">@Math.Round(Model.TMDBData.FilmIdResult.popularity, 0)</span></li>
+        <li>Score: <span id="spanScore">@Model.TMDBData.Score</span>&nbsp; <i class="bi bi-info-square" data-toggle="tooltip" data-placement="right" title="Green is high, orange is medium and red is a low rating score."></i></li>
+        <li>Runtime: <span id="spanRuntime">@Model.TMDBData.FilmIdResult.runtime.ToString() mins</span>&nbsp; <i class="bi bi-info-square" data-toggle="tooltip" data-placement="right" title="Runtime below 120 mins is green, between 121 and 150 orange and above 150 red."></i></li>
+        <li>TMDB Popularity: <span id="spanTmdbPopularity">@Math.Round(Model.TMDBData.FilmIdResult.popularity, 0)</span>&nbsp; <i class="bi bi-info-square" data-toggle="tooltip" data-placement="right" title="Green is high, orange is medium and red is a low TMDB popularity score."></i></li>
         <li>Genres: @String.Join(", ", Model.TMDBData.FilmIdResult.genres.Select(x => x.name).ToArray())</li>
 
         @{

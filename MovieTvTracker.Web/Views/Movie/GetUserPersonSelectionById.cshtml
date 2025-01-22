@@ -76,7 +76,7 @@
         <li>Date Of Birth: @Model.TMDBData.PersonDobAge</li>
         <li>Place Of Birth: @Model.TMDBData.PersonIdResult.place_of_birth</li>
         <li>Known For: @Model.TMDBData.KnownForMovies</li>
-        <li>TMDB Popularity: <span id="spanTmdbPopularity">@Math.Round(Model.TMDBData.PersonIdResult.popularity, 0)</span></li>
+        <li>TMDB Popularity: <span id="spanTmdbPopularity">@Math.Round(Model.TMDBData.PersonIdResult.popularity, 0)</span>&nbsp; <i class="bi bi-info-square" data-toggle="tooltip" data-placement="right" title="Green is high, orange is medium and red is a low TMDB popularity score."></i></li>
     </div>
 </div>
 

@@ -81,7 +81,7 @@
 <div class="card border-secondary mb-3" style="width: 100%">
     <div class="card-header">General Information:</div>
     <div class="card-body">
-        <li>Score: <span id="spanScore">@Model.TMDBData.Score</span></li>
+        <li>Score: <span id="spanScore">@Model.TMDBData.Score</span>&nbsp; <i class="bi bi-info-square" data-toggle="tooltip" data-placement="right" title="Green is high, orange is medium and red is a low rating score."></i></li>
         <li>Genres: @String.Join(", ", Model.TMDBData.TvIdResult.genres.Select(x => x.name).ToArray())</li>
 
         @{
