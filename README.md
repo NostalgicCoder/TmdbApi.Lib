@@ -45,6 +45,7 @@ Technologies / Principles Used:
 - Newtonsoft.Json
 - Entity Framework - Code first approach
 - SQL Server Express backend database
+- TDD (Microsoft Test Framework + Fluent Assertion / Fluent Validation)
 
 Requirements:
 
