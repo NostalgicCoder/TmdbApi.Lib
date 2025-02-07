@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using FakeItEasy;
+using FluentAssertions;
 using TmdbApi.Lib.Interfaces;
 using TmdbApi.Lib.Models;
 
@@ -7,7 +8,14 @@ namespace TmdbApi.Lib.Tests
     [TestClass]
     public sealed class TmdbTests
     {
-        private ITmdb _tmdb = new Tmdb();
+        private readonly ITmdb _tmdb;
+
+        public TmdbTests()
+        {
+            // SUT (System Under Test)
+            _tmdb = new Tmdb();
+            //_tmdb = A.Fake<ITmdb>();
+        }
 
         [TestMethod]
         public void Tmdb_CallTmdbApi_ShouldBeNull()
@@ -24,11 +32,14 @@ namespace TmdbApi.Lib.Tests
         {
             // Arrange
             string query = "/search/movie?query=Robocop&include_adult=false&language=en-US&page=1";
+            
+            //A.CallTo(() => _tmdb.CallTmdbApi(query)).Returns(true);
 
             // Act
             Rootobject result = _tmdb.CallTmdbApi(query);
 
             // Assert
+            result.Should().BeOfType<Rootobject>();
             result.results[0].original_title.Should().Be("RoboCop");
             result.results[0].release_date.Should().Be("1987-07-17");
         }
@@ -43,8 +54,9 @@ namespace TmdbApi.Lib.Tests
             Rootobject result = _tmdb.CallTmdbApi(query);
 
             // Assert
-            result.results.Count().Should().Be(0);
             result.Should().NotBeNull();
+            result.Should().BeOfType<Rootobject>();
+            result.results.Count().Should().Be(0);
         }
 
         [TestMethod]
@@ -57,6 +69,8 @@ namespace TmdbApi.Lib.Tests
             ResultReturn result = _tmdb.SearchForFilmTvPerson(keyword);
 
             // Assert
+            result.Should().BeOfType<ResultReturn>();
+
             result.FilmResults.results[0].original_title.Should().Be("RoboCop");
             result.FilmResults.results[0].release_date.Should().Be("1987-07-17");
 
@@ -74,7 +88,8 @@ namespace TmdbApi.Lib.Tests
             ResultReturn result = _tmdb.SearchForTvAndCreditsById(id);
 
             // Assert
-            result.TvIdResult.name.Should().Be("The Movies That Made Us"); 
+            result.Should().BeOfType<ResultReturn>();
+            result.TvIdResult.name.Should().Be("The Movies That Made Us");
             result.CreditsByTvId.id.Should().Be(93219);
         }
     }

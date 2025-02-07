@@ -12,10 +12,11 @@ namespace TmdbApi.Lib
 
         private RestClient _client = new RestClient("https://api.themoviedb.org/3");
 
+        private readonly string _readAccessToken = "PRIVATE";
+
         private List<string> _logoSizes;
         private List<string> _posterSizes;
 
-        private string _readAccessToken = "PRIVATE";
         private string _imgPath;
 
         /// <summary>
