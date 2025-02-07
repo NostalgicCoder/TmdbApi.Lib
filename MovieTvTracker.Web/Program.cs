@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MovieTvTracker.Web.Data;
+using TmdbApi.Lib;
+using TmdbApi.Lib.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
+
+// Register with dependancy injection container
+builder.Services.AddSingleton<ITmdb, Tmdb>();
 
 var app = builder.Build();
 

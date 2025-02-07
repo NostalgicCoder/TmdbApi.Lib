@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TmdbApi.Lib;
 using MovieTvTracker.Web.Models;
 using MovieTvTracker.Web.Data;
 using TmdbApi.Lib.Interfaces;
@@ -11,7 +10,7 @@ namespace MovieTvTracker.Web.Controllers
 {
     public class MovieController : Controller
     {
-        private ITmdb _tmdb = new Tmdb();
+        private ITmdb _tmdb;
 
         private ErrorViewModel _errorViewModel;
 
@@ -20,9 +19,10 @@ namespace MovieTvTracker.Web.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public MovieController(ApplicationDbContext db)
+        public MovieController(ApplicationDbContext db, ITmdb tmdb)
         {
             _db = db;
+            _tmdb = tmdb;
         }
 
         [HttpPost]

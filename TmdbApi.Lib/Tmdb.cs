@@ -10,14 +10,20 @@ namespace TmdbApi.Lib
     {
         private IHelper _helper = new Helper();
 
-        private RestClient _client = new RestClient("https://api.themoviedb.org/3");
+        private RestClient _client;
 
-        private readonly string _readAccessToken = "PRIVATE";
+        private readonly string _readAccessToken;
 
         private List<string> _logoSizes;
         private List<string> _posterSizes;
 
         private string _imgPath;
+
+        public Tmdb()
+        {
+            _client = new RestClient("https://api.themoviedb.org/3");
+            _readAccessToken = "PRIVATE";
+        }
 
         /// <summary>
         /// Call TMDB API with authorization token and request query, deserialize response into a recognised object type.
@@ -299,21 +305,25 @@ namespace TmdbApi.Lib
         /// <summary>
         /// Returns the current list of available movie genres
         /// </summary>
-        public void GetMovieGenreList()
+        public Rootobject GetMovieGenreList()
         {
             string query = Endpoint.MovieGenres;
 
             Rootobject result = CallTmdbApi(query);
+
+            return result;
         }
 
         /// <summary>
         /// Returns the current list of available TV genres
         /// </summary>
-        public void GetTvGenreList()
+        public Rootobject GetTvGenreList()
         {
             string query = Endpoint.TvGenres;
 
             Rootobject result = CallTmdbApi(query);
+
+            return result;
         }
     }
 }
