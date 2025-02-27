@@ -13,7 +13,7 @@ namespace TmdbApi.Lib.Tests
         public TmdbTests()
         {
             // SUT (System Under Test)
-            _tmdb = new Tmdb("PRIVATE");
+            _tmdb = new Tmdb("YOUR_TMDB_API_READACCESS_TOKEN_GOES_HERE");
             //_tmdb = A.Fake<ITmdb>();
         }
 

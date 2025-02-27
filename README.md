@@ -4,7 +4,7 @@ TmdbApi.Lib - TMDB (The Movie Database) RESTful API C# Wrapper - About:
 
 First created on: 09/09/2024
 
-I am a avid film fan so when my nephew introduced me to the TMDB (The Movie Database - RESTful API) on one of his demo projects i was keen to give it a go myself and try it out.
+I am a avid film fan so when my nephew introduced me to the TMDB (The Movie Database) RESTful API on one of his demo projects i was keen to give it a go myself and try it out.
 
 In order to utilise the TMDB API effectively across multiple project types i decided to make a C# wrapper (Class library project) for it.  This project includes some basic unit tests for the API as well as a console based test harness for testing out commands.  This project can perform the following TMDB API commands:
 
@@ -34,9 +34,14 @@ Technologies / Principles Used:
 
 Requirements:
 
-- Developer license key for TMDB API (The Movie Database)
+- Developer license key for TMDB API (The Movie Database) - Available for free
 
 Resources / Credits:
 
 - https://www.themoviedb.org/?language=en-GB
 - https://developer.themoviedb.org/reference/intro/getting-started
+
+Images:
+
+![Alt text](Images/TmdbApi1.jpg)
+![Alt text](Images/TmdbApi2.jpg)
