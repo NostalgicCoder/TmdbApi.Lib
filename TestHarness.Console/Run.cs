@@ -22,6 +22,9 @@ namespace TestHarness.Console
             _tmdb.MoviesNowPlaying();
             _tmdb.GetMovieGenreList();
             _tmdb.GetTvGenreList();
+            _tmdb.SearchForPersonAndCreditsById(1245); // Scarlett Johansson
+            _tmdb.SearchForPersonAndCreditsById(500); // Tom Cruise
+            _tmdb.SearchForPersonAndCreditsById(190); // Clint Eastwood
 
             System.Console.ReadLine();
         }

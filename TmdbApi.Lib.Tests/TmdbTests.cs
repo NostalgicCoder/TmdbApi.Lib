@@ -21,7 +21,7 @@ namespace TmdbApi.Lib.Tests
         public void Tmdb_CallTmdbApi_ShouldBeNull()
         {
             // Act
-            Rootobject result = _tmdb.CallTmdbApi(string.Empty);
+            Rootobject result = _tmdb.CallTmdbApi(string.Empty).Result;
 
             // Assert
             result.Should().BeNull();
@@ -36,7 +36,7 @@ namespace TmdbApi.Lib.Tests
             //A.CallTo(() => _tmdb.CallTmdbApi(query)).Returns(true);
 
             // Act
-            Rootobject result = _tmdb.CallTmdbApi(query);
+            Rootobject result = _tmdb.CallTmdbApi(query).Result;
 
             // Assert
             result.Should().BeOfType<Rootobject>();
@@ -51,7 +51,7 @@ namespace TmdbApi.Lib.Tests
             string query = "/search/movie?query=FakeMovie&include_adult=false&language=en-US&page=1";
 
             // Act
-            Rootobject result = _tmdb.CallTmdbApi(query);
+            Rootobject result = _tmdb.CallTmdbApi(query).Result;
 
             // Assert
             result.Should().NotBeNull();

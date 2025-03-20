@@ -6,9 +6,9 @@ namespace TmdbApi.Lib.Interfaces
     {
         void GetConfigurationData();
         void GetMovieImages(int id);
+        Task<Rootobject> CallTmdbApi(string query);
         Rootobject GetMovieGenreList();
         Rootobject GetTvGenreList();
-        Rootobject CallTmdbApi(string query);
         Rootobject SearchForFilm(string keyword);
         Rootobject SearchForTv(string keyword);
         Rootobject SearchForFilmById(int id);

@@ -26,16 +26,16 @@ namespace TmdbApi.Lib
         }
 
         /// <summary>
-        /// Call TMDB API with authorization token and request query, deserialize response into a recognised object type.
+        /// Call TMDB API with authorization token and request query asynchronously, deserialize response into a recognised object type.
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public Rootobject CallTmdbApi(string query)
+        public async Task<Rootobject> CallTmdbApi(string query)
         {
             RestRequest request = new RestRequest(query);
             request.AddHeader("Authorization", "Bearer " + _readAccessToken);
 
-            RestResponse response = _client.Execute(request, Method.Get);
+            RestResponse response = await _client.ExecuteAsync(request, Method.Get);
 
             Rootobject result = new Rootobject();
 
@@ -74,7 +74,7 @@ namespace TmdbApi.Lib
         {
             string query = Endpoint.Configuration;
 
-            Rootobject result = CallTmdbApi(query);
+            Rootobject result = CallTmdbApi(query).Result;
 
             if (result.images != null)
             {
@@ -109,7 +109,7 @@ namespace TmdbApi.Lib
         {
             string query = Endpoint.SearchMovie + keyword + "&include_adult=false&language=en-US&page=1";
 
-            return CallTmdbApi(query);
+            return CallTmdbApi(query).Result;
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace TmdbApi.Lib
         {
             string query = Endpoint.SearchTv + keyword + "&include_adult=false&language=en-US&page=1";
 
-            return CallTmdbApi(query);
+            return CallTmdbApi(query).Result;
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace TmdbApi.Lib
         {
             string query = Endpoint.SearchPerson + keyword + "&include_adult=false&language=en-US&page=1";
 
-            return CallTmdbApi(query);
+            return CallTmdbApi(query).Result;
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace TmdbApi.Lib
         {
             string query = Endpoint.SearchMovieId + id;
 
-            return CallTmdbApi(query);
+            return CallTmdbApi(query).Result;
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace TmdbApi.Lib
         {
             string query = Endpoint.SearchMovieId + id + Endpoint.Credits;
 
-            return CallTmdbApi(query);
+            return CallTmdbApi(query).Result;
         }
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace TmdbApi.Lib
         {
             string query = Endpoint.SearchTvId + id;
 
-            return CallTmdbApi(query);
+            return CallTmdbApi(query).Result;
         }
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace TmdbApi.Lib
         {
             string query = Endpoint.SearchTvId + id + Endpoint.Credits;
 
-            return CallTmdbApi(query);
+            return CallTmdbApi(query).Result;
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace TmdbApi.Lib
         {
             string query = Endpoint.SearchPersonId + id;
 
-            return CallTmdbApi(query);
+            return CallTmdbApi(query).Result;
         }
 
         /// <summary>
@@ -268,7 +268,7 @@ namespace TmdbApi.Lib
         {
             string query = Endpoint.SearchPersonId + id + Endpoint.PersonCombinedCredits;
 
-            return CallTmdbApi(query);
+            return CallTmdbApi(query).Result;
         }
 
         /// <summary>
@@ -281,7 +281,7 @@ namespace TmdbApi.Lib
         {
             string query = Endpoint.SearchMovieId + id + Endpoint.MovieImages;
 
-            Rootobject result = CallTmdbApi(query);
+            Rootobject result = CallTmdbApi(query).Result;
 
             string logo = _imgPath + _logoSizes.Last<string>() + result.logos.FirstOrDefault().file_path;
             string url = _imgPath + _posterSizes.Last<string>() + result.posters.FirstOrDefault().file_path;
@@ -297,7 +297,7 @@ namespace TmdbApi.Lib
 
             string query = Endpoint.MoviesNowPlaying;
 
-            resultReturn.MoviesNowPlaying = CallTmdbApi(query);
+            resultReturn.MoviesNowPlaying = CallTmdbApi(query).Result;
 
             return resultReturn;
         }
@@ -309,7 +309,7 @@ namespace TmdbApi.Lib
         {
             string query = Endpoint.MovieGenres;
 
-            Rootobject result = CallTmdbApi(query);
+            Rootobject result = CallTmdbApi(query).Result;
 
             return result;
         }
@@ -321,7 +321,7 @@ namespace TmdbApi.Lib
         {
             string query = Endpoint.TvGenres;
 
-            Rootobject result = CallTmdbApi(query);
+            Rootobject result = CallTmdbApi(query).Result;
 
             return result;
         }
