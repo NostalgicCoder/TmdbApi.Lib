@@ -27,12 +27,19 @@ namespace TestHarness.Console
             _tmdb.SearchForPersonAndCreditsById(500); // Tom Cruise
             _tmdb.SearchForPersonAndCreditsById(190); // Clint Eastwood
 
-            List<Int32> ids = new List<Int32>();
-            ids.Add(1091);
-            ids.Add(9532);
-            ids.Add(9792);
+            List<Int32> filmIds = new List<Int32>();
+            filmIds.Add(1091);
+            filmIds.Add(9532);
+            filmIds.Add(9792);
 
-            _tmdb.ConvertIdToTitleAndCheckForKeywordMatch(ids, "yes", Caller.Film);
+            _tmdb.ConvertIdToTitleAndCheckForKeywordMatch(filmIds, "yes", Caller.Film);
+
+            List<Int32> actorIds = new List<Int32>();
+            actorIds.Add(679);
+            actorIds.Add(27811);
+            actorIds.Add(1059597);
+
+            _tmdb.ConvertIdToTitleAndCheckForKeywordMatch(actorIds, "weller", Caller.Actor);
 
             System.Console.ReadLine();
         }

@@ -370,6 +370,13 @@ namespace TmdbApi.Lib
                         }
                     case Caller.Actor:
                         {
+                            query = Endpoint.SearchPersonId + id;
+
+                            if (CallTmdbApi(query).Result.name.ToLower().Contains(keyword.ToLower()))
+                            {
+                                idMatches.Add(id);
+                            }
+
                             break;
                         }
                 }
