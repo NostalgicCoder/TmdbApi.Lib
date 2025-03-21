@@ -1,4 +1,5 @@
-﻿using TmdbApi.Lib.Models;
+﻿using TmdbApi.Lib.Enum;
+using TmdbApi.Lib.Models;
 
 namespace TmdbApi.Lib.Interfaces
 {
@@ -7,6 +8,7 @@ namespace TmdbApi.Lib.Interfaces
         void GetConfigurationData();
         void GetMovieImages(int id);
         Task<Rootobject> CallTmdbApi(string query);
+        List<Int32> ConvertIdToTitleAndCheckForKeywordMatch(List<Int32> tmdbIds, string keyword, Caller caller);
         Rootobject GetMovieGenreList();
         Rootobject GetTvGenreList();
         Rootobject SearchForFilm(string keyword);
@@ -23,4 +25,4 @@ namespace TmdbApi.Lib.Interfaces
         ResultReturn SearchForTvAndCreditsById(int id);
         ResultReturn SearchForFilmAndCreditsById(int id);
     }
-}
+};

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
 using TmdbApi.Lib.Class;
+using TmdbApi.Lib.Enum;
 using TmdbApi.Lib.Interfaces;
 using TmdbApi.Lib.Models;
 
@@ -324,6 +325,57 @@ namespace TmdbApi.Lib
             Rootobject result = CallTmdbApi(query).Result;
 
             return result;
+        }
+
+        /// <summary>
+        /// See if the title, name of a TMDB ID result matches the keyword value, if it does return the TMDB ID values that match.
+        /// - The purpose of this call is to provide a lighter weight / faster solution then simply querying ever single TMDB ID result in the database for full/complete details that the RESTful API can provide.
+        /// - Other alternatives to using the below solution would be storing title, names in the database to avoid extra strain on the RESTful API, but that comes with its own issues
+        /// </summary>
+        /// <param name="tmdbIds"></param>
+        /// <param name="keyword"></param>
+        /// <param name="caller"></param>
+        /// <returns></returns>
+        public List<Int32> ConvertIdToTitleAndCheckForKeywordMatch(List<Int32> tmdbIds, string keyword, Caller caller)
+        {
+            List<Int32> idMatches = new List<Int32>();
+
+            foreach (Int32 id in tmdbIds)
+            {
+                string query = string.Empty; 
+
+                switch (caller)
+                {
+                    case Caller.Film :
+                        {
+                            query = Endpoint.SearchMovieId + id;
+
+                            if (CallTmdbApi(query).Result.original_title.ToLower().Contains(keyword.ToLower()))
+                            {
+                                idMatches.Add(id);
+                            }
+
+                            break;
+                        }
+                    case Caller.TV:
+                        {
+                            query = Endpoint.SearchTvId + id;
+
+                            if (CallTmdbApi(query).Result.name.ToLower().Contains(keyword.ToLower()))
+                            {
+                                idMatches.Add(id);
+                            }
+
+                            break;
+                        }
+                    case Caller.Actor:
+                        {
+                            break;
+                        }
+                }
+            }
+
+            return idMatches;
         }
     }
 }

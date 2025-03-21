@@ -1,4 +1,5 @@
 ﻿using TmdbApi.Lib;
+using TmdbApi.Lib.Enum;
 using TmdbApi.Lib.Interfaces;
 
 namespace TestHarness.Console
@@ -25,6 +26,13 @@ namespace TestHarness.Console
             _tmdb.SearchForPersonAndCreditsById(1245); // Scarlett Johansson
             _tmdb.SearchForPersonAndCreditsById(500); // Tom Cruise
             _tmdb.SearchForPersonAndCreditsById(190); // Clint Eastwood
+
+            List<Int32> ids = new List<Int32>();
+            ids.Add(1091);
+            ids.Add(9532);
+            ids.Add(9792);
+
+            _tmdb.ConvertIdToTitleAndCheckForKeywordMatch(ids, "yes", Caller.Film);
 
             System.Console.ReadLine();
         }
