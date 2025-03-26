@@ -8,7 +8,7 @@ namespace TmdbApi.Lib.Interfaces
         void GetConfigurationData();
         void GetMovieImages(int id);
         Task<Rootobject> CallTmdbApi(string query);
-        List<Int32> ConvertIdToTitleAndCheckForKeywordMatch(List<Int32> tmdbIds, string keyword, Caller caller);
+        List<Int32> GetTmdbIdsThatMatchKeywordOrYearCriteria(List<Int32> tmdbIds, Caller caller, string keyword = null, string year = null);
         Rootobject GetMovieGenreList();
         Rootobject GetTvGenreList();
         Rootobject SearchForFilm(string keyword);

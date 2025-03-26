@@ -32,14 +32,16 @@ namespace TestHarness.Console
             filmIds.Add(9532);
             filmIds.Add(9792);
 
-            _tmdb.ConvertIdToTitleAndCheckForKeywordMatch(filmIds, "yes", Caller.Film);
+            _tmdb.GetTmdbIdsThatMatchKeywordOrYearCriteria(filmIds, Caller.Film, "yes");
 
             List<Int32> actorIds = new List<Int32>();
             actorIds.Add(679);
             actorIds.Add(27811);
             actorIds.Add(1059597);
 
-            _tmdb.ConvertIdToTitleAndCheckForKeywordMatch(actorIds, "weller", Caller.Actor);
+            _tmdb.GetTmdbIdsThatMatchKeywordOrYearCriteria(actorIds, Caller.Actor, "weller");
+
+            _tmdb.GetTmdbIdsThatMatchKeywordOrYearCriteria(filmIds, Caller.Film, null, "1982");
 
             System.Console.ReadLine();
         }

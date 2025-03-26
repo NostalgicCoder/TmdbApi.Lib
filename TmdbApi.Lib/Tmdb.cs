@@ -328,31 +328,52 @@ namespace TmdbApi.Lib
         }
 
         /// <summary>
-        /// See if the title, name of a TMDB ID result matches the keyword value, if it does return the TMDB ID values that match.
-        /// - The purpose of this call is to provide a lighter weight / faster solution then simply querying ever single TMDB ID result in the database for full/complete details that the RESTful API can provide.
-        /// - Other alternatives to using the below solution would be storing title, names in the database to avoid extra strain on the RESTful API, but that comes with its own issues
+        /// Check the provided TMDB ID's against the appropriate TMDB API call to see if they are a match for title, name or year.  If matches occur then return the results as a list of TMDB ID's.
+        /// - The purpose of this call if to provide a lighter weight way of querying the TMDB API for the presentation layer without needing to retrieve full data for every single result.
+        /// - An alternative to the below would be to store more TMDB API data locally, but this comes with its own issues (Data going out of sync, update slowdown when syncing etc)
         /// </summary>
         /// <param name="tmdbIds"></param>
-        /// <param name="keyword"></param>
         /// <param name="caller"></param>
+        /// <param name="keyword"></param>
+        /// <param name="year"></param>
         /// <returns></returns>
-        public List<Int32> ConvertIdToTitleAndCheckForKeywordMatch(List<Int32> tmdbIds, string keyword, Caller caller)
+        public List<Int32> GetTmdbIdsThatMatchKeywordOrYearCriteria(List<Int32> tmdbIds, Caller caller, string keyword = null, string year = null)
         {
+            string query = string.Empty;
+
             List<Int32> idMatches = new List<Int32>();
 
             foreach (Int32 id in tmdbIds)
             {
-                string query = string.Empty; 
-
                 switch (caller)
                 {
-                    case Caller.Film :
+                    case Caller.Film:
                         {
                             query = Endpoint.SearchMovieId + id;
 
-                            if (CallTmdbApi(query).Result.original_title.ToLower().Contains(keyword.ToLower()))
+                            if (!string.IsNullOrEmpty(keyword) && string.IsNullOrEmpty(year))
                             {
-                                idMatches.Add(id);
+                                // only a keyword
+                                if (CallTmdbApi(query).Result.original_title.ToLower().Contains(keyword.ToLower()))
+                                {
+                                    idMatches.Add(id);
+                                }
+                            }
+                            else if (string.IsNullOrEmpty(keyword) && !string.IsNullOrEmpty(year))
+                            {
+                                // only a year
+                                if (Convert.ToDateTime(CallTmdbApi(query).Result.release_date).Year == Int32.Parse(year))
+                                {
+                                    idMatches.Add(id);
+                                }
+                            }
+                            else if (!string.IsNullOrEmpty(keyword) && !string.IsNullOrEmpty(year))
+                            {
+                                // both year and keyword
+                                if (CallTmdbApi(query).Result.original_title.ToLower().Contains(keyword.ToLower()) && Convert.ToDateTime(CallTmdbApi(query).Result.release_date).Year == Int32.Parse(year))
+                                {
+                                    idMatches.Add(id);
+                                }
                             }
 
                             break;
@@ -361,9 +382,29 @@ namespace TmdbApi.Lib
                         {
                             query = Endpoint.SearchTvId + id;
 
-                            if (CallTmdbApi(query).Result.name.ToLower().Contains(keyword.ToLower()))
+                            if (!string.IsNullOrEmpty(keyword) && string.IsNullOrEmpty(year))
                             {
-                                idMatches.Add(id);
+                                // only a keyword
+                                if (CallTmdbApi(query).Result.name.ToLower().Contains(keyword.ToLower()))
+                                {
+                                    idMatches.Add(id);
+                                }
+                            }
+                            else if (string.IsNullOrEmpty(keyword) && !string.IsNullOrEmpty(year))
+                            {
+                                // only a year
+                                if (Convert.ToDateTime(CallTmdbApi(query).Result.first_air_date).Year == Int32.Parse(year))
+                                {
+                                    idMatches.Add(id);
+                                }
+                            }
+                            else if (!string.IsNullOrEmpty(keyword) && !string.IsNullOrEmpty(year))
+                            {
+                                // both year and keyword
+                                if (CallTmdbApi(query).Result.name.ToLower().Contains(keyword.ToLower()) && Convert.ToDateTime(CallTmdbApi(query).Result.first_air_date).Year == Int32.Parse(year))
+                                {
+                                    idMatches.Add(id);
+                                }
                             }
 
                             break;
